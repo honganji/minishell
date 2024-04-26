@@ -1,0 +1,3 @@
+[submodule "42-c-library"]
+	path = 42-c-library
+	url = https://github.com/honganji/42-c-library.git
