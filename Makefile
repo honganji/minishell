@@ -24,6 +24,7 @@ all: $(LIBFT) $(NAME)
 $(LIBFT):
 	@if [ -z "$(shell ls -A $(LIB_DIR))" ]; then \
 		git submodule init $(LIB_DIR); \
+		git submodule update $(LIB_DIR); \
 	fi
 	@echo "$(BLUE)Start compiling libft...$(NC)"
 	@$(MAKE) $(MAKE_FLAG) $(LIB_DIR)
