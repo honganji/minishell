@@ -1,1 +1,1 @@
-![norminette](https://github.com/honganji/minishell/workflows/norminette.yml/badge.svg)
+![norminette](https://github.com/honganji/minishell/actions/workflows/norminette.yml/badge.svg)
