@@ -6,56 +6,50 @@
 /*   By: ytoshihi <ytoshihi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/02 10:11:47 by ytoshihi          #+#    #+#             */
-/*   Updated: 2024/05/02 19:27:58 by ytoshihi         ###   ########.fr       */
+/*   Updated: 2024/05/03 00:06:25 by ytoshihi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "execution.h"
 
-void	ft_exe_ls(void)
+char	**create_args(char *str, ...)
 {
-	char	*args[3];
-	pid_t	pid;
+	va_list	ap;
+	char	*value;
+	int		size;
+	int		i;
+	char	**args;
 
-	args[0] = "ls";
-	args[1] = "-l";
-	args[2] = NULL;
+	size = ft_atoi(str);
+	va_start(ap, str);
+	i = 0;
+	args = (char **)ft_calloc(size + 1, sizeof(char *));
+	while (i < size)
+	{
+		value = va_arg(ap, char *);
+		args[i++] = value;
+	}
+	args[i] = NULL;
+	va_end(ap);
+	return (args);
+}
+
+void	ft_exe_command(t_data *data)
+{
+	pid_t	pid;
+	int		i;
+
 	pid = fork();
+	i = 0;
+	data->path = ft_strjoin("/bin/", data->args[0]);
 	if (pid == 0)
-		execve("/bin/ls", args, NULL);
+		execve(data->path, data->args, NULL);
 	else
 		wait(NULL);
 }
 
-void	ft_exe_echo(void)
+void	free_data(t_data *data)
 {
-	char	*args[4];
-	pid_t	pid;
-
-	args[0] = "echo";
-	args[1] = "-n";
-	args[2] = "Hello World!";
-	args[3] = NULL;
-	printf("size of args: %lu", sizeof(args)/sizeof(args[0]));
-	pid = fork();
-	if (pid == 0)
-		execve("/bin/echo", args, NULL);
-	else
-		wait(NULL);
+	free(data->args);
+	free(data->path);
 }
-
-// void	ft_exe_pwd(void)
-// {
-// 	char	*args[4];
-// 	pid_t	pid;
-
-// 	args[0] = "echo";
-// 	args[1] = "-n";
-// 	args[2] = "Hello World!";
-// 	args[3] = NULL;
-// 	pid = fork();
-// 	if (pid == 0)
-// 		execve("/bin/echo", args, NULL);
-// 	else
-// 		wait(NULL);
-// }
