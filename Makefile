@@ -4,7 +4,7 @@ LIB_DIR := 42-c-library
 OBJ_DIR := objs
 
 SOURCE := main.c
-HEARDER := minishell.h
+HEADER := minishell.h
 
 OBJS := $(SOURCE:%.c=$(OBJ_DIR)/%.o)
 
@@ -18,6 +18,7 @@ MAKE := make
 RM_FLAG := -rf
 CC_FLAG := -Wall -Werror -Wextra
 MAKE_FLAG := -C
+LDLIBS := -lreadline
 
 all: $(LIBFT) $(NAME)
 
@@ -30,16 +31,16 @@ $(LIBFT):
 	@$(MAKE) $(MAKE_FLAG) $(LIB_DIR)
 	@echo "$(GREEN)Build libft successfully!$(NC)"
 
-$(NAME): $(OBJ_DIR) $(OBJS) $(HEARDER)
-	@$(CC) $(CC_FLAG) $(OBJS) $(LIBFT) -o $(NAME)
+$(NAME): $(OBJ_DIR) $(OBJS) $(HEADER)
+	@$(CC) $(CC_FLAG) $(LDLIBS) $(OBJS) $(LIBFT) -o $(NAME)
 
 clean:
 	@$(RM) $(RM_FLAG) $(OBJ_DIR) $(LIB_DIR)/objs
-	@echo "$(GREEN)Clean object files successfully$(NC)"
+	@echo "$(GREEN)Cleaned object files successfully!$(NC)"
 
 fclean: clean
 	@$(RM) $(RM_FLAG) $(NAME) $(LIBFT)
-	@echo "$(GREEN)Clean executable and library successfully!$(NC)"
+	@echo "$(GREEN)Cleaned executable and library successfully!$(NC)"
 
 re: fclean all
 
