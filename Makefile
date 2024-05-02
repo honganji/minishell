@@ -1,9 +1,12 @@
 NAME := minishell
+EXE_NAME := minishell_exe
 
 LIB_DIR := 42-c-library
+EXE_DIR := execution
 OBJ_DIR := objs
 
 SOURCE := main.c
+SOURCE_EXE := $(addprefix $(EXE_DIR)/, main.c execution.c pipe.c)
 HEARDER := minishell.h
 
 OBJS := $(SOURCE:%.c=$(OBJ_DIR)/%.o)
@@ -17,6 +20,7 @@ MAKE := make
 
 RM_FLAG := -rf
 CC_FLAG := -Wall -Werror -Wextra
+LIB_FLAG := -lreadline
 MAKE_FLAG := -C
 
 all: $(LIBFT) $(NAME)
@@ -38,7 +42,7 @@ clean:
 	@echo "$(GREEN)Clean object files successfully$(NC)"
 
 fclean: clean
-	@$(RM) $(RM_FLAG) $(NAME) $(LIBFT)
+	@$(RM) $(RM_FLAG) $(NAME) $(LIBFT) $(EXE_NAME)
 	@echo "$(GREEN)Clean executable and library successfully!$(NC)"
 
 re: fclean all
@@ -49,6 +53,10 @@ exe: all
 clean_lib:
 	@cd $(LIB_DIR) && ls -A | xargs rm -rf
 
+exe_execution: $(LIBFT)
+	@$(CC) $(CC_FLAG) $(SOURCE_EXE) $(LIBFT) -o $(EXE_NAME) $(LIB_FLAG)
+	./$(EXE_NAME)
+
 $(OBJ_DIR)/%.o: %.c $(HEADER)
 	$(CC) $(CC_FLAG) -c $< -o $@
 
@@ -56,7 +64,7 @@ $(OBJ_DIR):
 	@echo "$(BLUE)Start compiling...$(NC)"
 	$(MAKE_DIR) $(OBJ_DIR)
 
-.PHONY: all clean fclean re exe clean_lib
+.PHONY: all clean fclean re exe clean_lib exe_execution
 
 GREEN := \033[0;32m
 BLUE := \033[0;34m
