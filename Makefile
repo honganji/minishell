@@ -21,8 +21,8 @@ MAKE := make
 
 RM_FLAG := -rf
 CC_FLAG := -Wall -Werror -Wextra
-LIB_FLAG := -lreadline
 MAKE_FLAG := -C
+LDLIBS := -lreadline
 
 all: $(LIBFT) $(NAME)
 
@@ -35,16 +35,16 @@ $(LIBFT):
 	@$(MAKE) $(MAKE_FLAG) $(LIB_DIR)
 	@echo "$(GREEN)Build libft successfully!$(NC)"
 
-$(NAME): $(OBJ_DIR) $(OBJS) $(HEARDER)
-	@$(CC) $(CC_FLAG) $(OBJS) $(LIBFT) -o $(NAME)
+$(NAME): $(OBJ_DIR) $(OBJS) $(HEADER)
+	@$(CC) $(CC_FLAG) $(LDLIBS) $(OBJS) $(LIBFT) -o $(NAME)
 
 clean:
 	@$(RM) $(RM_FLAG) $(OBJ_DIR) $(LIB_DIR)/objs
-	@echo "$(GREEN)Clean object files successfully$(NC)"
+	@echo "$(GREEN)Cleaned object files successfully!$(NC)"
 
 fclean: clean
-	@$(RM) $(RM_FLAG) $(NAME) $(LIBFT) $(EXE_NAME)
-	@echo "$(GREEN)Clean executable and library successfully!$(NC)"
+	@$(RM) $(RM_FLAG) $(NAME) $(LIBFT)
+	@echo "$(GREEN)Cleaned executable and library successfully!$(NC)"
 
 re: fclean all
 
@@ -55,7 +55,7 @@ clean_lib:
 	@cd $(LIB_DIR) && ls -A | xargs rm -rf
 
 exe_execution: $(LIBFT)
-	$(CC) $(CC_FLAG) $(SOURCE_EXE) $(LIBFT) -o $(EXE_NAME) $(LIB_FLAG)
+	$(CC) $(CC_FLAG) $(SOURCE_EXE) $(LIBFT) -o $(EXE_NAME) $(LDLIBS)
 	./$(EXE_NAME)
 
 $(OBJ_DIR)/%.o: %.c $(HEADER)
