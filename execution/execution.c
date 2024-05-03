@@ -6,7 +6,7 @@
 /*   By: ytoshihi <ytoshihi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/02 10:11:47 by ytoshihi          #+#    #+#             */
-/*   Updated: 2024/05/03 20:59:01 by ytoshihi         ###   ########.fr       */
+/*   Updated: 2024/05/03 21:17:55 by ytoshihi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,14 @@
 // TODO enable to use env variable
 void	ft_exe_command(t_data *data, char *str, t_com com)
 {
-	if (com == CD)
-		ft_chdir(str);
-	else if (com == ECHO)
+	if (com == ECHO)
 		ft_echo(str);
+	else if (com == CD)
+		ft_chdir(str);
 	else if (com == PWD)
 		ft_pwd();
+	else if (com == EXPORT)
+		ft_export(&data, str);
 	else if (com == ENV)
 		ft_env(data);
 	else if (com == EXIT)

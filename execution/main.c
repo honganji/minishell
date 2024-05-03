@@ -6,22 +6,22 @@
 /*   By: ytoshihi <ytoshihi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/02 17:55:22 by ytoshihi          #+#    #+#             */
-/*   Updated: 2024/05/03 21:01:10 by ytoshihi         ###   ########.fr       */
+/*   Updated: 2024/05/03 21:20:51 by ytoshihi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "execution.h"
 
-static void	clear_lst(t_list **lst)
+static void	clear_lst(t_list *lst)
 {
 	t_list	*tmp;
 
-	tmp = *lst;
-	while (*lst)
+	tmp = lst;
+	while (lst)
 	{
-		tmp = (*lst)->next;
-		free(*lst);
-		*lst = tmp;
+		tmp = lst->next;
+		free(lst);
+		lst = tmp;
 	}
 }
 
@@ -35,10 +35,11 @@ int	main(void)
 	ft_exe_command(data, "pwd", PWD);
 	printf("\n");
 	ft_exe_command(data, "execution", CD);
+	ft_exe_command(data, "KING=king", EXPORT);
 	ft_exe_command(data, "env", ENV);
-	clear_lst(&data->env_lst);
 	// free(data->arr);
+	clear_lst(data->env_lst);
 	// free(data);
-	system("leaks minishell_exe");
+	// system("leaks minishell_exe");
 	return (0);
 }
