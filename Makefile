@@ -54,7 +54,7 @@ clean_lib:
 	@cd $(LIB_DIR) && ls -A | xargs rm -rf
 
 exe_execution: $(LIBFT)
-	@$(CC) $(CC_FLAG) $(SOURCE_EXE) $(LIBFT) -o $(EXE_NAME) $(LIB_FLAG)
+	$(CC) $(CC_FLAG) $(SOURCE_EXE) $(LIBFT) -o $(EXE_NAME) $(LIB_FLAG)
 	./$(EXE_NAME)
 
 $(OBJ_DIR)/%.o: %.c $(HEADER)
