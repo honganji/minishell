@@ -1,30 +1,14 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   execution.c                                        :+:      :+:    :+:   */
+/*   builtin_fn_2.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ytoshihi <ytoshihi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/02 10:11:47 by ytoshihi          #+#    #+#             */
-/*   Updated: 2024/05/03 16:06:21 by ytoshihi         ###   ########.fr       */
+/*   Created: 2024/05/03 14:50:18 by ytoshihi          #+#    #+#             */
+/*   Updated: 2024/05/03 14:53:18 by ytoshihi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "execution.h"
 
-// TODO enable to use env variable
-void	ft_exe_command(t_data *data, char *str, t_com com)
-{
-	if (com == CD)
-		ft_chdir(str);
-	else if (com == ECHO)
-		ft_echo(str);
-	else if (com == PWD)
-		ft_pwd();
-	else if (com == ENV)
-		ft_env();
-	else if (com == EXIT)
-		exit(EXIT_SUCCESS);
-	else
-		ft_execve(data, str);
-}
