@@ -6,7 +6,7 @@
 /*   By: ytoshihi <ytoshihi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/02 10:11:47 by ytoshihi          #+#    #+#             */
-/*   Updated: 2024/05/03 16:06:21 by ytoshihi         ###   ########.fr       */
+/*   Updated: 2024/05/03 20:59:01 by ytoshihi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	ft_exe_command(t_data *data, char *str, t_com com)
 	else if (com == PWD)
 		ft_pwd();
 	else if (com == ENV)
-		ft_env();
+		ft_env(data);
 	else if (com == EXIT)
 		exit(EXIT_SUCCESS);
 	else

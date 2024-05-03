@@ -6,7 +6,7 @@
 /*   By: ytoshihi <ytoshihi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 14:50:18 by ytoshihi          #+#    #+#             */
-/*   Updated: 2024/05/03 16:03:29 by ytoshihi         ###   ########.fr       */
+/*   Updated: 2024/05/03 21:02:57 by ytoshihi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,10 +88,16 @@ void	ft_pwd(void)
 
 // For env command
 // TODO the order is different from the original env function so you should fix
-void	ft_env(void)
+void	ft_env(t_data *data)
 {
-	extern char	**environ;
+	t_list	*tmp;
 
-	while (*environ)
-		printf("%s\n", *environ++);
+	tmp = data->env_lst;
+	while (data->env_lst)
+	{
+		printf("%s=%s\n", (*(t_env *)((data->env_lst)->content)).key,
+			(*(t_env *)((data->env_lst)->content)).value);
+		data->env_lst = (data->env_lst)->next;
+	}
+	data->env_lst = tmp;
 }
