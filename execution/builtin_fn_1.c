@@ -6,13 +6,14 @@
 /*   By: ytoshihi <ytoshihi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 14:50:18 by ytoshihi          #+#    #+#             */
-/*   Updated: 2024/05/03 21:02:57 by ytoshihi         ###   ########.fr       */
+/*   Updated: 2024/05/04 11:02:49 by ytoshihi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "execution.h"
 
 // For other builtin functions
+// TODO deal with the command doesn't exist in the OS
 void	ft_execve(t_data *data, char *str)
 {
 	pid_t	pid;
@@ -23,7 +24,6 @@ void	ft_execve(t_data *data, char *str)
 	if (pid == 0)
 	{
 		data->args = ft_split(str, ' ');
-		printf("%s part------------------\n", data->args[0]);
 		data->path = ft_strjoin("/bin/", data->args[0]);
 		if (execve(data->path, data->args, NULL) == -1)
 		{
@@ -46,29 +46,23 @@ void	ft_chdir(char *path)
 }
 
 // For echo command
-void	ft_echo(char *str)
+void	ft_echo(char *str, char *flag)
 {
-	char	**arr;
-	int		i;
-	int		n_flag;
+	int	i;
+	int	n_flag;
 
-	arr = ft_split(str, ',');
 	i = 0;
 	n_flag = 0;
 	// Check if there is -n flag
-	if (!ft_strncmp(str, "-n", 2))
+	if (!ft_strncmp(flag, "-n", 2))
 	{
 		n_flag = 1;
 		i = 1;
 	}
 	// print what you need to display
-	printf("%s", arr[i]);
+	printf("%s", str);
 	if (n_flag)
 		printf("\n");
-	i = 0;
-	while (arr[i])
-		free(arr[i++]);
-	free(arr);
 }
 
 // For pwd command
