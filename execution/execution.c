@@ -6,13 +6,12 @@
 /*   By: ytoshihi <ytoshihi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/02 10:11:47 by ytoshihi          #+#    #+#             */
-/*   Updated: 2024/05/04 13:39:30 by ytoshihi         ###   ########.fr       */
+/*   Updated: 2024/05/04 23:01:27 by ytoshihi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "execution.h"
 
-// TODO enable to use env variable
 void	ft_exe_command(t_data *data, char *str, t_com com)
 {
 	if (com == ECHO)

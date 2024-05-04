@@ -6,7 +6,7 @@
 /*   By: ytoshihi <ytoshihi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 14:50:18 by ytoshihi          #+#    #+#             */
-/*   Updated: 2024/05/04 11:02:49 by ytoshihi         ###   ########.fr       */
+/*   Updated: 2024/05/04 23:01:10 by ytoshihi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,8 @@
 void	ft_execve(t_data *data, char *str)
 {
 	pid_t	pid;
-	int		i;
 
 	pid = fork();
-	i = 0;
 	if (pid == 0)
 	{
 		data->args = ft_split(str, ' ');
@@ -48,17 +46,12 @@ void	ft_chdir(char *path)
 // For echo command
 void	ft_echo(char *str, char *flag)
 {
-	int	i;
 	int	n_flag;
 
-	i = 0;
 	n_flag = 0;
 	// Check if there is -n flag
 	if (!ft_strncmp(flag, "-n", 2))
-	{
 		n_flag = 1;
-		i = 1;
-	}
 	// print what you need to display
 	printf("%s", str);
 	if (n_flag)
@@ -82,6 +75,7 @@ void	ft_pwd(void)
 
 // For env command
 // TODO the order is different from the original env function so you should fix
+// TODO you should deal with when there is no value in env file
 void	ft_env(t_data *data)
 {
 	t_list	*tmp;

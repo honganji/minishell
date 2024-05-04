@@ -6,7 +6,7 @@
 /*   By: ytoshihi <ytoshihi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 17:52:24 by ytoshihi          #+#    #+#             */
-/*   Updated: 2024/05/04 13:35:04 by ytoshihi         ###   ########.fr       */
+/*   Updated: 2024/05/04 19:11:27 by ytoshihi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ static int	count_env(void)
 	return (count);
 }
 
-// TODO There is memory leaks so I should fix
 // TODO Deal with when the env variables doesn't exist
 void	store_env(t_data *data)
 {
@@ -36,14 +35,15 @@ void	store_env(t_data *data)
 	int			i;
 
 	env_name = environ;
+	env_json = (char **)ft_calloc(1, sizeof(char *));
 	data->arr = ft_calloc(count_env(), sizeof(t_env));
 	i = 0;
 	while (*env_name)
 	{
-		env_json = ft_split(*env_name++, '=');
+		ft_to_json(env_json, *env_name++);
 		data->arr[i].key = env_json[0];
 		data->arr[i].value = env_json[1];
 		ft_lstadd_back(&data->env_lst, ft_lstnew(&data->arr[i++]));
-		free(env_json);
 	}
+	free(env_json);
 }

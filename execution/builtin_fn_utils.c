@@ -6,24 +6,30 @@
 /*   By: ytoshihi <ytoshihi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/04 09:24:36 by ytoshihi          #+#    #+#             */
-/*   Updated: 2024/05/04 13:49:25 by ytoshihi         ###   ########.fr       */
+/*   Updated: 2024/05/04 22:58:23 by ytoshihi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "execution.h"
 
-void	ft_del_node(t_data *data, t_list **lst, t_list *pre_lst)
+void	ft_del_node(t_data *data, t_list *lst, t_list *pre_lst)
 {
 	if (!pre_lst)
 	{
-		free(*lst);
 		data->env_lst = data->env_lst->next;
+		free(((t_env *)(lst->content))->key);
+		free(((t_env *)(lst->content))->value);
+		free(lst->content);
+		free(lst);
 		return ;
 	}
 	else
 	{
-		pre_lst->next = (*lst)->next;
-		free(*lst);
+		pre_lst->next = lst->next;
+		free(((t_env *)(lst->content))->key);
+		free(((t_env *)(lst->content))->value);
+		free(lst->content);
+		free(lst);
 		return ;
 	}
 }
@@ -67,7 +73,6 @@ static int	ft_count_arg(t_data *data, char *str)
 	return (count);
 }
 
-// TODO you should hold the input parameter string and free it after all
 char	*ft_rep_env(t_data *data, char *str)
 {
 	int		i;
@@ -85,7 +90,7 @@ char	*ft_rep_env(t_data *data, char *str)
 			if (tmp)
 			{
 				ft_strlcpy(&arg[i], (*(t_env *)tmp->content).value,
-				ft_strlen((*(t_env *)tmp->content).value) + 1);
+					ft_strlen((*(t_env *)tmp->content).value) + 1);
 				i += ft_strlen((*(t_env *)tmp->content).value);
 				str += ft_strlen((*(t_env *)tmp->content).key);
 				i--;
@@ -95,4 +100,15 @@ char	*ft_rep_env(t_data *data, char *str)
 	}
 	arg[i] = '\0';
 	return (arg);
+}
+
+void	ft_to_json(char **env_json, char *env_name)
+{
+	int	count;
+
+	count = 0;
+	while (env_name[count] != '=' && env_name[count])
+		count++;
+	env_json[0] = ft_substr(env_name, 0, count);
+	env_json[1] = ft_substr(env_name, count + 1, ft_strlen(env_name) - count);
 }
