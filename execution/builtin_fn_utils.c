@@ -1,34 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   execution.c                                        :+:      :+:    :+:   */
+/*   builtin_fn_utils.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ytoshihi <ytoshihi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/02 10:11:47 by ytoshihi          #+#    #+#             */
-/*   Updated: 2024/05/04 09:13:51 by ytoshihi         ###   ########.fr       */
+/*   Created: 2024/05/04 09:24:36 by ytoshihi          #+#    #+#             */
+/*   Updated: 2024/05/04 09:26:58 by ytoshihi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "execution.h"
 
-// TODO enable to use env variable
-void	ft_exe_command(t_data *data, char *str, t_com com)
+void	ft_del_node(t_data **data, t_list **lst, t_list *pre_lst)
 {
-	if (com == ECHO)
-		ft_echo(str);
-	else if (com == CD)
-		ft_chdir(str);
-	else if (com == PWD)
-		ft_pwd();
-	else if (com == EXPORT)
-		ft_export(&data, str);
-	else if (com == UNSET)
-		ft_unset(&data, str);
-	else if (com == ENV)
-		ft_env(data);
-	else if (com == EXIT)
-		exit(EXIT_SUCCESS);
+	if (!pre_lst)
+	{
+		free(*lst);
+		(*data)->env_lst = (*data)->env_lst->next;
+		return ;
+	}
 	else
-		ft_execve(data, str);
+	{
+		pre_lst->next = (*lst)->next;
+		free(*lst);
+		return ;
+	}
 }

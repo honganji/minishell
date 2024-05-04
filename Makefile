@@ -7,7 +7,9 @@ OBJ_DIR := objs
 
 SOURCE := main.c
 SOURCE_EXE := $(addprefix $(EXE_DIR)/, \
-			  main.c execution.c pipe.c builtin_fn_1.c builtin_fn_2.c env.c)
+			  main.c execution.c pipe.c builtin_fn_1.c builtin_fn_2.c env.c \
+			  builtin_fn_utils.c)
+
 HEARDER := minishell.h
 
 OBJS := $(SOURCE:%.c=$(OBJ_DIR)/%.o)

@@ -6,7 +6,7 @@
 /*   By: ytoshihi <ytoshihi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/02 15:09:17 by ytoshihi          #+#    #+#             */
-/*   Updated: 2024/05/03 21:16:42 by ytoshihi         ###   ########.fr       */
+/*   Updated: 2024/05/04 09:27:46 by ytoshihi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,8 @@ void	ft_pwd(void);
 void	ft_env(t_data *data);
 void	ft_export(t_data **data, char *str);
 void	ft_exe_command(t_data *data, char *str, t_com com);
+void	ft_unset(t_data **data, char *str);
+void	ft_del_node(t_data **data, t_list **lst, t_list *pre_lst);
 void	store_env(t_data **data);
 
 #endif
