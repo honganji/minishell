@@ -6,16 +6,15 @@
 /*   By: ytoshihi <ytoshihi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 17:52:24 by ytoshihi          #+#    #+#             */
-/*   Updated: 2024/05/04 19:11:27 by ytoshihi         ###   ########.fr       */
+/*   Updated: 2024/05/05 10:24:03 by ytoshihi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../42-c-library/library.h"
 #include "execution.h"
 
-static int	count_env(void)
+static int	count_env(char **environ)
 {
-	extern char	**environ;
 	char		**env_name;
 	int			count;
 
@@ -27,16 +26,15 @@ static int	count_env(void)
 }
 
 // TODO Deal with when the env variables doesn't exist
-void	store_env(t_data *data)
+void	store_env(t_data *data, char **environ)
 {
-	extern char	**environ;
 	char		**env_name;
 	char		**env_json;
 	int			i;
 
 	env_name = environ;
 	env_json = (char **)ft_calloc(1, sizeof(char *));
-	data->arr = ft_calloc(count_env(), sizeof(t_env));
+	data->arr = ft_calloc(count_env(environ), sizeof(t_env));
 	i = 0;
 	while (*env_name)
 	{
