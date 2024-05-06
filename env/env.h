@@ -1,33 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   execution.c                                        :+:      :+:    :+:   */
+/*   env.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ytoshihi <ytoshihi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/02 10:11:47 by ytoshihi          #+#    #+#             */
-/*   Updated: 2024/05/06 10:50:03 by ytoshihi         ###   ########.fr       */
+/*   Created: 2024/05/05 13:11:29 by ytoshihi          #+#    #+#             */
+/*   Updated: 2024/05/05 14:09:49 by ytoshihi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "execution.h"
+#ifndef ENV_H
+# define ENV_H
+# include "../minishell.h"
 
-void	ft_exe_command(t_data *data, char *str, t_com com)
-{
-	if (com == ECHO)
-		ft_echo(data, str, "-n");
-	else if (com == CD)
-		ft_chdir(str);
-	else if (com == PWD)
-		ft_pwd();
-	else if (com == EXPORT)
-		ft_export(data, str);
-	else if (com == UNSET)
-		ft_unset(data, str);
-	else if (com == ENV)
-		ft_env(data);
-	else if (com == EXIT)
-		exit(EXIT_SUCCESS);
-	else
-		ft_execve(str);
-}
+void	ft_store_env(t_data *data, char **environ);
+
+#endif

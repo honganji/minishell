@@ -6,13 +6,13 @@
 /*   By: ytoshihi <ytoshihi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/02 15:08:30 by ytoshihi          #+#    #+#             */
-/*   Updated: 2024/05/02 18:07:11 by ytoshihi         ###   ########.fr       */
+/*   Updated: 2024/05/05 13:36:51 by ytoshihi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "execution.h"
+#include "pipe.h"
 
-void	create_pipe(void)
+void	ft_create_pipe(void)
 {
 	int			fds[2];
 	pid_t		pid;

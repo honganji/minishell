@@ -6,56 +6,65 @@
 /*   By: ytoshihi <ytoshihi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 14:50:18 by ytoshihi          #+#    #+#             */
-/*   Updated: 2024/05/04 23:01:10 by ytoshihi         ###   ########.fr       */
+/*   Updated: 2024/05/06 10:55:12 by ytoshihi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "execution.h"
 
 // For other builtin functions
-// TODO deal with the command doesn't exist in the OS
-void	ft_execve(t_data *data, char *str)
+void	ft_execve(char *str)
 {
 	pid_t	pid;
+	char	**args;
+	char	*path;
 
+	args = ft_split(str, ' ');
+	path = ft_check_exist(args[0]);
+	if (!*path)
+	{
+		printf("minishell: command not found: %s", str);
+		free(path);
+		free_arr(args);
+		return ;
+	}
+	free(args[0]);
+	args[0] = path;
 	pid = fork();
 	if (pid == 0)
 	{
-		data->args = ft_split(str, ' ');
-		data->path = ft_strjoin("/bin/", data->args[0]);
-		if (execve(data->path, data->args, NULL) == -1)
-		{
-			printf("Error in execve...");
+		if (execve(path, args, NULL) == -1)
 			exit(EXIT_FAILURE);
-		}
 	}
 	else
+	{
+		free_arr(args);
 		wait(NULL);
+	}
 }
 
 // For cd command
 void	ft_chdir(char *path)
 {
 	if (chdir(path) == -1)
-	{
-		printf("Error in chdir...");
 		exit(EXIT_FAILURE);
-	}
 }
 
 // For echo command
-void	ft_echo(char *str, char *flag)
+void	ft_echo(t_data *data, char *str, char *flag)
 {
-	int	n_flag;
+	int		n_flag;
+	char	*arg;
 
 	n_flag = 0;
+	arg = ft_rep_env(data, str);
 	// Check if there is -n flag
 	if (!ft_strncmp(flag, "-n", 2))
 		n_flag = 1;
-	// print what you need to display
-	printf("%s", str);
+	printf("%s", arg);
 	if (n_flag)
 		printf("\n");
+	free(arg);
 }
 
 // For pwd command
@@ -66,26 +75,20 @@ void	ft_pwd(void)
 
 	cur_dir = getcwd(buffer, sizeof(buffer));
 	if (!cur_dir)
-	{
-		printf("Error in pwd...");
 		exit(EXIT_FAILURE);
-	}
 	printf("%s", cur_dir);
 }
 
 // For env command
-// TODO the order is different from the original env function so you should fix
-// TODO you should deal with when there is no value in env file
 void	ft_env(t_data *data)
 {
 	t_list	*tmp;
 
 	tmp = data->env_lst;
-	while (data->env_lst)
+	while (tmp)
 	{
-		printf("%s=%s\n", (*(t_env *)((data->env_lst)->content)).key,
-			(*(t_env *)((data->env_lst)->content)).value);
-		data->env_lst = (data->env_lst)->next;
+		printf("%s=%s\n", (*(t_env *)(tmp->content)).key,
+			(*(t_env *)(tmp->content)).value);
+		tmp = tmp->next;
 	}
-	data->env_lst = tmp;
 }

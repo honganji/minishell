@@ -3,12 +3,20 @@ EXE_NAME := minishell_exe
 
 LIB_DIR := 42-c-library
 EXE_DIR := execution
+UTILS_DIR := utils
+PIPE_DIR := pipe
+ENV_DIR := env
 OBJ_DIR := objs
 
 SOURCE := main.c
 SOURCE_EXE := $(addprefix $(EXE_DIR)/, \
-			  main.c execution.c pipe.c builtin_fn_1.c builtin_fn_2.c env.c \
-			  builtin_fn_utils.c)
+			  main.c execution.c builtin_fn_1.c builtin_fn_2.c) \
+			  $(addprefix $(UTILS_DIR)/, \
+			  builtin_fn_1.c builtin_fn_2.c) \
+			  $(addprefix $(PIPE_DIR)/, \
+			  pipe.c) \
+			  $(addprefix $(ENV_DIR)/, \
+			  env.c)
 
 HEADER := minishell.h
 

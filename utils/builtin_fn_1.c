@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   builtin_fn_utils.c                                 :+:      :+:    :+:   */
+/*   builtin_fn_1.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ytoshihi <ytoshihi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/04 09:24:36 by ytoshihi          #+#    #+#             */
-/*   Updated: 2024/05/04 22:58:23 by ytoshihi         ###   ########.fr       */
+/*   Updated: 2024/05/06 10:44:57 by ytoshihi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "execution.h"
+#include "utils.h"
 
 void	ft_del_node(t_data *data, t_list *lst, t_list *pre_lst)
 {
@@ -104,11 +104,15 @@ char	*ft_rep_env(t_data *data, char *str)
 
 void	ft_to_json(char **env_json, char *env_name)
 {
-	int	count;
+	int	i;
+	int	j;
 
-	count = 0;
-	while (env_name[count] != '=' && env_name[count])
-		count++;
-	env_json[0] = ft_substr(env_name, 0, count);
-	env_json[1] = ft_substr(env_name, count + 1, ft_strlen(env_name) - count);
+	i = 0;
+	while (env_name[i] != '=' && env_name[i])
+		i++;
+	j = i + 1;
+	while (env_name[j] != ' ' && env_name[j])
+		j++;
+	env_json[0] = ft_substr(env_name, 0, i);
+	env_json[1] = ft_substr(env_name, i + 1, j - (i + 1));
 }
