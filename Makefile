@@ -1,5 +1,6 @@
 NAME := minishell
-EXE_NAME := minishell_exe
+EXE_CMD_NAME := minishell_exe
+EXE_PIPE_NAME := minishell_pipe
 
 LIB_DIR := 42-c-library
 EXE_DIR := execution
@@ -9,12 +10,22 @@ ENV_DIR := env
 OBJ_DIR := objs
 
 SOURCE := main.c
+
 SOURCE_EXE := $(addprefix $(EXE_DIR)/, \
 			  main.c execution.c builtin_fn_1.c builtin_fn_2.c) \
 			  $(addprefix $(UTILS_DIR)/, \
 			  builtin_fn_1.c builtin_fn_2.c) \
 			  $(addprefix $(PIPE_DIR)/, \
 			  pipe.c) \
+			  $(addprefix $(ENV_DIR)/, \
+			  env.c)
+
+SOURCE_PIPE := $(addprefix $(EXE_DIR)/, \
+			  execution.c builtin_fn_1.c builtin_fn_2.c) \
+			  $(addprefix $(UTILS_DIR)/, \
+			  builtin_fn_1.c builtin_fn_2.c) \
+			  $(addprefix $(PIPE_DIR)/, \
+			  pipe.c main.c) \
 			  $(addprefix $(ENV_DIR)/, \
 			  env.c)
 
@@ -65,8 +76,12 @@ clean_lib:
 	@cd $(LIB_DIR) && ls -A | xargs rm -rf
 
 exe_execution: $(LIBFT)
-	$(CC) $(CC_FLAG) $(SOURCE_EXE) $(LIBFT) -o $(EXE_NAME) $(LDLIBS)
-	./$(EXE_NAME)
+	$(CC) $(CC_FLAG) $(SOURCE_EXE) $(LIBFT) -o $(EXE_CMD_NAME) $(LDLIBS)
+	./$(EXE_CMD_NAME)
+
+exe_pipe: $(LIBFT)
+	$(CC) $(CC_FLAG) $(SOURCE_PIPE) $(LIBFT) -o $(EXE_PIPE_NAME) $(LDLIBS)
+	./$(EXE_PIPE_NAME)
 
 $(OBJ_DIR)/%.o: %.c $(HEADER)
 	$(CC) $(CC_FLAG) -c $< -o $@

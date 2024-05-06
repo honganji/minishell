@@ -1,19 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipe.h                                             :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ytoshihi <ytoshihi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/05 13:12:58 by ytoshihi          #+#    #+#             */
-/*   Updated: 2024/05/06 17:13:03 by ytoshihi         ###   ########.fr       */
+/*   Created: 2024/05/06 14:39:12 by ytoshihi          #+#    #+#             */
+/*   Updated: 2024/05/06 17:12:56 by ytoshihi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PIPE_H
-# define PIPE_H
-# include "../minishell.h"
+#include "pipe.h"
 
-void	ft_create_pipe(int i);
+int	main(void)
+{
+	char	**args;
 
-#endif
+	args = ft_split("ls -l", ' ');
+	ft_create_pipe(0);
+	printf("main function\n");
+	printf("This function shouldn't be run\n");
+	return (0);
+}
