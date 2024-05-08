@@ -6,11 +6,11 @@
 /*   By: ytoshihi <ytoshihi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 14:50:18 by ytoshihi          #+#    #+#             */
-/*   Updated: 2024/05/06 10:55:12 by ytoshihi         ###   ########.fr       */
+/*   Updated: 2024/05/08 20:07:15 by ytoshihi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "execution.h"
+#include "../include/execution.h"
 
 // For other builtin functions
 void	ft_execve(char *str)

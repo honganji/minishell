@@ -8,8 +8,18 @@ UTILS_DIR := utils
 PIPE_DIR := pipe
 ENV_DIR := env
 OBJ_DIR := objs
+OBJ_DIR_COLLECTION := $(OBJ_DIR) $(addprefix $(OBJ_DIR)/, $(EXE_DIR) \
+					  $(UTILS_DIR) $(PIPE_DIR) $(ENV_DIR))
 
-SOURCE := main.c
+SOURCE := main.c \
+		  $(addprefix $(ENV_DIR)/, \
+		  env.c) \
+		  $(addprefix $(EXE_DIR)/, \
+		  execution.c builtin_fn_1.c builtin_fn_2.c) \
+		  $(addprefix $(PIPE_DIR)/, \
+		  pipe.c) \
+		  $(addprefix $(UTILS_DIR)/, \
+		  builtin_fn_1.c builtin_fn_2.c)
 
 SOURCE_EXE := $(addprefix $(EXE_DIR)/, \
 			  main.c execution.c builtin_fn_1.c builtin_fn_2.c) \
@@ -28,8 +38,6 @@ SOURCE_PIPE := $(addprefix $(EXE_DIR)/, \
 			  pipe.c main.c) \
 			  $(addprefix $(ENV_DIR)/, \
 			  env.c)
-
-HEADER := minishell.h
 
 OBJS := $(SOURCE:%.c=$(OBJ_DIR)/%.o)
 
@@ -83,12 +91,12 @@ exe_pipe: $(LIBFT)
 	$(CC) $(CC_FLAG) $(SOURCE_PIPE) $(LIBFT) -o $(EXE_PIPE_NAME) $(LDLIBS)
 	./$(EXE_PIPE_NAME)
 
-$(OBJ_DIR)/%.o: %.c $(HEADER)
+$(OBJ_DIR)/%.o: %.c
 	$(CC) $(CC_FLAG) -c $< -o $@
 
 $(OBJ_DIR):
 	@echo "$(BLUE)Start compiling...$(NC)"
-	$(MAKE_DIR) $(OBJ_DIR)
+	$(MAKE_DIR) $(OBJ_DIR_COLLECTION)
 
 .PHONY: all clean fclean re exe clean_lib exe_execution
 

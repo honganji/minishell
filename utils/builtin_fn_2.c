@@ -6,11 +6,11 @@
 /*   By: ytoshihi <ytoshihi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 12:18:51 by ytoshihi          #+#    #+#             */
-/*   Updated: 2024/05/06 10:54:14 by ytoshihi         ###   ########.fr       */
+/*   Updated: 2024/05/08 20:12:18 by ytoshihi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "utils.h"
+#include "../include/utils.h"
 
 void	free_arr(char **path_arr)
 {

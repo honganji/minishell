@@ -6,11 +6,11 @@
 /*   By: ytoshihi <ytoshihi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 14:50:18 by ytoshihi          #+#    #+#             */
-/*   Updated: 2024/05/05 10:52:18 by ytoshihi         ###   ########.fr       */
+/*   Updated: 2024/05/08 20:07:35 by ytoshihi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "execution.h"
+#include "../include/execution.h"
 
 // For export command
 void	ft_export(t_data *data, char *str)

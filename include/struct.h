@@ -1,19 +1,48 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   struct.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ytoshihi <ytoshihi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/25 19:42:02 by ytoshihi          #+#    #+#             */
-/*   Updated: 2024/05/08 20:13:41 by ytoshihi         ###   ########.fr       */
+/*   Created: 2024/05/08 19:07:23 by ytoshihi          #+#    #+#             */
+/*   Updated: 2024/05/08 20:10:01 by ytoshihi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "include/minishell.h"
+#ifndef STRUCT_H
+# define STRUCT_H
 
-int	main(void)
+# include <stdio.h>
+# include <stdlib.h>
+# include <sys/wait.h>
+# include <unistd.h>
+# include "../42-c-library/library.h"
+
+typedef enum e_com
 {
-	ft_create_pipe();
-	return (0);
-}
+	ECHO,
+	CD,
+	PWD,
+	EXPORT,
+	UNSET,
+	ENV,
+	EXIT,
+	ETC
+}t_com;
+
+typedef struct s_env
+{
+	char	*key;
+	char	*value;
+}t_env;
+
+typedef struct s_data
+{
+	char	**args;
+	char	*path;
+	t_env	*arr;
+	t_list	*env_lst;
+}t_data;
+
+#endif

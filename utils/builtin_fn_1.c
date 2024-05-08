@@ -6,11 +6,11 @@
 /*   By: ytoshihi <ytoshihi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/04 09:24:36 by ytoshihi          #+#    #+#             */
-/*   Updated: 2024/05/06 10:44:57 by ytoshihi         ###   ########.fr       */
+/*   Updated: 2024/05/08 20:12:12 by ytoshihi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "utils.h"
+#include "../include/utils.h"
 
 void	ft_del_node(t_data *data, t_list *lst, t_list *pre_lst)
 {

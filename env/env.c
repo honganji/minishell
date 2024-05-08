@@ -6,11 +6,11 @@
 /*   By: ytoshihi <ytoshihi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 17:52:24 by ytoshihi          #+#    #+#             */
-/*   Updated: 2024/05/06 10:57:37 by ytoshihi         ###   ########.fr       */
+/*   Updated: 2024/05/08 20:06:47 by ytoshihi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "env.h"
+#include "../include/env.h"
 
 void	ft_store_env(t_data *data, char **environ)
 {
