@@ -3,8 +3,11 @@ NAME := minishell
 LIB_DIR := 42-c-library
 OBJ_DIR := objs
 
-SOURCE := main.c
-HEARDER := minishell.h
+SOURCE := main.c \
+			init.c \
+			tokenization.c
+
+HEADER := minishell.h
 
 OBJS := $(SOURCE:%.c=$(OBJ_DIR)/%.o)
 
