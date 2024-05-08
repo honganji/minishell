@@ -1,19 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ytoshihi <ytoshihi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/25 19:42:02 by ytoshihi          #+#    #+#             */
-/*   Updated: 2024/05/04 21:23:09 by ytoshihi         ###   ########.fr       */
+/*   Created: 2024/05/03 17:52:24 by ytoshihi          #+#    #+#             */
+/*   Updated: 2024/05/06 10:57:37 by ytoshihi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "env.h"
 
-int	main(void)
+void	ft_store_env(t_data *data, char **environ)
 {
-	ft_printf("Hello world");
-	return (0);
+	char		**env_json;
+	int			i;
+
+	i = 0;
+	if (!environ)
+		return ;
+	while (*environ)
+	{
+		env_json = (char **)ft_calloc(1, sizeof(char *));
+		ft_to_json(env_json, *environ++);
+		ft_lstadd_back(&data->env_lst, ft_lstnew(env_json));
+	}
 }

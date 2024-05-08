@@ -1,9 +1,23 @@
 NAME := minishell
+EXE_NAME := minishell_exe
 
 LIB_DIR := 42-c-library
+EXE_DIR := execution
+UTILS_DIR := utils
+PIPE_DIR := pipe
+ENV_DIR := env
 OBJ_DIR := objs
 
 SOURCE := main.c
+SOURCE_EXE := $(addprefix $(EXE_DIR)/, \
+			  main.c execution.c builtin_fn_1.c builtin_fn_2.c) \
+			  $(addprefix $(UTILS_DIR)/, \
+			  builtin_fn_1.c builtin_fn_2.c) \
+			  $(addprefix $(PIPE_DIR)/, \
+			  pipe.c) \
+			  $(addprefix $(ENV_DIR)/, \
+			  env.c)
+
 HEADER := minishell.h
 
 OBJS := $(SOURCE:%.c=$(OBJ_DIR)/%.o)
@@ -50,6 +64,10 @@ exe: all
 clean_lib:
 	@cd $(LIB_DIR) && ls -A | xargs rm -rf
 
+exe_execution: $(LIBFT)
+	$(CC) $(CC_FLAG) $(SOURCE_EXE) $(LIBFT) -o $(EXE_NAME) $(LDLIBS)
+	./$(EXE_NAME)
+
 $(OBJ_DIR)/%.o: %.c $(HEADER)
 	$(CC) $(CC_FLAG) -c $< -o $@
 
@@ -57,7 +75,7 @@ $(OBJ_DIR):
 	@echo "$(BLUE)Start compiling...$(NC)"
 	$(MAKE_DIR) $(OBJ_DIR)
 
-.PHONY: all clean fclean re exe clean_lib
+.PHONY: all clean fclean re exe clean_lib exe_execution
 
 GREEN := \033[0;32m
 BLUE := \033[0;34m

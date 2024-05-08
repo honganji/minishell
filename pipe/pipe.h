@@ -1,19 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   pipe.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ytoshihi <ytoshihi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/25 19:42:02 by ytoshihi          #+#    #+#             */
-/*   Updated: 2024/05/04 21:23:09 by ytoshihi         ###   ########.fr       */
+/*   Created: 2024/05/05 13:12:58 by ytoshihi          #+#    #+#             */
+/*   Updated: 2024/05/05 13:37:08 by ytoshihi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#ifndef PIPE_H
+# define PIPE_H
+# include "../minishell.h"
 
-int	main(void)
-{
-	ft_printf("Hello world");
-	return (0);
-}
+void	ft_create_pipe(void);
+
+#endif
