@@ -6,7 +6,7 @@
 /*   By: ytoshihi <ytoshihi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 11:57:56 by ytoshihi          #+#    #+#             */
-/*   Updated: 2024/05/08 20:15:14 by ytoshihi         ###   ########.fr       */
+/*   Updated: 2024/05/09 14:27:58 by ytoshihi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,9 @@
 # define UTILS_H
 
 # include "../42-c-library/library.h"
-# include "struct.h"
+# include "minishell.h"
+
+typedef struct s_data t_data;
 
 void	ft_del_node(t_data *data, t_list *lst, t_list *pre_lst);
 t_list	*ft_find_ele(t_data *data, char *str);

@@ -6,7 +6,7 @@
 /*   By: ytoshihi <ytoshihi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 13:12:58 by ytoshihi          #+#    #+#             */
-/*   Updated: 2024/05/08 20:15:08 by ytoshihi         ###   ########.fr       */
+/*   Updated: 2024/05/09 14:23:27 by ytoshihi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # include <sys/wait.h>
 # include <unistd.h>
 # include "../42-c-library/library.h"
-# include "struct.h"
+# include "minishell.h"
 # include "utils.h"
 
 // typedef enum e_com	t_com;

@@ -6,7 +6,7 @@
 /*   By: ytoshihi <ytoshihi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/02 15:09:17 by ytoshihi          #+#    #+#             */
-/*   Updated: 2024/05/08 20:15:25 by ytoshihi         ###   ########.fr       */
+/*   Updated: 2024/05/09 14:29:30 by ytoshihi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,11 @@
 # include <sys/wait.h>
 # include <unistd.h>
 # include "../42-c-library/library.h"
-# include "struct.h"
+# include "minishell.h"
 # include "utils.h"
+
+typedef struct s_data t_data;
+typedef enum e_com t_com;
 
 void	ft_execve(char *str);
 void	ft_chdir(char *path);

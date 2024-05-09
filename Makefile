@@ -1,6 +1,7 @@
 NAME := minishell
 EXE_CMD_NAME := minishell_exe
 EXE_PIPE_NAME := minishell_pipe
+EXE_TEST_NAME := minishell_test
 
 LIB_DIR := 42-c-library
 EXE_DIR := execution
@@ -38,6 +39,8 @@ SOURCE_PIPE := $(addprefix $(EXE_DIR)/, \
 			  pipe.c main.c) \
 			  $(addprefix $(ENV_DIR)/, \
 			  env.c)
+
+SOURCE_TEST := $(addprefix $(PIPE_DIR)/, redirection.c)
 
 OBJS := $(SOURCE:%.c=$(OBJ_DIR)/%.o)
 
@@ -90,6 +93,10 @@ exe_execution: $(LIBFT)
 exe_pipe: $(LIBFT)
 	$(CC) $(CC_FLAG) $(SOURCE_PIPE) $(LIBFT) -o $(EXE_PIPE_NAME) $(LDLIBS)
 	./$(EXE_PIPE_NAME)
+
+exe_test:
+	$(CC) $(CC_FLAG) $(SOURCE_TEST) $(LIBFT) -o $(EXE_TEST_NAME) $(LDLIBS)
+	./$(EXE_TEST_NAME)
 
 $(OBJ_DIR)/%.o: %.c
 	$(CC) $(CC_FLAG) -c $< -o $@
