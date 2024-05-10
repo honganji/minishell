@@ -6,7 +6,7 @@
 /*   By: ytoshihi <ytoshihi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/02 17:55:22 by ytoshihi          #+#    #+#             */
-/*   Updated: 2024/05/08 20:16:38 by ytoshihi         ###   ########.fr       */
+/*   Updated: 2024/05/10 17:49:09 by ytoshihi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ int	main(int argc, char **argv, char **env)
 	ft_exe_command(data, "GEN2=Kintama", EXPORT);
 	ft_exe_command(data, "General $GEN2", ECHO);
 	printf("----------------builtin command test----------\n");
-	ft_exe_command(data, "ls -l", ETC);
+	ft_exe_command(data, "/ls -l", ETC);
 	printf("\n-----Finish-----------------------------------\n");
 	clear_lst(data->env_lst);
 	free(data);

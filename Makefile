@@ -40,7 +40,11 @@ SOURCE_PIPE := $(addprefix $(EXE_DIR)/, \
 			  $(addprefix $(ENV_DIR)/, \
 			  env.c)
 
-SOURCE_TEST := $(addprefix $(PIPE_DIR)/, redirection.c)
+SOURCE_TEST := $(addprefix $(PIPE_DIR)/, redirection.c) \
+			   $(addprefix $(EXE_DIR)/, \
+			   execution.c builtin_fn_1.c builtin_fn_2.c) \
+			   $(addprefix $(UTILS_DIR)/, \
+			   builtin_fn_1.c builtin_fn_2.c) \
 
 OBJS := $(SOURCE:%.c=$(OBJ_DIR)/%.o)
 
