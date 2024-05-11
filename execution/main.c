@@ -6,7 +6,7 @@
 /*   By: ytoshihi <ytoshihi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/02 17:55:22 by ytoshihi          #+#    #+#             */
-/*   Updated: 2024/05/10 17:49:09 by ytoshihi         ###   ########.fr       */
+/*   Updated: 2024/05/11 13:24:01 by ytoshihi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,27 +41,36 @@ int	main(int argc, char **argv, char **env)
 	ft_store_env(data, env);
 	printf("----------------pwd test-----------------------\n");
 	ft_exe_command(data, NULL, PWD);
+	ft_read_stdin();
 	printf("\n----------------cd test------------------------\n");
 	ft_exe_command(data, "execution", CD);
 	ft_exe_command(data, NULL, PWD);
+	ft_read_stdin();
 	printf("\n");
 	printf("----------------env test-----------------------\n");
 	ft_exe_command(data, NULL, ENV);
+	ft_read_stdin();
 	printf("----------------export, and unset test---------\n");
 	ft_exe_command(data, "General $GEN1", ECHO);
+	ft_read_stdin();
 	ft_exe_command(data, "GEN1=Nobunaga Oda", EXPORT);
 	ft_exe_command(data, "General $GEN1", ECHO);
+	ft_read_stdin();
 	ft_exe_command(data, "GEN2=Hideyoshi Toyotomi", EXPORT);
 	ft_exe_command(data, "GEN3=Ieyasu Tokugawa", EXPORT);
 	ft_exe_command(data, "GEN1", UNSET);
 	ft_exe_command(data, "General $GEN1", ECHO);
+	ft_read_stdin();
 	printf("\n");
 	printf("----------------echo test---------------------\n");
 	ft_exe_command(data, "\"I am a hero\"", ECHO);
+	ft_read_stdin();
 	printf("----------------export update test------------\n");
 	ft_exe_command(data, "General $GEN2", ECHO);
+	ft_read_stdin();
 	ft_exe_command(data, "GEN2=Kintama", EXPORT);
 	ft_exe_command(data, "General $GEN2", ECHO);
+	ft_read_stdin();
 	printf("----------------builtin command test----------\n");
 	ft_exe_command(data, "/ls -l", ETC);
 	printf("\n-----Finish-----------------------------------\n");

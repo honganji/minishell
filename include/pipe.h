@@ -6,7 +6,7 @@
 /*   By: ytoshihi <ytoshihi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 13:12:58 by ytoshihi          #+#    #+#             */
-/*   Updated: 2024/05/10 22:20:54 by ytoshihi         ###   ########.fr       */
+/*   Updated: 2024/05/11 12:57:56 by ytoshihi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,5 @@
 
 void	ft_create_pipe(void);
 void	ft_output_red(char *name, char *content, int is_append);
-void	ft_input_file(char *str, int is_file);
 
 #endif

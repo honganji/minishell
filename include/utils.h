@@ -6,7 +6,7 @@
 /*   By: ytoshihi <ytoshihi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 11:57:56 by ytoshihi          #+#    #+#             */
-/*   Updated: 2024/05/09 14:27:58 by ytoshihi         ###   ########.fr       */
+/*   Updated: 2024/05/11 13:18:48 by ytoshihi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,5 +24,8 @@ char	*ft_rep_env(t_data *data, char *str);
 void	ft_to_json(char **env_json, char *env_name);
 void	free_arr(char **path_arr);
 char	*ft_check_exist(char *path_name);
+void	ft_input_data(char *str, int is_file);
+void	ft_read_stdin(void);
+char	*ft_free_strjoin(char *s1, char *s2);
 
 #endif
