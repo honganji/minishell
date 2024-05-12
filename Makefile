@@ -5,7 +5,8 @@ OBJ_DIR := objs
 
 SOURCE := main.c \
 			init.c \
-			tokenization.c
+			tokenization.c \
+			utils.c
 
 HEADER := minishell.h
 
@@ -20,6 +21,7 @@ MAKE := make
 
 RM_FLAG := -rf
 CC_FLAG := -Wall -Werror -Wextra
+L_READ_LIB := -lreadline
 MAKE_FLAG := -C
 
 all: $(LIBFT) $(NAME)
@@ -33,8 +35,8 @@ $(LIBFT):
 	@$(MAKE) $(MAKE_FLAG) $(LIB_DIR)
 	@echo "$(GREEN)Build libft successfully!$(NC)"
 
-$(NAME): $(OBJ_DIR) $(OBJS) $(HEARDER)
-	@$(CC) $(CC_FLAG) $(OBJS) $(LIBFT) -o $(NAME)
+$(NAME): $(OBJ_DIR) $(OBJS) $(HEADER)
+	@$(CC) $(CC_FLAG) $(OBJS) $(LIBFT) $(L_READ_LIB) -o $(NAME)
 
 clean:
 	@$(RM) $(RM_FLAG) $(OBJ_DIR) $(LIB_DIR)/objs

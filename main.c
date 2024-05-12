@@ -6,7 +6,7 @@
 /*   By: adprzyby <adprzyby@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 19:42:02 by ytoshihi          #+#    #+#             */
-/*   Updated: 2024/05/08 17:48:06 by adprzyby         ###   ########.fr       */
+/*   Updated: 2024/05/12 14:51:57 by adprzyby         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,15 +25,14 @@ int main(int argc, char **argv, char **envp)
 	(void)argc;
 	(void)argv;
 	// Main loop for the shell
-	while (1) 
+	while (1)
 	{
 		char* input = readline("Enter command: ");
 		if (input)
 		{
 			add_history(input);  // add the input to the history
-			char **blocks = ft_split(input, '|');  // split the input into blocks separated by '|'
+			char **blocks = ft_split(input, ' ');  // split the input into blocks separated by '|'
 			tokenization(blocks);  // process the tokens (not implemented yet)
-			printf("You entered: %s\n", input);
 			free(blocks);  // free the memory allocated by ft_split
 			free(input);  // free the memory allocated by readline
 		}

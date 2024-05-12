@@ -6,7 +6,7 @@
 /*   By: adprzyby <adprzyby@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 20:07:29 by ytoshihi          #+#    #+#             */
-/*   Updated: 2024/05/08 19:10:26 by adprzyby         ###   ########.fr       */
+/*   Updated: 2024/05/10 16:12:59 by adprzyby         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ typedef struct s_token
 {
 	void			*data;
 	enum	s_type	type;
-	int				i;
+	int				id;
 	struct s_token	*next;
 	struct s_token	*prev;
 }					t_token;
@@ -75,6 +75,8 @@ typedef struct s_cmd
 	char			*output;
 	int				pipe;
 	int				pipefd[2];
+	struct s_cmd	*next;
+	struct s_cmd	*prev;
 }					t_cmd;
 
 // A command is a sequence of words that the shell executes.
@@ -90,14 +92,21 @@ int					main(int argc, char **argv, char **envp);
 // tokenization
 void				tokenization(char **tokens);
 int					what_token(char *str);
-int					what_quote(char *str, int i);
+// int					what_quote(char *str, int i);
 int					what_redir(char *str, int i);
 int					is_command(char *str);
 int					is_env_var(char *str);
 int					is_argument(char *str);
+int					is_flag(char *str);
+char				*extract_token(char *block, int *i);
 
 // init
 t_token				*token_init(void);
 t_env				*env_init(char **envp);
+t_cmd				*cmd_init(void);
+
+// utils
+int	ft_isspace(int c);
+int	in_quotes(char *str);
 
 #endif
