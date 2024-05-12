@@ -6,9 +6,12 @@ OBJ_DIR := objs
 SOURCE := main.c \
 			init.c \
 			tokenization.c \
-			utils.c
+			utils/utils.c \
+			utils/utils_split.c \
+			utils/utils_split1.c \
+			parsing/grouping.c
 
-HEADER := minishell.h
+HEADER := include/minishell.h
 
 OBJS := $(SOURCE:%.c=$(OBJ_DIR)/%.o)
 
@@ -59,7 +62,7 @@ $(OBJ_DIR)/%.o: %.c $(HEADER)
 
 $(OBJ_DIR):
 	@echo "$(BLUE)Start compiling...$(NC)"
-	$(MAKE_DIR) $(OBJ_DIR)
+	$(MAKE_DIR) $(OBJ_DIR) $(OBJ_DIR)/utils $(OBJ_DIR)/parsing
 
 .PHONY: all clean fclean re exe clean_lib
 

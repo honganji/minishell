@@ -6,14 +6,15 @@
 /*   By: adprzyby <adprzyby@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 19:42:02 by ytoshihi          #+#    #+#             */
-/*   Updated: 2024/05/12 14:51:57 by adprzyby         ###   ########.fr       */
+/*   Updated: 2024/05/12 18:31:12 by adprzyby         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "include/minishell.h"
 
 int main(int argc, char **argv, char **envp)
 {
+	t_cmd_list **commands;
 	// Print all environment variables
 	char **env = envp;
 	while (*env != 0)
@@ -22,6 +23,7 @@ int main(int argc, char **argv, char **envp)
 		printf("%s\n", thisEnv);
 		env++;
 	}
+	// Not used argc and argv
 	(void)argc;
 	(void)argv;
 	// Main loop for the shell
@@ -31,9 +33,10 @@ int main(int argc, char **argv, char **envp)
 		if (input)
 		{
 			add_history(input);  // add the input to the history
-			char **blocks = ft_split(input, ' ');  // split the input into blocks separated by '|'
-			tokenization(blocks);  // process the tokens (not implemented yet)
-			free(blocks);  // free the memory allocated by ft_split
+			char **raw_tokens = split_with_quotes(input, ' ');  // split the input into blocks separated by ' '
+			tokenization(raw_tokens);  // process the tokens
+			commands = parse_commands();  // group the tokens into commands
+			free(raw_tokens);  // free the memory allocated by ft_split
 			free(input);  // free the memory allocated by readline
 		}
 	}

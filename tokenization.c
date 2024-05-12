@@ -6,11 +6,11 @@
 /*   By: adprzyby <adprzyby@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/27 17:04:21 by adprzyby          #+#    #+#             */
-/*   Updated: 2024/05/10 16:36:24 by adprzyby         ###   ########.fr       */
+/*   Updated: 2024/05/12 17:49:24 by adprzyby         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "include/minishell.h"
 
 int	what_token(char *str)
 {
@@ -45,29 +45,23 @@ int	what_redir(char *str, int i)
 }
 // what_redir returns the type of redirection token
 
-void	tokenization(char **blocks)
+void	tokenization(char **tokens)
 {
 	t_token	*token;
 	t_token	*tmp;
 	int		i;
-	int		j;
 
 	i = 0;
-	j = 0;
 	token = token_init();
 	tmp = token;
-	while (blocks[i])
+	while (tokens[i])
 	{
-		while (blocks[i][j])
-		{
-			tmp->data = extract_token(blocks[i], &j);
-			tmp->type = what_token(tmp->data);
-			tmp->next = token_init();
-			tmp->id = i;
-			tmp = tmp->next;
-		}
+		tmp->data = tokens[i];
+		tmp->type = what_token(tmp->data);
+		tmp->next = token_init();
+		tmp->id = i;
+		tmp = tmp->next;
 		i++;
-		j = 0;
 	}
 	tmp = token;
 	while (tmp && tmp->data)
@@ -83,61 +77,61 @@ void	tokenization(char **blocks)
 // where each token has a data field (the string itself) and a type field (the type of token).
 // The function uses the what_token function to determine the type of each token based on its content.
 
-char	*extract_token(char *block, int *i)
-{
-	char	*start;
-	char	*end;
-	size_t	len;
-	char	*token;
+// char	*extract_token(char *block, int *i)
+// {
+// 	char	*start;
+// 	char	*end;
+// 	size_t	len;
+// 	char	*token;
 
-	while (block[*i] && ft_isspace(block[*i]))
-		(*i)++;
-	start = &block[*i];
-	if (in_quotes(start))
-	{
-		end = ft_strchr(start + 1, start[0]);
-		if (end != NULL)
-			end++;
-		// (*i)++;
-	}
-	else
-	{
-		end = start;
-		while (*end && !ft_isspace(*end) && !in_quotes(end))
-			end++;
-	}
-		end = ft_strchr(start, ' ');
-	if (end == NULL)
-		end = start + ft_strlen(start);
-	len = end - start;
-	token = ft_substr(start, 0, len);
-	*i += len;
-	return (token);
-}
+// 	while (block[*i] && ft_isspace(block[*i]))
+// 		(*i)++;
+// 	start = &block[*i];
+// 	if (in_quotes(start))
+// 	{
+// 		end = ft_strchr(start + 1, start[0]);
+// 		if (end != NULL)
+// 			end++;
+// 		// (*i)++;
+// 	}
+// 	else
+// 	{
+// 		end = start;
+// 		while (*end && !ft_isspace(*end) && !in_quotes(end))
+// 			end++;
+// 	}
+// 		end = ft_strchr(start, ' ');
+// 	if (end == NULL)
+// 		end = start + ft_strlen(start);
+// 	len = end - start;
+// 	token = ft_substr(start, 0, len);
+// 	*i += len;
+// 	return (token);
+// }
 // The extract_token function takes an array of strings, an index i,
 // and a position j as input.
 // It extracts a token from the string at index i, starting at position j.
 // The token is extracted by finding the first space character after position j.
 // The function then creates a new string containing the token and returns it.
 
-int	in_quotes(char *str)
-{
-	int	quote;
-	int i;
+// int	in_quotes(char *str)
+// {
+// 	int	quote;
+// 	int i;
 
-	i = 0;
-	quote = 0;
-	if (str[0] != '\"' && str[0] != '\'')
-		return (0);
-	while (str[i])
-	{
-		if ((str[i] == '\"' || str[i] == '\'') && quote == 0)
-			quote = 1;
-		else if ((str[i] == '\"' || str[i] == '\'') && quote == 1)
-			quote = 0;
-		i++;
-	}
-	if (str[i -1] != str[0])
-		return 0;
-	return (quote);
-}
+// 	i = 0;
+// 	quote = 0;
+// 	if (str[0] != '\"' && str[0] != '\'')
+// 		return (0);
+// 	while (str[i])
+// 	{
+// 		if ((str[i] == '\"' || str[i] == '\'') && quote == 0)
+// 			quote = 1;
+// 		else if ((str[i] == '\"' || str[i] == '\'') && quote == 1)
+// 			quote = 0;
+// 		i++;
+// 	}
+// 	if (str[i -1] != str[0])
+// 		return 0;
+// 	return (quote);
+// }

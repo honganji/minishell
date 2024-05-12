@@ -6,11 +6,11 @@
 /*   By: adprzyby <adprzyby@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 13:46:58 by adprzyby          #+#    #+#             */
-/*   Updated: 2024/05/09 16:05:09 by adprzyby         ###   ########.fr       */
+/*   Updated: 2024/05/12 18:29:44 by adprzyby         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "minishell.h"
+# include "include/minishell.h"
 
 t_token	*token_init(void)
 {
@@ -37,10 +37,21 @@ t_cmd *cmd_init(void)
 	cmd->args = NULL;
 	cmd->input = NULL;
 	cmd->output = NULL;
-	cmd->pipe = 0;
 	cmd->next = NULL;
 	cmd->prev = NULL;
 	return (cmd);
+}
+
+t_cmd_list	*cmd_list_init(void)
+{
+	t_cmd_list	*list;
+
+	list = malloc(sizeof(t_cmd_list));
+	if (!list)
+		return (NULL);
+	list->head = NULL;
+	list->tail = NULL;
+	return (list);
 }
 
 t_env	*env_init(char **envp)

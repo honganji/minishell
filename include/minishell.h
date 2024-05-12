@@ -6,7 +6,7 @@
 /*   By: adprzyby <adprzyby@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 20:07:29 by ytoshihi          #+#    #+#             */
-/*   Updated: 2024/05/10 16:12:59 by adprzyby         ###   ########.fr       */
+/*   Updated: 2024/05/12 18:56:24 by adprzyby         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 // LIBS
 
-# include "./42-c-library/library.h"
+# include "../42-c-library/library.h"
 # include <readline/history.h>
 # include <readline/readline.h>
 # include <stdbool.h>
@@ -39,24 +39,21 @@ typedef struct s_env
 
 typedef enum s_type
 {
-	NOTOKEN,
-	WORD,		  // a sequence of characters (command, argument, etc.)
-	PIPE,          // |
-	REDIR_HERE,    // <<
-	REDIR_APP_OUT, // >>
-	REDIR_IN,      // <
-	REDIR_OUT,     // >
-	// QUOTE,         // '
-	// D_QUOTE,       // "
-	// BRACE_EXP      // {}
-}				t_type;
+	NOTOKEN,		// no token (0)
+	WORD,          // a sequence of characters (command, argument, etc.) (1)
+	PIPE,          // | (2)
+	REDIR_HERE,    // << (3)
+	REDIR_APP_OUT, // >> (4)
+	REDIR_IN,      // < (5)
+	REDIR_OUT,     // > (6)
+}					t_type;
 
 // A type is a category of a token.
 
 typedef struct s_token
 {
 	void			*data;
-	enum	s_type	type;
+	enum s_type		type;
 	int				id;
 	struct s_token	*next;
 	struct s_token	*prev;
@@ -66,15 +63,12 @@ typedef struct s_token
 // In the context of a shell, a token is a single word or symbol.
 // 		For example, in the command ls -l, there are two tokens: ls and -l.
 
-
 typedef struct s_cmd
 {
 	char			*cmd;
 	char			**args;
 	char			*input;
 	char			*output;
-	int				pipe;
-	int				pipefd[2];
 	struct s_cmd	*next;
 	struct s_cmd	*prev;
 }					t_cmd;
@@ -84,6 +78,26 @@ typedef struct s_cmd
 // -l is an argument.
 // A command can also have input and output redirection, as well as pipes.
 
+typedef struct s_cmd_list
+{
+	t_cmd			*command;
+	t_cmd			*next;
+	t_cmd			*prev;
+}					t_cmd_list;
+
+// A command list is a linked list of commands.
+
+typedef struct s_split_vars
+{
+	int				start;
+	int				end;
+	int				index;
+	int				in_s_quotes;
+	int				in_d_quotes;
+}					t_split_vars;
+
+// A struct to store variables used in the split_with_quotes function
+
 // FUNCTIONS
 
 // main
@@ -92,13 +106,11 @@ int					main(int argc, char **argv, char **envp);
 // tokenization
 void				tokenization(char **tokens);
 int					what_token(char *str);
-// int					what_quote(char *str, int i);
 int					what_redir(char *str, int i);
-int					is_command(char *str);
-int					is_env_var(char *str);
-int					is_argument(char *str);
-int					is_flag(char *str);
-char				*extract_token(char *block, int *i);
+// int					is_command(char *str);
+// int					is_env_var(char *str);
+// int					is_argument(char *str);
+// int					is_flag(char *str);
 
 // init
 t_token				*token_init(void);
@@ -106,7 +118,19 @@ t_env				*env_init(char **envp);
 t_cmd				*cmd_init(void);
 
 // utils
-int	ft_isspace(int c);
-int	in_quotes(char *str);
+int					ft_isspace(int c);
+int					in_quotes(char *str);
+
+// split
+char				**split_with_quotes(char const *s, char c);
+char				*word_dup(int start, int end, char const *str);
+int					count_word(char const *s, char c);
+void				check_chr(char const *s, int *end, char c);
+char				**free_arr(char **tokens);
+
+// parsing
+t_cmd				**parse_commands(t_token *tokens);
+void				add_token_to_command(t_cmd *command, t_token *token);
+void				add_command_to_list(t_cmd **commands, t_cmd *command);
 
 #endif
