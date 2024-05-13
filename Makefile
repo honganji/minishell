@@ -25,7 +25,7 @@ SOURCE := main.c \
 SOURCE_EXE := $(addprefix $(EXE_DIR)/, \
 			  main.c execution.c builtin_fn_1.c builtin_fn_2.c) \
 			  $(addprefix $(UTILS_DIR)/, \
-			  builtin_fn_1.c builtin_fn_2.c) \
+			  builtin_fn_1.c builtin_fn_2.c builtin_fn_3.c) \
 			  $(addprefix $(PIPE_DIR)/, \
 			  pipe.c) \
 			  $(addprefix $(ENV_DIR)/, \
@@ -34,7 +34,7 @@ SOURCE_EXE := $(addprefix $(EXE_DIR)/, \
 SOURCE_PIPE := $(addprefix $(EXE_DIR)/, \
 			  execution.c builtin_fn_1.c builtin_fn_2.c) \
 			  $(addprefix $(UTILS_DIR)/, \
-			  builtin_fn_1.c builtin_fn_2.c) \
+			  builtin_fn_1.c builtin_fn_2.c builtin_fn_3.c) \
 			  $(addprefix $(PIPE_DIR)/, \
 			  pipe.c main.c) \
 			  $(addprefix $(ENV_DIR)/, \

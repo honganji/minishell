@@ -6,7 +6,7 @@
 /*   By: ytoshihi <ytoshihi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 13:12:58 by ytoshihi          #+#    #+#             */
-/*   Updated: 2024/05/11 12:57:56 by ytoshihi         ###   ########.fr       */
+/*   Updated: 2024/05/12 13:07:51 by ytoshihi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,10 @@
 # include "minishell.h"
 # include "utils.h"
 
-void	ft_create_pipe(void);
+typedef struct s_exe t_exe;
+
+void	ft_create_pipe(t_data *data, t_exe *arr);
 void	ft_output_red(char *name, char *content, int is_append);
+void	ft_pipe(t_data *data, t_exe *arr);
 
 #endif

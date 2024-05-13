@@ -6,7 +6,7 @@
 /*   By: ytoshihi <ytoshihi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 12:18:51 by ytoshihi          #+#    #+#             */
-/*   Updated: 2024/05/11 13:18:40 by ytoshihi         ###   ########.fr       */
+/*   Updated: 2024/05/13 16:45:50 by ytoshihi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,16 +74,20 @@ void	ft_input_data(char *str, int is_file)
 	}
 }
 
-void	ft_read_stdin(void)
+char	*ft_read_file(int fd)
 {
 	char	*line;
-	line = get_next_line(STDIN_FILENO);
+	char	*str;
+
+	str = ft_strdup("");
+	line = get_next_line(fd);
 	while (line)
 	{
-		printf("%s", line);
+		str = ft_free_strjoin(str, line);
 		free(line);
-		line = get_next_line(STDIN_FILENO);
+		line = get_next_line(fd);
 	}
+	return (str);
 }
 
 char	*ft_free_strjoin(char *s1, char *s2)

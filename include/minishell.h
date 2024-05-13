@@ -6,12 +6,14 @@
 /*   By: ytoshihi <ytoshihi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 20:07:29 by ytoshihi          #+#    #+#             */
-/*   Updated: 2024/05/09 14:23:04 by ytoshihi         ###   ########.fr       */
+/*   Updated: 2024/05/13 16:38:05 by ytoshihi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
+
+# define TMP_FILE "tmp.txt"
 
 # include "execution.h"
 # include "env.h"
@@ -43,10 +45,14 @@ typedef struct s_env
 
 typedef struct s_data
 {
-	char	**args;
-	char	*path;
-	t_env	*arr;
 	t_list	*env_lst;
+	char	*output;
 }t_data;
+
+typedef struct s_exe
+{
+	t_com	com;
+	char	*str;
+}t_exe;
 
 #endif
