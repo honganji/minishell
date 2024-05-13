@@ -1,28 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipe.h                                             :+:      :+:    :+:   */
+/*   redirection_test.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ytoshihi <ytoshihi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/05 13:12:58 by ytoshihi          #+#    #+#             */
-/*   Updated: 2024/05/13 18:49:23 by ytoshihi         ###   ########.fr       */
+/*   Created: 2024/05/13 20:09:54 by ytoshihi          #+#    #+#             */
+/*   Updated: 2024/05/13 21:39:00 by ytoshihi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PIPE_H
-# define PIPE_H
-# include <stdio.h>
-# include <stdlib.h>
-# include <sys/wait.h>
-# include <unistd.h>
-# include "../42-c-library/library.h"
-# include "minishell.h"
-# include "utils.h"
+#include "../include/test.h"
 
-typedef struct s_exe t_exe;
-
-void	ft_output_red(char *name, char *content, int is_append);
-void	ft_pipe(t_data *data, t_exe *arr);
-
-#endif
+void	red_test(t_data *data)
+{
+	(void)data;
+	printf("\nred_test\n");
+	ft_output_red("../text_1.txt", "overwrite output\nHello world", 1);
+	ft_output_red("../text_2.txt", "\nadd output\nHello World!", 0);
+	ft_input_data("../text_2.txt", 1);
+	ft_execve("/sort");
+	ft_input_data("Hello\nYou\nKing\n", 0);
+	ft_execve("/sort");
+}

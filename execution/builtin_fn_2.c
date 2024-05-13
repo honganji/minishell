@@ -6,7 +6,7 @@
 /*   By: ytoshihi <ytoshihi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 14:50:18 by ytoshihi          #+#    #+#             */
-/*   Updated: 2024/05/12 14:51:15 by ytoshihi         ###   ########.fr       */
+/*   Updated: 2024/05/13 19:04:37 by ytoshihi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,8 @@ void	ft_export(t_data *data, char *str)
 	}
 	else
 		ft_lstadd_back(&data->env_lst, ft_lstnew(env_json));
-	free(data->output);
-	data->output = ft_strdup("");
 	free(env_arr);
+	ft_input_data("", 0);
 }
 
 // For unset command
@@ -57,6 +56,5 @@ void	ft_unset(t_data *data, char *str)
 		pre_lst = tmp_lst;
 		tmp_lst = tmp_lst->next;
 	}
-	free(data->output);
-	data->output = ft_strdup("cur_dir");
+	ft_input_data("", 0);
 }

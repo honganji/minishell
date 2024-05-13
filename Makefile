@@ -8,9 +8,10 @@ EXE_DIR := execution
 UTILS_DIR := utils
 PIPE_DIR := pipe
 ENV_DIR := env
+TEST_DIR := test
 OBJ_DIR := objs
 OBJ_DIR_COLLECTION := $(OBJ_DIR) $(addprefix $(OBJ_DIR)/, $(EXE_DIR) \
-					  $(UTILS_DIR) $(PIPE_DIR) $(ENV_DIR))
+					  $(UTILS_DIR) $(PIPE_DIR) $(ENV_DIR) $(TEST_DIR))
 
 SOURCE := main.c \
 		  $(addprefix $(ENV_DIR)/, \
@@ -18,9 +19,11 @@ SOURCE := main.c \
 		  $(addprefix $(EXE_DIR)/, \
 		  execution.c builtin_fn_1.c builtin_fn_2.c) \
 		  $(addprefix $(PIPE_DIR)/, \
-		  pipe.c) \
+		  pipe.c redirection.c) \
 		  $(addprefix $(UTILS_DIR)/, \
-		  builtin_fn_1.c builtin_fn_2.c)
+		  builtin_fn_1.c builtin_fn_2.c builtin_fn_3.c) \
+		  $(addprefix $(TEST_DIR)/, \
+		  command_test.c pipe_test.c set_val.c redirection_test.c)
 
 SOURCE_EXE := $(addprefix $(EXE_DIR)/, \
 			  main.c execution.c builtin_fn_1.c builtin_fn_2.c) \

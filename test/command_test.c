@@ -1,43 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   command_test.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ytoshihi <ytoshihi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/02 17:55:22 by ytoshihi          #+#    #+#             */
-/*   Updated: 2024/05/13 19:05:08 by ytoshihi         ###   ########.fr       */
+/*   Created: 2024/05/13 19:31:43 by ytoshihi          #+#    #+#             */
+/*   Updated: 2024/05/13 20:07:20 by ytoshihi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/execution.h"
+#include "../include/test.h"
 
-static void	clear_lst(t_list *lst)
+static void	test_1(t_data *data)
 {
-	t_list	*tmp;
-
-	tmp = lst;
-	while (lst)
-	{
-		tmp = lst;
-		free(((t_env *)tmp->content)->key);
-		free(((t_env *)tmp->content)->value);
-		free(tmp->content);
-		lst = lst->next;
-		free(tmp);
-	}
-}
-
-int	main(int argc, char **argv, char **env)
-{
-	t_data	*data;
 	char	*value;
 
-	// env = ft_split("", ' ');
-	(void)argc;
-	(void)argv;
-	data = (t_data *)ft_calloc(1, sizeof(t_data));
-	ft_store_env(data, env);
 	printf("----------------pwd test-----------------------\n");
 	ft_exe_command(data, NULL, PWD);
 	printf("%s", value = ft_read_file(STDIN_FILENO));
@@ -52,6 +30,12 @@ int	main(int argc, char **argv, char **env)
 	ft_exe_command(data, NULL, ENV);
 	printf("%s", value = ft_read_file(STDIN_FILENO));
 	free(value);
+}
+
+static void	test_2(t_data *data)
+{
+	char	*value;
+
 	printf("----------------export, and unset test---------\n");
 	ft_exe_command(data, "General $GEN1\n", ECHO);
 	printf("%s", value = ft_read_file(STDIN_FILENO));
@@ -66,6 +50,12 @@ int	main(int argc, char **argv, char **env)
 	ft_exe_command(data, "General $GEN1\n", ECHO);
 	printf("%s", value = ft_read_file(STDIN_FILENO));
 	free(value);
+}
+
+static void	test_3(t_data *data)
+{
+	char	*value;
+
 	printf("----------------echo test---------------------\n");
 	ft_exe_command(data, "\"I am a hero\"\n", ECHO);
 	printf("%s", value = ft_read_file(STDIN_FILENO));
@@ -83,8 +73,11 @@ int	main(int argc, char **argv, char **env)
 	printf("%s", value = ft_read_file(STDIN_FILENO));
 	free(value);
 	printf("-----Finish-----------------------------------\n");
-	clear_lst(data->env_lst);
-	free(data);
-	// system("leaks minishell_exe");
-	return (0);
+}
+
+void	command_test(t_data *data)
+{
+	test_1(data);
+	test_2(data);
+	test_3(data);
 }

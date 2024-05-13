@@ -1,3 +1,8 @@
+.
+..
+.git
+.gitignore
+.gitmodules
 42-c-library
 Makefile
 env
@@ -11,6 +16,7 @@ minishell_test
 objs
 output.txt
 pipe
+test
 text_1.txt
 text_2.txt
 text_3.txt

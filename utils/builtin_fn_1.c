@@ -6,11 +6,34 @@
 /*   By: ytoshihi <ytoshihi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/04 09:24:36 by ytoshihi          #+#    #+#             */
-/*   Updated: 2024/05/08 20:12:12 by ytoshihi         ###   ########.fr       */
+/*   Updated: 2024/05/13 19:09:35 by ytoshihi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/utils.h"
+
+static int	ft_count_arg(t_data *data, char *str)
+{
+	int		count;
+	t_list	*tmp;
+
+	count = 0;
+	while (*str)
+	{
+		if (*str++ == '$')
+		{
+			tmp = ft_find_ele(data, str);
+			if (tmp)
+			{
+				count--;
+				count += ft_strlen((*(t_env *)tmp->content).value);
+				str += ft_strlen((*(t_env *)tmp->content).key);
+			}
+		}
+		count++;
+	}
+	return (count);
+}
 
 void	ft_del_node(t_data *data, t_list *lst, t_list *pre_lst)
 {
@@ -48,29 +71,6 @@ t_list	*ft_find_ele(t_data *data, char *str)
 		tmp = tmp->next;
 	}
 	return (NULL);
-}
-
-static int	ft_count_arg(t_data *data, char *str)
-{
-	int		count;
-	t_list	*tmp;
-
-	count = 0;
-	while (*str)
-	{
-		if (*str++ == '$')
-		{
-			tmp = ft_find_ele(data, str);
-			if (tmp)
-			{
-				count--;
-				count += ft_strlen((*(t_env *)tmp->content).value);
-				str += ft_strlen((*(t_env *)tmp->content).key);
-			}
-		}
-		count++;
-	}
-	return (count);
 }
 
 char	*ft_rep_env(t_data *data, char *str)
