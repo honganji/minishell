@@ -1,27 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.h                                            :+:      :+:    :+:   */
+/*   pipe.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ytoshihi <ytoshihi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/05 11:57:56 by ytoshihi          #+#    #+#             */
-/*   Updated: 2024/05/05 20:02:08 by ytoshihi         ###   ########.fr       */
+/*   Created: 2024/05/05 13:12:58 by ytoshihi          #+#    #+#             */
+/*   Updated: 2024/05/13 18:49:23 by ytoshihi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef UTILS_H
-# define UTILS_H
-# include "../minishell.h"
+#ifndef PIPE_H
+# define PIPE_H
+# include <stdio.h>
+# include <stdlib.h>
+# include <sys/wait.h>
+# include <unistd.h>
+# include "../42-c-library/library.h"
+# include "minishell.h"
+# include "utils.h"
 
-typedef struct s_data t_data;
-typedef struct s_list t_list;
+typedef struct s_exe t_exe;
 
-void	ft_del_node(t_data *data, t_list *lst, t_list *pre_lst);
-t_list	*ft_find_ele(t_data *data, char *str);
-char	*ft_rep_env(t_data *data, char *str);
-void	ft_to_json(char **env_json, char *env_name);
-void	free_arr(char **path_arr);
-char	*ft_check_exist(char *path_name);
+void	ft_output_red(char *name, char *content, int is_append);
+void	ft_pipe(t_data *data, t_exe *arr);
 
 #endif

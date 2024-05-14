@@ -6,35 +6,23 @@
 /*   By: ytoshihi <ytoshihi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/02 15:08:30 by ytoshihi          #+#    #+#             */
-/*   Updated: 2024/05/05 13:36:51 by ytoshihi         ###   ########.fr       */
+/*   Updated: 2024/05/13 20:01:39 by ytoshihi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipe.h"
+#include "../include/pipe.h"
 
-void	ft_create_pipe(void)
+void	ft_pipe(t_data *data, t_exe *arr)
 {
-	int			fds[2];
-	pid_t		pid;
-	char		**argv;
+	char	*str;
 
-	pipe(fds);
-	pid = fork();
-	argv = malloc(sizeof(char *));
-	argv[0] = "sort";
-	argv[1] = NULL;
-	if (pid == 0)
+	str = NULL;
+	while ((*arr).str)
 	{
-		dup2(fds[0], STDIN_FILENO);
-		close(fds[0]);
-		close(fds[1]);
-		if (execvp(argv[0], argv) < 0)
-			exit(0);
+		ft_exe_command(data, (*arr).str, (*arr).com);
+		arr++;
 	}
-	close(fds[0]);
-	dprintf(fds[1], "%s\n", "word");
-	dprintf(fds[1], "%s\n", "king");
-	dprintf(fds[1], "%s\n", "make");
-	dprintf(fds[1], "%s\n", "apple");
-	close(fds[1]);
+	str = ft_read_file(STDIN_FILENO);
+	printf("%s", str);
+	free(str);
 }

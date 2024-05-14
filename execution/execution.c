@@ -6,16 +6,16 @@
 /*   By: ytoshihi <ytoshihi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/02 10:11:47 by ytoshihi          #+#    #+#             */
-/*   Updated: 2024/05/06 10:50:03 by ytoshihi         ###   ########.fr       */
+/*   Updated: 2024/05/13 19:02:51 by ytoshihi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "execution.h"
+#include "../include/execution.h"
 
 void	ft_exe_command(t_data *data, char *str, t_com com)
 {
 	if (com == ECHO)
-		ft_echo(data, str, "-n");
+		ft_echo(data, str, "-k");
 	else if (com == CD)
 		ft_chdir(str);
 	else if (com == PWD)
@@ -28,6 +28,6 @@ void	ft_exe_command(t_data *data, char *str, t_com com)
 		ft_env(data);
 	else if (com == EXIT)
 		exit(EXIT_SUCCESS);
-	else
+	else if (com == ETC)
 		ft_execve(str);
 }

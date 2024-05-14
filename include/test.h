@@ -1,19 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env.h                                              :+:      :+:    :+:   */
+/*   test.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ytoshihi <ytoshihi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/05 13:11:29 by ytoshihi          #+#    #+#             */
-/*   Updated: 2024/05/05 14:09:49 by ytoshihi         ###   ########.fr       */
+/*   Created: 2024/05/13 19:23:10 by ytoshihi          #+#    #+#             */
+/*   Updated: 2024/05/13 20:11:11 by ytoshihi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ENV_H
-# define ENV_H
-# include "../minishell.h"
+// TODO delete
 
-void	ft_store_env(t_data *data, char **environ);
+#ifndef TEST_H
+# define TEST_H
+
+#include "minishell.h"
+
+typedef struct s_data t_data;
+typedef struct s_exe t_exe;
+
+void	set_val(t_data *data, t_exe **arr, char **env);
+void	pipe_test(t_data *data, t_exe *arr);
+void	command_test(t_data *data);
+void	red_test(t_data *data);
 
 #endif

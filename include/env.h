@@ -1,29 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env.c                                              :+:      :+:    :+:   */
+/*   env.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ytoshihi <ytoshihi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/03 17:52:24 by ytoshihi          #+#    #+#             */
-/*   Updated: 2024/05/08 20:06:47 by ytoshihi         ###   ########.fr       */
+/*   Created: 2024/05/05 13:11:29 by ytoshihi          #+#    #+#             */
+/*   Updated: 2024/05/09 14:28:32 by ytoshihi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/env.h"
+#ifndef ENV_H
+# define ENV_H
+# include <stdio.h>
+# include <stdlib.h>
+# include <sys/wait.h>
+# include <unistd.h>
+# include "../42-c-library/library.h"
+# include "minishell.h"
+# include "utils.h"
 
-void	ft_store_env(t_data *data, char **environ)
-{
-	char		**env_json;
-	int			i;
+typedef struct s_data t_data;
 
-	i = 0;
-	if (!environ)
-		return ;
-	while (*environ)
-	{
-		env_json = (char **)ft_calloc(1, sizeof(char *));
-		ft_to_json(env_json, *environ++);
-		ft_lstadd_back(&data->env_lst, ft_lstnew(env_json));
-	}
-}
+void	ft_store_env(t_data *data, char **environ);
+
+#endif

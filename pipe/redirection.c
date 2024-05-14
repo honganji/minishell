@@ -1,29 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env.c                                              :+:      :+:    :+:   */
+/*   redirection.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ytoshihi <ytoshihi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/03 17:52:24 by ytoshihi          #+#    #+#             */
-/*   Updated: 2024/05/08 20:06:47 by ytoshihi         ###   ########.fr       */
+/*   Created: 2024/05/09 11:45:40 by ytoshihi          #+#    #+#             */
+/*   Updated: 2024/05/13 20:52:58 by ytoshihi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/env.h"
+#include "../include/pipe.h"
 
-void	ft_store_env(t_data *data, char **environ)
+void	ft_output_red(char *name, char *content, int is_append)
 {
-	char		**env_json;
-	int			i;
+	int	fd;
 
-	i = 0;
-	if (!environ)
-		return ;
-	while (*environ)
+	if (is_append)
+		fd = open(name, O_CREAT | O_WRONLY, 0744);
+	else
+		fd = open(name, O_CREAT | O_WRONLY | O_APPEND, 0744);
+	if (fd == -1)
 	{
-		env_json = (char **)ft_calloc(1, sizeof(char *));
-		ft_to_json(env_json, *environ++);
-		ft_lstadd_back(&data->env_lst, ft_lstnew(env_json));
+		perror("opening file error");
+		return ;
 	}
+	write(fd, content, ft_strlen(content));
+	close(fd);
 }

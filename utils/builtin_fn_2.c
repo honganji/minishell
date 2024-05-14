@@ -6,11 +6,11 @@
 /*   By: ytoshihi <ytoshihi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 12:18:51 by ytoshihi          #+#    #+#             */
-/*   Updated: 2024/05/06 10:54:14 by ytoshihi         ###   ########.fr       */
+/*   Updated: 2024/05/13 16:45:50 by ytoshihi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "utils.h"
+#include "../include/utils.h"
 
 void	free_arr(char **path_arr)
 {
@@ -43,4 +43,60 @@ char	*ft_check_exist(char *path_name)
 		free(comb_path);
 	}
 	return (free_arr(path_arr), ft_strdup(""));
+}
+
+void	ft_input_data(char *str, int is_file)
+{
+	int		fds[2];
+
+	if (is_file)
+	{
+		fds[0] = open(str, O_RDONLY);
+		if (fds[0] == -1)
+		{
+			perror("opening file error");
+			return ;
+		}
+		dup2(fds[0], STDIN_FILENO);
+		close(fds[0]);
+	}
+	else
+	{
+		if (pipe(fds))
+		{
+			perror("pipe error");
+			return ;
+		}
+		write(fds[1], str, ft_strlen(str));
+		close(fds[1]);
+		dup2(fds[0], STDIN_FILENO);
+		close(fds[0]);
+	}
+}
+
+char	*ft_read_file(int fd)
+{
+	char	*line;
+	char	*str;
+
+	str = ft_strdup("");
+	line = get_next_line(fd);
+	while (line)
+	{
+		str = ft_free_strjoin(str, line);
+		free(line);
+		line = get_next_line(fd);
+	}
+	return (str);
+}
+
+char	*ft_free_strjoin(char *s1, char *s2)
+{
+	char	*str;
+
+	str  = ft_strjoin(s1, s2);
+	if (!str)
+		return (ft_strdup(""));
+	free(s1);
+	return (str);
 }

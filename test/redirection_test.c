@@ -1,29 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env.c                                              :+:      :+:    :+:   */
+/*   redirection_test.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ytoshihi <ytoshihi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/03 17:52:24 by ytoshihi          #+#    #+#             */
-/*   Updated: 2024/05/08 20:06:47 by ytoshihi         ###   ########.fr       */
+/*   Created: 2024/05/13 20:09:54 by ytoshihi          #+#    #+#             */
+/*   Updated: 2024/05/13 21:39:00 by ytoshihi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/env.h"
+#include "../include/test.h"
 
-void	ft_store_env(t_data *data, char **environ)
+void	red_test(t_data *data)
 {
-	char		**env_json;
-	int			i;
-
-	i = 0;
-	if (!environ)
-		return ;
-	while (*environ)
-	{
-		env_json = (char **)ft_calloc(1, sizeof(char *));
-		ft_to_json(env_json, *environ++);
-		ft_lstadd_back(&data->env_lst, ft_lstnew(env_json));
-	}
+	(void)data;
+	printf("\nred_test\n");
+	ft_output_red("../text_1.txt", "overwrite output\nHello world", 1);
+	ft_output_red("../text_2.txt", "\nadd output\nHello World!", 0);
+	ft_input_data("../text_2.txt", 1);
+	ft_execve("/sort");
+	ft_input_data("Hello\nYou\nKing\n", 0);
+	ft_execve("/sort");
 }

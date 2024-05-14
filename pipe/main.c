@@ -5,53 +5,33 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: ytoshihi <ytoshihi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/25 19:42:02 by ytoshihi          #+#    #+#             */
-/*   Updated: 2024/05/13 21:24:26 by ytoshihi         ###   ########.fr       */
+/*   Created: 2024/05/06 14:39:12 by ytoshihi          #+#    #+#             */
+/*   Updated: 2024/05/13 19:08:22 by ytoshihi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "include/minishell.h"
-
-static void	clear_lst(t_list *lst)
-{
-	t_list	*tmp;
-
-	tmp = lst;
-	while (lst)
-	{
-		tmp = lst;
-		free(((t_env *)tmp->content)->key);
-		free(((t_env *)tmp->content)->value);
-		free(tmp->content);
-		lst = lst->next;
-		free(tmp);
-	}
-}
+#include "../include/pipe.h"
 
 int	main(int argc, char **argv, char **env)
 {
 	t_exe	*arr;
 	t_data	*data;
+	int		i;
 
 	(void)argc;
 	(void)argv;
-	arr = NULL;
+	i = 0;
+	arr = ft_calloc(4, sizeof(t_exe));
+	arr[0].com = ECHO;
+	arr[0].str = ".";
+	arr[1].com = ETC;
+	arr[1].str = "/ls -a";
+	arr[2].com = ECHO;
+	arr[2].str = "WOW";
 	data = (t_data *)ft_calloc(1, sizeof(t_data));
-
-	// Set the valuables
-	set_val(data, &arr, env);
-
-	// command test
-	command_test(data);
-
-	// pipe test
-	pipe_test(data, arr);
-
-	// redirection test
-	red_test(data);
-
-	clear_lst(data->env_lst);
-	free(data);
-	// system("leaks minishell");
+	ft_input_data("", 0);
+	ft_store_env(data, env);
+	ft_pipe(data, arr);
+	// system("leaks minishell_pipe");
 	return (0);
 }
