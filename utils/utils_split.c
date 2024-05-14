@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   utils_split.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adprzyby <adprzyby@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ytoshihi <ytoshihi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/12 14:57:07 by adprzyby          #+#    #+#             */
-/*   Updated: 2024/05/12 17:49:56 by adprzyby         ###   ########.fr       */
+/*   Updated: 2024/05/14 16:27:23 by ytoshihi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
+#include "../include/utils.h"
 
 int	count_word(char const *s, char c)
 {
@@ -43,18 +43,6 @@ char	*word_dup(int start, int end, const char *str)
 		word[end - start - size - 1] = str[start + (end - start - size - 1)];
 	word[end - start] = '\0';
 	return (word);
-}
-
-char	**free_arr(char **tokens)
-{
-	int	count;
-
-	count = 0;
-	while (tokens[count])
-		free(tokens[count++]);
-	free(tokens[count]);
-	free(tokens);
-	return (NULL);
 }
 
 void	check_chr(char const *s, int *end, char c)

@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   tokenization.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adprzyby <adprzyby@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ytoshihi <ytoshihi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/27 17:04:21 by adprzyby          #+#    #+#             */
-/*   Updated: 2024/05/13 15:28:35 by adprzyby         ###   ########.fr       */
+/*   Updated: 2024/05/14 16:33:24 by ytoshihi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "include/minishell.h"
+#include "../include/parsing.h"
 
 int	what_token(char *str)
 {
