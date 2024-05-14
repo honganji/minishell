@@ -4,12 +4,13 @@ LIB_DIR := 42-c-library
 OBJ_DIR := objs
 
 SOURCE := main.c \
-			init.c \
-			tokenization.c \
+			init/init.c \
 			utils/utils.c \
 			utils/utils_split.c \
 			utils/utils_split1.c \
-			parsing/grouping.c
+			parsing/grouping.c \
+			parsing/process.c 
+			parsing/tokenization.c \
 
 HEADER := include/minishell.h
 

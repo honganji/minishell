@@ -6,14 +6,14 @@
 /*   By: adprzyby <adprzyby@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 20:07:29 by ytoshihi          #+#    #+#             */
-/*   Updated: 2024/05/12 18:56:24 by adprzyby         ###   ########.fr       */
+/*   Updated: 2024/05/13 18:04:33 by adprzyby         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
-// LIBS
+	// LIBS
 
 # include "../42-c-library/library.h"
 # include <readline/history.h>
@@ -22,7 +22,7 @@
 # include <stdio.h>
 # include <stdlib.h>
 
-// STRUCTS
+	// STRUCTS
 
 typedef struct s_env
 {
@@ -65,7 +65,6 @@ typedef struct s_token
 
 typedef struct s_cmd
 {
-	char			*cmd;
 	char			**args;
 	char			*input;
 	char			*output;
@@ -78,15 +77,6 @@ typedef struct s_cmd
 // -l is an argument.
 // A command can also have input and output redirection, as well as pipes.
 
-typedef struct s_cmd_list
-{
-	t_cmd			*command;
-	t_cmd			*next;
-	t_cmd			*prev;
-}					t_cmd_list;
-
-// A command list is a linked list of commands.
-
 typedef struct s_split_vars
 {
 	int				start;
@@ -98,24 +88,25 @@ typedef struct s_split_vars
 
 // A struct to store variables used in the split_with_quotes function
 
-// FUNCTIONS
+	// FUNCTIONS
 
 // main
 int					main(int argc, char **argv, char **envp);
 
 // tokenization
-void				tokenization(char **tokens);
+t_token				*tokenization(char **tokens);
 int					what_token(char *str);
 int					what_redir(char *str, int i);
-// int					is_command(char *str);
-// int					is_env_var(char *str);
-// int					is_argument(char *str);
-// int					is_flag(char *str);
+// int				is_command(char *str);
+// int				is_env_var(char *str);
+// int				is_argument(char *str);
+// int				is_flag(char *str);
 
 // init
 t_token				*token_init(void);
 t_env				*env_init(char **envp);
 t_cmd				*cmd_init(void);
+// t_cmd			*cmd_list_init(void);
 
 // utils
 int					ft_isspace(int c);
@@ -129,8 +120,10 @@ void				check_chr(char const *s, int *end, char c);
 char				**free_arr(char **tokens);
 
 // parsing
-t_cmd				**parse_commands(t_token *tokens);
+void				parse_commands(t_token *tokens);
 void				add_token_to_command(t_cmd *command, t_token *token);
-void				add_command_to_list(t_cmd **commands, t_cmd *command);
+void				add_command_to_list(t_cmd **head, t_cmd *command);
+void				process_commands(char *input);
+void 				print_commands(t_cmd *command);
 
 #endif
