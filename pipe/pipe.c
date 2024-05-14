@@ -1,14 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   handle_err.c                                       :+:      :+:    :+:   */
+/*   pipe.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ytoshihi <ytoshihi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/06 14:09:47 by adprzyby          #+#    #+#             */
-/*   Updated: 2024/05/14 15:20:56 by ytoshihi         ###   ########.fr       */
+/*   Created: 2024/05/02 15:08:30 by ytoshihi          #+#    #+#             */
+/*   Updated: 2024/05/13 20:01:39 by ytoshihi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../include/pipe.h"
 
+void	ft_pipe(t_data *data, t_exe *arr)
+{
+	char	*str;
+
+	str = NULL;
+	while ((*arr).str)
+	{
+		ft_exe_command(data, (*arr).str, (*arr).com);
+		arr++;
+	}
+	str = ft_read_file(STDIN_FILENO);
+	printf("%s", str);
+	free(str);
+}

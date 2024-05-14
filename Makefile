@@ -1,20 +1,65 @@
 NAME := minishell
+EXE_CMD_NAME := minishell_exe
+EXE_PIPE_NAME := minishell_pipe
+EXE_TEST_NAME := minishell_test
 
 LIB_DIR := 42-c-library
+EXE_DIR := execution
+UTILS_DIR := utils
+PIPE_DIR := pipe
+ENV_DIR := env
+TEST_DIR := test
+INIT_DIR := init
+PARSING_DIR := parsing
 OBJ_DIR := objs
+OBJ_DIR_COLLECTION := $(OBJ_DIR) $(addprefix $(OBJ_DIR)/, $(EXE_DIR) \
+					  $(UTILS_DIR) $(PIPE_DIR) $(ENV_DIR) $(TEST_DIR) \
+					  $(INIT_DIR) $(PARSING_DIR))
 
 SOURCE := main.c \
-			init/init.c \
-			utils/utils.c \
-			utils/utils_split.c \
-			utils/utils_split1.c \
-			parsing/grouping.c \
-			parsing/process.c 
-			parsing/tokenization.c \
+		  $(addprefix $(ENV_DIR)/, \
+		  env.c) \
+		  $(addprefix $(EXE_DIR)/, \
+		  execution.c builtin_fn_1.c builtin_fn_2.c) \
+		  $(addprefix $(PIPE_DIR)/, \
+		  pipe.c redirection.c) \
+		  $(addprefix $(UTILS_DIR)/, \
+		  builtin_fn_1.c builtin_fn_2.c builtin_fn_3.c utils.c utils_split.c \
+		  utils_split1.c)\
+		  $(addprefix $(TEST_DIR)/, \
+		  command_test.c pipe_test.c set_val.c redirection_test.c) \
+		  $(addprefix $(INIT_DIR)/, \
+		  init.c) \
+		  $(addprefix $(PARSING_DIR)/, \
+		  grouping.c process.c tokenization.c)
 
-HEADER := include/minishell.h
+SOURCE_EXE := $(addprefix $(EXE_DIR)/, \
+			  main.c execution.c builtin_fn_1.c builtin_fn_2.c) \
+			  $(addprefix $(UTILS_DIR)/, \
+			  builtin_fn_1.c builtin_fn_2.c builtin_fn_3.c) \
+			  $(addprefix $(PIPE_DIR)/, \
+			  pipe.c) \
+			  $(addprefix $(ENV_DIR)/, \
+			  env.c)
+
+SOURCE_PIPE := $(addprefix $(EXE_DIR)/, \
+			  execution.c builtin_fn_1.c builtin_fn_2.c) \
+			  $(addprefix $(UTILS_DIR)/, \
+			  builtin_fn_1.c builtin_fn_2.c builtin_fn_3.c) \
+			  $(addprefix $(PIPE_DIR)/, \
+			  pipe.c main.c) \
+			  $(addprefix $(ENV_DIR)/, \
+			  env.c)
+
+SOURCE_TEST := $(addprefix $(PIPE_DIR)/, redirection.c) \
+			   $(addprefix $(EXE_DIR)/, \
+			   execution.c builtin_fn_1.c builtin_fn_2.c) \
+			   $(addprefix $(UTILS_DIR)/, \
+			   builtin_fn_1.c builtin_fn_2.c) \
 
 OBJS := $(SOURCE:%.c=$(OBJ_DIR)/%.o)
+
+HEADER := include/minishell.h
 
 LIBFT := $(LIB_DIR)/libft.a
 
@@ -44,11 +89,11 @@ $(NAME): $(OBJ_DIR) $(OBJS) $(HEADER)
 
 clean:
 	@$(RM) $(RM_FLAG) $(OBJ_DIR) $(LIB_DIR)/objs
-	@echo "$(GREEN)Clean object files successfully$(NC)"
+	@echo "$(GREEN)Cleaned object files successfully!$(NC)"
 
 fclean: clean
 	@$(RM) $(RM_FLAG) $(NAME) $(LIBFT)
-	@echo "$(GREEN)Clean executable and library successfully!$(NC)"
+	@echo "$(GREEN)Cleaned executable and library successfully!$(NC)"
 
 re: fclean all
 
@@ -58,14 +103,26 @@ exe: all
 clean_lib:
 	@cd $(LIB_DIR) && ls -A | xargs rm -rf
 
-$(OBJ_DIR)/%.o: %.c $(HEADER)
+exe_execution: $(LIBFT)
+	$(CC) $(CC_FLAG) $(SOURCE_EXE) $(LIBFT) -o $(EXE_CMD_NAME) $(LDLIBS)
+	./$(EXE_CMD_NAME)
+
+exe_pipe: $(LIBFT)
+	$(CC) $(CC_FLAG) $(SOURCE_PIPE) $(LIBFT) -o $(EXE_PIPE_NAME) $(LDLIBS)
+	./$(EXE_PIPE_NAME)
+
+exe_test:
+	$(CC) $(CC_FLAG) $(SOURCE_TEST) $(LIBFT) -o $(EXE_TEST_NAME) $(LDLIBS)
+	./$(EXE_TEST_NAME)
+
+$(OBJ_DIR)/%.o: %.c
 	$(CC) $(CC_FLAG) -c $< -o $@
 
 $(OBJ_DIR):
 	@echo "$(BLUE)Start compiling...$(NC)"
-	$(MAKE_DIR) $(OBJ_DIR) $(OBJ_DIR)/utils $(OBJ_DIR)/parsing
+	$(MAKE_DIR) $(OBJ_DIR_COLLECTION)
 
-.PHONY: all clean fclean re exe clean_lib
+.PHONY: all clean fclean re exe clean_lib exe_execution
 
 GREEN := \033[0;32m
 BLUE := \033[0;34m
