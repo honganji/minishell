@@ -9,9 +9,12 @@ UTILS_DIR := utils
 PIPE_DIR := pipe
 ENV_DIR := env
 TEST_DIR := test
+INIT_DIR := init
+PARSING_DIR := parsing
 OBJ_DIR := objs
 OBJ_DIR_COLLECTION := $(OBJ_DIR) $(addprefix $(OBJ_DIR)/, $(EXE_DIR) \
-					  $(UTILS_DIR) $(PIPE_DIR) $(ENV_DIR) $(TEST_DIR))
+					  $(UTILS_DIR) $(PIPE_DIR) $(ENV_DIR) $(TEST_DIR) \
+					  $(INIT_DIR) $(PARSING_DIR))
 
 SOURCE := main.c \
 		  $(addprefix $(ENV_DIR)/, \
@@ -21,9 +24,14 @@ SOURCE := main.c \
 		  $(addprefix $(PIPE_DIR)/, \
 		  pipe.c redirection.c) \
 		  $(addprefix $(UTILS_DIR)/, \
-		  builtin_fn_1.c builtin_fn_2.c builtin_fn_3.c) \
+		  builtin_fn_1.c builtin_fn_2.c builtin_fn_3.c utils.c utils_split.c \
+		  utils_split1.c)\
 		  $(addprefix $(TEST_DIR)/, \
-		  command_test.c pipe_test.c set_val.c redirection_test.c)
+		  command_test.c pipe_test.c set_val.c redirection_test.c) \
+		  $(addprefix $(INIT_DIR)/, \
+		  init.c) \
+		  $(addprefix $(PARSING_DIR)/, \
+		  grouping.c process.c tokenization.c)
 
 SOURCE_EXE := $(addprefix $(EXE_DIR)/, \
 			  main.c execution.c builtin_fn_1.c builtin_fn_2.c) \
@@ -51,6 +59,8 @@ SOURCE_TEST := $(addprefix $(PIPE_DIR)/, redirection.c) \
 
 OBJS := $(SOURCE:%.c=$(OBJ_DIR)/%.o)
 
+HEADER := include/minishell.h
+
 LIBFT := $(LIB_DIR)/libft.a
 
 RM := rm
@@ -60,8 +70,8 @@ MAKE := make
 
 RM_FLAG := -rf
 CC_FLAG := -Wall -Werror -Wextra
+L_READ_LIB := -lreadline
 MAKE_FLAG := -C
-LDLIBS := -lreadline
 
 all: $(LIBFT) $(NAME)
 
@@ -75,7 +85,7 @@ $(LIBFT):
 	@echo "$(GREEN)Build libft successfully!$(NC)"
 
 $(NAME): $(OBJ_DIR) $(OBJS) $(HEADER)
-	@$(CC) $(CC_FLAG) $(LDLIBS) $(OBJS) $(LIBFT) -o $(NAME)
+	@$(CC) $(CC_FLAG) $(OBJS) $(LIBFT) $(L_READ_LIB) -o $(NAME)
 
 clean:
 	@$(RM) $(RM_FLAG) $(OBJ_DIR) $(LIB_DIR)/objs
