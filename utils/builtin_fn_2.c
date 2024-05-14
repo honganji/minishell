@@ -6,7 +6,7 @@
 /*   By: ytoshihi <ytoshihi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 12:18:51 by ytoshihi          #+#    #+#             */
-/*   Updated: 2024/05/13 16:45:50 by ytoshihi         ###   ########.fr       */
+/*   Updated: 2024/05/14 16:26:30 by ytoshihi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ void	free_arr(char **path_arr)
 	i = 0;
 	while (path_arr[i])
 		free(path_arr[i++]);
+	free(path_arr[i]);
 	free(path_arr);
 }
 

@@ -1,7 +1,4 @@
 NAME := minishell
-EXE_CMD_NAME := minishell_exe
-EXE_PIPE_NAME := minishell_pipe
-EXE_TEST_NAME := minishell_test
 
 LIB_DIR := 42-c-library
 EXE_DIR := execution
@@ -32,30 +29,6 @@ SOURCE := main.c \
 		  init.c) \
 		  $(addprefix $(PARSING_DIR)/, \
 		  grouping.c process.c tokenization.c)
-
-SOURCE_EXE := $(addprefix $(EXE_DIR)/, \
-			  main.c execution.c builtin_fn_1.c builtin_fn_2.c) \
-			  $(addprefix $(UTILS_DIR)/, \
-			  builtin_fn_1.c builtin_fn_2.c builtin_fn_3.c) \
-			  $(addprefix $(PIPE_DIR)/, \
-			  pipe.c) \
-			  $(addprefix $(ENV_DIR)/, \
-			  env.c)
-
-SOURCE_PIPE := $(addprefix $(EXE_DIR)/, \
-			  execution.c builtin_fn_1.c builtin_fn_2.c) \
-			  $(addprefix $(UTILS_DIR)/, \
-			  builtin_fn_1.c builtin_fn_2.c builtin_fn_3.c) \
-			  $(addprefix $(PIPE_DIR)/, \
-			  pipe.c main.c) \
-			  $(addprefix $(ENV_DIR)/, \
-			  env.c)
-
-SOURCE_TEST := $(addprefix $(PIPE_DIR)/, redirection.c) \
-			   $(addprefix $(EXE_DIR)/, \
-			   execution.c builtin_fn_1.c builtin_fn_2.c) \
-			   $(addprefix $(UTILS_DIR)/, \
-			   builtin_fn_1.c builtin_fn_2.c) \
 
 OBJS := $(SOURCE:%.c=$(OBJ_DIR)/%.o)
 
@@ -102,18 +75,6 @@ exe: all
 
 clean_lib:
 	@cd $(LIB_DIR) && ls -A | xargs rm -rf
-
-exe_execution: $(LIBFT)
-	$(CC) $(CC_FLAG) $(SOURCE_EXE) $(LIBFT) -o $(EXE_CMD_NAME) $(LDLIBS)
-	./$(EXE_CMD_NAME)
-
-exe_pipe: $(LIBFT)
-	$(CC) $(CC_FLAG) $(SOURCE_PIPE) $(LIBFT) -o $(EXE_PIPE_NAME) $(LDLIBS)
-	./$(EXE_PIPE_NAME)
-
-exe_test:
-	$(CC) $(CC_FLAG) $(SOURCE_TEST) $(LIBFT) -o $(EXE_TEST_NAME) $(LDLIBS)
-	./$(EXE_TEST_NAME)
 
 $(OBJ_DIR)/%.o: %.c
 	$(CC) $(CC_FLAG) -c $< -o $@

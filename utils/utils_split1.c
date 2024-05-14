@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   utils_split1.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adprzyby <adprzyby@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ytoshihi <ytoshihi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/12 15:19:12 by adprzyby          #+#    #+#             */
-/*   Updated: 2024/05/12 17:49:53 by adprzyby         ###   ########.fr       */
+/*   Updated: 2024/05/14 16:27:40 by ytoshihi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
+#include "../include/utils.h"
 
 char	**initialize_split(char const *s, char c, t_split_vars *vars)
 {

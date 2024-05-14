@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adprzyby <adprzyby@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ytoshihi <ytoshihi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 13:46:58 by adprzyby          #+#    #+#             */
-/*   Updated: 2024/05/14 14:59:57 by adprzyby         ###   ########.fr       */
+/*   Updated: 2024/05/14 16:32:54 by ytoshihi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "include/minishell.h"
+# include "../include/init.h"
 
 t_token	*token_init(void)
 {
@@ -40,29 +40,4 @@ t_cmd *cmd_init(void)
 	cmd->next = NULL;
 	cmd->prev = NULL;
 	return (cmd);
-}
-
-t_env	*env_init(char **envp)
-{
-	t_env	*env;
-	t_env	*tmp;
-	int		i;
-
-	i = 0;
-	env = malloc(sizeof(t_env));
-	env->key = ft_strchr(envp[i], '=') + 1;
-	env->value = ft_strchr(envp[i], '=') + 1;
-	env->next = NULL;
-	tmp = env;
-	i++;
-	while (envp[i])
-	{
-		tmp->next = malloc(sizeof(t_env));
-		tmp = tmp->next;
-		tmp->key = ft_strchr(envp[i], '=') + 1;
-		tmp->value = ft_strchr(envp[i], '=') + 1;
-		tmp->next = NULL;
-		i++;
-	}
-	return (env);
 }
