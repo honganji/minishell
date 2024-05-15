@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_fn_1.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ytoshihi <ytoshihi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: adprzyby <adprzyby@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 14:50:18 by ytoshihi          #+#    #+#             */
-/*   Updated: 2024/05/13 19:03:12 by ytoshihi         ###   ########.fr       */
+/*   Updated: 2024/05/15 15:02:17 by adprzyby         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,8 @@ void	ft_execve(char *str)
 	path = ft_check_exist(args[0]);
 	if (!*path)
 	{
-		printf("minishell: command not found: %s\n", str);
+		// printf("minishell: command not found: %s\n", str);
+		handle_err(NULL, args[0], 127);
 		ft_input_data("", 0);
 		free(str);
 		free(path);
@@ -53,7 +54,8 @@ void	ft_chdir(char *path)
 {
 	if (chdir(path) == -1)
 	{
-		perror("cd: no such file or directory: ");
+		// perror("cd: no such file or directory: ");
+		handle_err(NULL, path, 1);
 		exit(EXIT_FAILURE);
 	}
 	ft_input_data("", 0);
@@ -67,7 +69,11 @@ void	ft_echo(t_data *data, char *str, char *flag)
 	arg = ft_rep_env(data, str);
 	// Check if there is -n flag
 	if (!ft_strncmp(flag, "-n", 2))
+	{
+		// perror("echo: illegal option -- n\n");
+		handle_err(data, arg, 1);
 		arg = ft_free_strjoin(arg, "\n");
+	}
 	ft_input_data(arg, 0);
 	free(arg);
 }
@@ -80,7 +86,10 @@ void	ft_pwd(void)
 
 	cur_dir = getcwd(buffer, sizeof(buffer));
 	if (!cur_dir)
+	{
+		handle_err(NULL, "pwd: error retrieving current directory\n", 1);
 		exit(EXIT_FAILURE);
+	}
 	ft_input_data(cur_dir, 0);
 }
 
@@ -92,6 +101,8 @@ void	ft_env(t_data *data)
 
 	tmp = data->env_lst;
 	str = ft_strdup("");
+	if (!str)
+		handle_err(data, "env: error duplicating string\n");
 	while (tmp)
 	{
 		str = ft_free_strjoin(str, (*(t_env *)(tmp->content)).key);

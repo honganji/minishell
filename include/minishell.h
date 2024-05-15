@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ytoshihi <ytoshihi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: adprzyby <adprzyby@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 20:07:29 by ytoshihi          #+#    #+#             */
-/*   Updated: 2024/05/14 16:47:02 by ytoshihi         ###   ########.fr       */
+/*   Updated: 2024/05/15 16:33:09 by adprzyby         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 # define MINISHELL_H
 
 # include "../42-c-library/library.h"
+# include <errno.h>
+# include <fcntl.h>
 # include <readline/history.h>
 # include <readline/readline.h>
 # include <stdbool.h>
@@ -21,15 +23,14 @@
 # include <stdlib.h>
 # define TMP_FILE "utils/tmp.txt"
 
-# include "execution.h"
 # include "env.h"
+# include "execution.h"
 # include "pipe.h"
 // TODO delete
+# include "../42-c-library/library.h"
 # include "test.h"
-
 # include <sys/wait.h>
 # include <unistd.h>
-# include "../42-c-library/library.h"
 
 typedef enum e_com
 {
@@ -41,24 +42,27 @@ typedef enum e_com
 	ENV,
 	EXIT,
 	ETC
-}t_com;
+}					t_com;
 
 typedef struct s_env
 {
-	char	*key;
-	char	*value;
-}t_env;
+	char			*key;
+	char			*value;
+}					t_env;
 
 typedef struct s_data
 {
-	t_list	*env_lst;
-}t_data;
+	t_list			*env_lst;
+	int				exit_code;
+}					t_data;
 
 typedef struct s_exe
 {
-	t_com	com;
-	char	*str;
-}t_exe;
+	t_com			com;
+	char			**args;
+	char			*input;
+	char			*output;
+}					t_exe;
 
 typedef enum s_type
 {
@@ -80,14 +84,14 @@ typedef struct s_token
 	struct s_token	*prev;
 }					t_token;
 
-typedef struct s_cmd
-{
-	char			**args;
-	char			*input;
-	char			*output;
-	struct s_cmd	*next;
-	struct s_cmd	*prev;
-}					t_cmd;
+// typedef struct s_cmd
+// {
+// 	char			**args;
+// 	char			*input;
+// 	char			*output;
+// 	struct s_cmd	*next;
+// 	struct s_cmd	*prev;
+// }					t_cmd;
 
 typedef struct s_split_vars
 {
