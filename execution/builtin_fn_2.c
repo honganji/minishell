@@ -6,13 +6,19 @@
 /*   By: ytoshihi <ytoshihi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 14:50:18 by ytoshihi          #+#    #+#             */
-/*   Updated: 2024/05/13 19:04:37 by ytoshihi         ###   ########.fr       */
+/*   Updated: 2024/05/15 14:28:55 by ytoshihi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/execution.h"
 
-// For export command
+/**
+ * @brief export value into env linked list
+ * 
+ * @param data data
+ * @param str string include key and value connected with '='
+ * @return void
+ */
 void	ft_export(t_data *data, char *str)
 {
 	char	**env_arr;
@@ -39,7 +45,13 @@ void	ft_export(t_data *data, char *str)
 	ft_input_data("", 0);
 }
 
-// For unset command
+/**
+ * @brief export value into env linked list
+ * 
+ * @param data data
+ * @param str string include key and value connected with '='
+ * @return void
+ */
 void	ft_unset(t_data *data, char *str)
 {
 	char	*key;

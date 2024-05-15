@@ -6,7 +6,7 @@
 /*   By: adprzyby <adprzyby@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 19:42:02 by ytoshihi          #+#    #+#             */
-/*   Updated: 2024/05/14 19:36:35 by adprzyby         ###   ########.fr       */
+/*   Updated: 2024/05/15 17:16:33 by adprzyby         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ int	main(int argc, char **argv, char **env)
 	t_exe	*arr;
 	t_data	*data;
 	char 	*input;
+	// TODO delete
+	int		saved_fd = dup(STDIN_FILENO);
 
 	(void)argc;
 	(void)argv;
@@ -41,15 +43,19 @@ int	main(int argc, char **argv, char **env)
 
 	// Set the valuables
 	set_val(data, &arr, env);
+	while (1)
+	{
+		// TODO reset STDIN
+		dup2(saved_fd, STDIN_FILENO);
+		input = readline("Enter command: ");
+		if (input)
+		{
+			process_commands(input);
+			// command test
+			command_test(data);
 
-	// command test
-	command_test(data);
-
-	// pipe test
-	pipe_test(data, arr);
-
-	// redirection test
-	red_test(data);
+			// pipe test
+			pipe_test(data, arr);
 
 	// while (1)
 	// {

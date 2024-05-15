@@ -6,7 +6,7 @@
 /*   By: adprzyby <adprzyby@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 20:07:29 by ytoshihi          #+#    #+#             */
-/*   Updated: 2024/05/15 16:33:09 by adprzyby         ###   ########.fr       */
+/*   Updated: 2024/05/15 17:13:19 by adprzyby         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,19 @@
 # include "env.h"
 # include "execution.h"
 # include "pipe.h"
+# include "parsing.h"
+# include "init.h"
 // TODO delete
 # include "../42-c-library/library.h"
 # include "test.h"
 # include <sys/wait.h>
 # include <unistd.h>
+
+typedef struct s_data
+{
+	t_list	*env_lst;
+	t_list	*cmd_lst;
+}t_data;
 
 typedef enum e_com
 {
@@ -41,6 +49,7 @@ typedef enum e_com
 	UNSET,
 	ENV,
 	EXIT,
+	OUTPUT,
 	ETC
 }					t_com;
 
@@ -56,13 +65,13 @@ typedef struct s_data
 	int				exit_code;
 }					t_data;
 
-typedef struct s_exe
+typedef struct s_cmd
 {
-	t_com			com;
-	char			**args;
-	char			*input;
-	char			*output;
-}					t_exe;
+	t_com	com;
+	char	**args;
+	char	*input;
+	char	*output;
+}t_cmd;
 
 typedef enum s_type
 {
@@ -83,15 +92,6 @@ typedef struct s_token
 	struct s_token	*next;
 	struct s_token	*prev;
 }					t_token;
-
-// typedef struct s_cmd
-// {
-// 	char			**args;
-// 	char			*input;
-// 	char			*output;
-// 	struct s_cmd	*next;
-// 	struct s_cmd	*prev;
-// }					t_cmd;
 
 typedef struct s_split_vars
 {
