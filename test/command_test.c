@@ -6,7 +6,7 @@
 /*   By: ytoshihi <ytoshihi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 19:31:43 by ytoshihi          #+#    #+#             */
-/*   Updated: 2024/05/13 20:07:20 by ytoshihi         ###   ########.fr       */
+/*   Updated: 2024/05/15 12:23:48 by ytoshihi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,4 +80,6 @@ void	command_test(t_data *data)
 	test_1(data);
 	test_2(data);
 	test_3(data);
+	// go back
+	ft_exe_command(data, "..", CD);
 }

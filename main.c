@@ -6,7 +6,7 @@
 /*   By: ytoshihi <ytoshihi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 19:42:02 by ytoshihi          #+#    #+#             */
-/*   Updated: 2024/05/14 16:47:55 by ytoshihi         ###   ########.fr       */
+/*   Updated: 2024/05/15 12:24:17 by ytoshihi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ int	main(int argc, char **argv, char **env)
 	t_exe	*arr;
 	t_data	*data;
 	char 	*input;
+	// TODO delete
+	int		saved_fd = dup(STDIN_FILENO);
 
 	(void)argc;
 	(void)argv;
@@ -41,26 +43,24 @@ int	main(int argc, char **argv, char **env)
 
 	// Set the valuables
 	set_val(data, &arr, env);
+	while (1)
+	{
+		// TODO reset STDIN
+		dup2(saved_fd, STDIN_FILENO);
+		input = readline("Enter command: ");
+		if (input)
+		{
+			process_commands(input);
+			// command test
+			command_test(data);
 
-	// command test
-	command_test(data);
+			// pipe test
+			pipe_test(data, arr);
 
-	// pipe test
-	pipe_test(data, arr);
-
-	// redirection test
-	red_test(data);
-
-	// while (1)
-	// {
-	// 	input = readline("Enter command: ");
-	// 	if (input)
-	// 	{
-	// 		process_commands(input);   
-	// 		// ft_input_data("", 0);
-	// 		// TODO execute command                    
-	// 	}
-	// }
+			// redirection test
+			red_test(data);               
+		}
+	}
 	clear_lst(data->env_lst);
 	free(data);
 	// system("leaks minishell");

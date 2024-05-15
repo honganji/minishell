@@ -6,12 +6,18 @@
 /*   By: ytoshihi <ytoshihi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 11:45:40 by ytoshihi          #+#    #+#             */
-/*   Updated: 2024/05/13 20:52:58 by ytoshihi         ###   ########.fr       */
+/*   Updated: 2024/05/15 15:36:56 by ytoshihi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/pipe.h"
 
+/**
+ * @brief 
+ * 
+ * @param 
+ * @return 
+ */
 void	ft_output_red(char *name, char *content, int is_append)
 {
 	int	fd;

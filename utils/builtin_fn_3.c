@@ -6,12 +6,21 @@
 /*   By: ytoshihi <ytoshihi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 16:43:20 by ytoshihi          #+#    #+#             */
-/*   Updated: 2024/05/13 18:57:44 by ytoshihi         ###   ########.fr       */
+/*   Updated: 2024/05/15 13:48:21 by ytoshihi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/utils.h"
 
+/**
+ * @brief store output after running a builtin function
+ * 
+ * Before running this project, you need to output the result of a builtin fn
+ * into a file. Then, read the file and put the result into STDIN
+ *
+ * @param void
+ * @return void
+ */
 void	store_output(void)
 {
 	int		file_desc;

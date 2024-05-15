@@ -6,7 +6,7 @@
 /*   By: ytoshihi <ytoshihi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 20:07:29 by ytoshihi          #+#    #+#             */
-/*   Updated: 2024/05/14 16:47:02 by ytoshihi         ###   ########.fr       */
+/*   Updated: 2024/05/15 16:40:41 by ytoshihi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@
 # include "execution.h"
 # include "env.h"
 # include "pipe.h"
+# include "parsing.h"
+# include "init.h"
 // TODO delete
 # include "test.h"
 
@@ -40,6 +42,7 @@ typedef enum e_com
 	UNSET,
 	ENV,
 	EXIT,
+	OUTPUT,
 	ETC
 }t_com;
 
@@ -52,12 +55,15 @@ typedef struct s_env
 typedef struct s_data
 {
 	t_list	*env_lst;
+	t_list	*cmd_lst;
 }t_data;
 
 typedef struct s_exe
 {
 	t_com	com;
-	char	*str;
+	char	**str;
+	char	*input;
+	char	*output;
 }t_exe;
 
 typedef enum s_type

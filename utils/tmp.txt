@@ -1,23 +1,20 @@
-.
-..
-.git
-.gitignore
-.gitmodules
-42-c-library
-Makefile
-env
-execution
-include
-main.c
-minishell
-minishell_exe
-minishell_pipe
-minishell_test
-objs
-output.txt
-pipe
-test
-text_1.txt
-text_2.txt
-text_3.txt
-utils
+Hello
+King
+You
+ello World!
+Hello World!
+Hello World!
+Hello World!
+Hello World!
+Hello World!
+Hello World!
+Hello World!
+add output
+add output
+add output
+add output
+add output
+add output
+add output
+add output
+add output

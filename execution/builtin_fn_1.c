@@ -6,19 +6,30 @@
 /*   By: ytoshihi <ytoshihi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 14:50:18 by ytoshihi          #+#    #+#             */
-/*   Updated: 2024/05/13 19:03:12 by ytoshihi         ###   ########.fr       */
+/*   Updated: 2024/05/15 14:27:43 by ytoshihi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/execution.h"
 
 // For other builtin functions
+/**
+ * @brief Executes a builtin function that is not made by us but installed in 
+ * OS.
+ *
+ * This function forks a new process and executes the given command in it.
+ * The output of the command is redirected to a temporary file.
+ *
+ * @param str The command to execute.
+ * @return void
+ * 
+ */
 void	ft_execve(char *str)
 {
 	char	**args;
 	char	*path;
 	pid_t	pid;
-	int 	fd;
+	int		fd;
 
 	fd = open(TMP_FILE, O_RDWR | O_CREAT, 0644);
 	str = ft_strdup(str);
@@ -48,7 +59,12 @@ void	ft_execve(char *str)
 	store_output();
 }
 
-// For cd command
+/**
+ * @brief change the current directory
+ * After change the current directory, set empty string into STDIN
+ * @param path path for the new path. It can be definite or relative path
+ * @return void
+ */
 void	ft_chdir(char *path)
 {
 	if (chdir(path) == -1)
@@ -59,20 +75,30 @@ void	ft_chdir(char *path)
 	ft_input_data("", 0);
 }
 
-// For echo command
+/**
+ * @brief read the input and send it to STDIN
+ * 
+ * @param data data
+ * @param str string to read
+ * @param flag flag string
+ * @return void
+ */
 void	ft_echo(t_data *data, char *str, char *flag)
 {
 	char	*arg;
 
 	arg = ft_rep_env(data, str);
-	// Check if there is -n flag
 	if (!ft_strncmp(flag, "-n", 2))
 		arg = ft_free_strjoin(arg, "\n");
 	ft_input_data(arg, 0);
 	free(arg);
 }
 
-// For pwd command
+/**
+ * @brief get the current definite directory path
+ * 
+ * @return void
+ */
 void	ft_pwd(void)
 {
 	char	buffer[256];
@@ -84,7 +110,13 @@ void	ft_pwd(void)
 	ft_input_data(cur_dir, 0);
 }
 
-// For env command
+/**
+ * @brief get all the env variable and send them to input parameter
+ * 
+ * Read all the node of a env variable list and combine using ft_free_strjoin
+ * @param data data
+ * @return void
+ */
 void	ft_env(t_data *data)
 {
 	t_list	*tmp;
