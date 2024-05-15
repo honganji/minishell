@@ -6,7 +6,7 @@
 /*   By: adprzyby <adprzyby@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 13:46:58 by adprzyby          #+#    #+#             */
-/*   Updated: 2024/05/15 16:33:56 by adprzyby         ###   ########.fr       */
+/*   Updated: 2024/05/15 19:30:43 by adprzyby         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,11 @@ t_token	*token_init(void)
 	return (token);
 }
 
-t_exe *cmd_init(void)
+t_cmd *cmd_init(void)
 {
-	t_exe	*cmd;
+	t_cmd	*cmd;
 
-	cmd = malloc(sizeof(t_exe));
+	cmd = malloc(sizeof(t_cmd));
 	if (!cmd)
 		return (NULL);
 	cmd->args = NULL;

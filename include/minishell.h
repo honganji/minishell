@@ -6,7 +6,7 @@
 /*   By: adprzyby <adprzyby@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 20:07:29 by ytoshihi          #+#    #+#             */
-/*   Updated: 2024/05/15 17:13:19 by adprzyby         ###   ########.fr       */
+/*   Updated: 2024/05/15 18:14:25 by adprzyby         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ typedef struct s_data
 {
 	t_list	*env_lst;
 	t_list	*cmd_lst;
+	int		exit_code;
 }t_data;
 
 typedef enum e_com
@@ -58,12 +59,6 @@ typedef struct s_env
 	char			*key;
 	char			*value;
 }					t_env;
-
-typedef struct s_data
-{
-	t_list			*env_lst;
-	int				exit_code;
-}					t_data;
 
 typedef struct s_cmd
 {

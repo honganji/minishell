@@ -6,7 +6,7 @@
 /*   By: adprzyby <adprzyby@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 19:42:02 by ytoshihi          #+#    #+#             */
-/*   Updated: 2024/05/15 17:16:33 by adprzyby         ###   ########.fr       */
+/*   Updated: 2024/05/15 17:25:51 by adprzyby         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,22 +57,13 @@ int	main(int argc, char **argv, char **env)
 			// pipe test
 			pipe_test(data, arr);
 
-	// while (1)
-	// {
-	// 	input = readline("minishell: ");
-	// 	if (input)
-	// 	{
-	// 		process_commands(input);   
-	// 		// ft_input_data("", 0);
-	// 		// TODO execute command                    
-	// 	}
-	// }
+	}
 	clear_lst(data->env_lst);
 	free(data);
 	// system("leaks minishell");
 	return (0);
+	}
 }
-
 // envp parameter is not part of the standard C specification,
 // but it is a common extension
 // and is generally portable across Unix-like systems,
