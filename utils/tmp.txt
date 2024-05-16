@@ -1,20 +1,28 @@
-Hello
-King
-You
-ello World!
-Hello World!
-Hello World!
-Hello World!
-Hello World!
-Hello World!
-Hello World!
-Hello World!
-add output
-add output
-add output
-add output
-add output
-add output
-add output
-add output
-add output
+.
+..
+.git
+.gitignore
+.gitmodules
+.vscode
+42-c-library
+Makefile
+backup
+env
+errors
+execution
+include
+init
+main.c
+minishell
+objs
+output_1.txt
+output_2.txt
+output_3.txt
+output_4.txt
+parsing
+pipe
+test
+text_1.txt
+text_2.txt
+text_3.txt
+utils

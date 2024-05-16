@@ -2,5 +2,3 @@ adios
 king
 hant
 pink
-cmd_lst->content.com
-cmd_lst->content.str

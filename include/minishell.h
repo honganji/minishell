@@ -6,7 +6,7 @@
 /*   By: ytoshihi <ytoshihi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 20:07:29 by ytoshihi          #+#    #+#             */
-/*   Updated: 2024/05/15 16:43:08 by ytoshihi         ###   ########.fr       */
+/*   Updated: 2024/05/16 19:41:30 by ytoshihi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ typedef struct s_data
 {
 	t_list	*env_lst;
 	t_list	*cmd_lst;
+	int		exit_code;
 }t_data;
 
 typedef enum e_com
@@ -58,12 +59,18 @@ typedef struct s_env
 	char	*value;
 }t_env;
 
+typedef struct s_redir
+{
+	int		is_single;
+	char	*file_name;
+}t_redir;
+
 typedef struct s_cmd
 {
 	t_com	com;
 	char	**args;
-	char	*input;
-	char	*output;
+	t_redir	input;
+	t_redir	output;
 }t_cmd;
 
 typedef enum s_type

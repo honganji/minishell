@@ -6,13 +6,13 @@
 /*   By: ytoshihi <ytoshihi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 19:25:07 by ytoshihi          #+#    #+#             */
-/*   Updated: 2024/05/14 16:28:14 by ytoshihi         ###   ########.fr       */
+/*   Updated: 2024/05/16 20:07:37 by ytoshihi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/test.h"
 
-void	pipe_test(t_data *data, t_exe *arr)
+void	pipe_test(t_data *data)
 {
-	ft_pipe(data, arr);
+	ft_pipe(data);
 }

@@ -6,13 +6,12 @@
 /*   By: ytoshihi <ytoshihi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 14:50:18 by ytoshihi          #+#    #+#             */
-/*   Updated: 2024/05/15 14:27:43 by ytoshihi         ###   ########.fr       */
+/*   Updated: 2024/05/16 21:21:25 by ytoshihi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/execution.h"
 
-// For other builtin functions
 /**
  * @brief Executes a builtin function that is not made by us but installed in 
  * OS.
@@ -24,38 +23,31 @@
  * @return void
  * 
  */
-void	ft_execve(char *str)
+void	ft_execve(char **args)
 {
-	char	**args;
-	char	*path;
 	pid_t	pid;
 	int		fd;
+	char	*tmp;
 
 	fd = open(TMP_FILE, O_RDWR | O_CREAT, 0644);
-	str = ft_strdup(str);
-	args = ft_split(str, ' ');
-	path = ft_check_exist(args[0]);
-	if (!*path)
+	tmp = args[0];
+	args[0] = ft_strjoin("/", args[0]);
+	args[0] = ft_check_exist(args[0]);
+	if (!*args)
 	{
-		printf("minishell: command not found: %s\n", str);
+		printf("minishell: command not found: %s\n", args[0]);
 		ft_input_data("", 0);
-		free(str);
-		free(path);
-		free_arr(args);
 		return ;
 	}
-	free(str);
-	free(args[0]);
-	args[0] = path;
 	pid = fork();
 	if (pid == 0)
 	{
 		dup2(fd, STDOUT_FILENO);
-		if (execve(path, args, NULL) == -1)
+		if (execve(args[0], args, NULL) == -1)
 			exit(EXIT_FAILURE);
 	}
-	free_arr(args);
 	wait(NULL);
+	args[0] = tmp;
 	store_output();
 }
 
@@ -78,20 +70,20 @@ void	ft_chdir(char *path)
 /**
  * @brief read the input and send it to STDIN
  * 
- * @param data data
- * @param str string to read
- * @param flag flag string
+ * @param args arguments
  * @return void
  */
-void	ft_echo(t_data *data, char *str, char *flag)
+void	ft_echo(char **args)
 {
-	char	*arg;
+	int	i;
 
-	arg = ft_rep_env(data, str);
-	if (!ft_strncmp(flag, "-n", 2))
-		arg = ft_free_strjoin(arg, "\n");
-	ft_input_data(arg, 0);
-	free(arg);
+	i = 1;
+	if (!ft_strncmp(args[i], "-n", 2))
+	{
+		i++;
+		args[i] = ft_strjoin(args[i], "\n");
+	}
+	ft_input_data(args[i], 0);
 }
 
 /**
@@ -117,12 +109,12 @@ void	ft_pwd(void)
  * @param data data
  * @return void
  */
-void	ft_env(t_data *data)
+void	ft_env(t_list *env_lst)
 {
 	t_list	*tmp;
 	char	*str;
 
-	tmp = data->env_lst;
+	tmp = env_lst;
 	str = ft_strdup("");
 	while (tmp)
 	{

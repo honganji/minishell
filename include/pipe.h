@@ -6,7 +6,7 @@
 /*   By: ytoshihi <ytoshihi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 13:12:58 by ytoshihi          #+#    #+#             */
-/*   Updated: 2024/05/13 18:49:23 by ytoshihi         ###   ########.fr       */
+/*   Updated: 2024/05/16 20:04:16 by ytoshihi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,6 @@
 typedef struct s_exe t_exe;
 
 void	ft_output_red(char *name, char *content, int is_append);
-void	ft_pipe(t_data *data, t_exe *arr);
+void	ft_pipe(t_data *data);
 
 #endif

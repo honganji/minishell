@@ -6,7 +6,7 @@
 /*   By: ytoshihi <ytoshihi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/02 15:08:30 by ytoshihi          #+#    #+#             */
-/*   Updated: 2024/05/15 15:36:18 by ytoshihi         ###   ########.fr       */
+/*   Updated: 2024/05/16 21:29:35 by ytoshihi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,20 +19,29 @@
  * space.
  * 
  * @param data data
- * @param arr hold elements that have enum command and args
+ * @param lst hold elements that have enum command and args
  * @return void
  */
-void	ft_pipe(t_data *data, t_exe *arr)
+void	ft_pipe(t_data *data)
 {
 	char	*str;
+	t_list	*lst;
+	char	*file_name;
 
 	str = NULL;
-	while ((*arr).str)
+	lst = data->cmd_lst;
+	while (lst)
 	{
-		ft_exe_command(data, (*arr).str, (*arr).com);
-		arr++;
+		file_name = ((t_cmd *)lst->content)->output.file_name;
+		ft_exe_command(data, *(t_cmd *)lst->content);
+		if (file_name)
+		{
+			str = ft_read_file(STDIN_FILENO);
+			// ft_output_red(file_name, str, 0);
+		}
+		lst = lst->next;
 	}
 	str = ft_read_file(STDIN_FILENO);
-	printf("%s", str);
+	printf("result: %s", str);
 	free(str);
 }
