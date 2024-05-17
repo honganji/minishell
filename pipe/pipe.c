@@ -6,7 +6,7 @@
 /*   By: ytoshihi <ytoshihi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/02 15:08:30 by ytoshihi          #+#    #+#             */
-/*   Updated: 2024/05/17 17:22:01 by ytoshihi         ###   ########.fr       */
+/*   Updated: 2024/05/17 17:57:18 by ytoshihi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,26 +26,36 @@ void	ft_pipe(t_data *data)
 {
 	char	*str;
 	t_list	*lst;
-	char	*file_name;
-	int		saved_fd;
+	t_redir	output;
+	t_redir	input;
 
-	saved_fd = dup(STDIN_FILENO);
 	str = NULL;
 	lst = data->cmd_lst;
 	while (lst)
 	{
-		file_name = ((t_cmd *)lst->content)->output.file_name;
+		output = ((t_cmd *)lst->content)->output;
+		input = ((t_cmd *)lst->content)->input;
+		if (input.file_name)
+		{
+			if (input.is_single)
+				ft_input_data(input.file_name, 1);
+			else
+				ft_input_data(input.file_name, 0);
+		}
 		ft_exe_command(data, *(t_cmd *)lst->content);
-		// if (file_name)
-		// {
-		// 	str = ft_read_file(STDIN_FILENO);
-		// 	// ft_output_red(file_name, str, 0);
-		// }
+		if (output.file_name)
+		{
+			str = ft_read_file(STDIN_FILENO);
+			ft_output_red(output.file_name, str, output.is_single);
+		}
+		else if (!lst->next)
+		{
+			str = ft_read_file(STDIN_FILENO);
+			printf("%s", str);
+		}
 		lst = lst->next;
 		if (lst)
-			dup2(saved_fd, STDIN_FILENO);
+			dup2(data->stdin_fd, STDIN_FILENO);
 	}
-	str = ft_read_file(STDIN_FILENO);
-	printf("%s", str);
 	free(str);
 }

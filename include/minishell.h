@@ -6,7 +6,7 @@
 /*   By: ytoshihi <ytoshihi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 20:07:29 by ytoshihi          #+#    #+#             */
-/*   Updated: 2024/05/17 15:43:01 by ytoshihi         ###   ########.fr       */
+/*   Updated: 2024/05/17 17:41:22 by ytoshihi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ typedef struct s_data
 	t_list	*env_lst;
 	t_list	*cmd_lst;
 	int		exit_code;
+	int		stdin_fd;
 }t_data;
 
 typedef enum e_com

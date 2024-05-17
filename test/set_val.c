@@ -43,11 +43,11 @@ void	set_val(t_data *data, char **env)
 
     content = create_cmd(ECHO, "echo king", (t_redir){.is_single = 1, .file_name="text_1.txt"}, (t_redir){.is_single = 1, .file_name="output_1.txt"});
     ft_lstadd_back(&data->cmd_lst, ft_lstnew(content));
-    content = create_cmd(CD, "cd ..", (t_redir){.is_single = 1, .file_name="text_2.txt"}, (t_redir){.is_single = 1, .file_name="output_2.txt"});
-    ft_lstadd_back(&data->cmd_lst, ft_lstnew(content));
+    // content = create_cmd(CD, "cd ..", (t_redir){.is_single = 1, .file_name="text_2.txt"}, (t_redir){.is_single = 1, .file_name="output_2.txt"});
+    // ft_lstadd_back(&data->cmd_lst, ft_lstnew(content));
     content = create_cmd(PWD, "pwd", (t_redir){.is_single = 1, .file_name="text_3.txt"}, (t_redir){.is_single = 1, .file_name="output_3.txt"});
     ft_lstadd_back(&data->cmd_lst, ft_lstnew(content));
-    content = create_cmd(ETC, "ls -a", (t_redir){.is_single = 1, .file_name="text_3.txt"}, (t_redir){.is_single = 1, .file_name="output_3.txt"});
+    content = create_cmd(ETC, "sort", (t_redir){.is_single = 1, .file_name="text_4.txt"}, (t_redir){.is_single = 1, .file_name="output_4.txt"});
     ft_lstadd_back(&data->cmd_lst, ft_lstnew(content));
     tmp = data->cmd_lst;
 	while (tmp)

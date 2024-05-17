@@ -37,7 +37,7 @@ SOURCE := main.c \
 		  builtin_fn_1.c builtin_fn_2.c builtin_fn_3.c utils.c utils_split.c \
 		  utils_split1.c) \
 		  $(addprefix $(TEST_DIR)/, \
-		  pipe_test.c set_val.c redirection_test.c) \
+		  set_val.c) \
 		  $(addprefix $(EXE_DIR)/, \
 		  execution.c builtin_fn_1.c builtin_fn_2.c) \
 		  $(addprefix $(PIPE_DIR)/, \
