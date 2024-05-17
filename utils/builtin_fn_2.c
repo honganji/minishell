@@ -6,7 +6,7 @@
 /*   By: ytoshihi <ytoshihi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 12:18:51 by ytoshihi          #+#    #+#             */
-/*   Updated: 2024/05/16 21:19:16 by ytoshihi         ###   ########.fr       */
+/*   Updated: 2024/05/17 17:20:04 by ytoshihi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,7 +115,7 @@ char	*ft_read_file(int fd)
 
 	str = ft_strdup("");
 	line = get_next_line(fd);
-	while (line)
+	while (line && *line)
 	{
 		str = ft_free_strjoin(str, line);
 		free(line);

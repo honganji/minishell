@@ -6,7 +6,7 @@
 /*   By: ytoshihi <ytoshihi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 20:07:29 by ytoshihi          #+#    #+#             */
-/*   Updated: 2024/05/16 19:41:30 by ytoshihi         ###   ########.fr       */
+/*   Updated: 2024/05/17 15:43:01 by ytoshihi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 # include <stdbool.h>
 # include <stdio.h>
 # include <stdlib.h>
-# define TMP_FILE "utils/tmp.txt"
+# define TMP_FILE "tmp.txt"
 
 # include "execution.h"
 # include "env.h"

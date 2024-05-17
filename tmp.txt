@@ -1,5 +1,6 @@
 .
 ..
+.DS_Store
 .git
 .gitignore
 .gitmodules
@@ -25,4 +26,5 @@ test
 text_1.txt
 text_2.txt
 text_3.txt
+tmp.txt
 utils

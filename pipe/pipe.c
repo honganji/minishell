@@ -6,7 +6,7 @@
 /*   By: ytoshihi <ytoshihi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/02 15:08:30 by ytoshihi          #+#    #+#             */
-/*   Updated: 2024/05/16 21:29:35 by ytoshihi         ###   ########.fr       */
+/*   Updated: 2024/05/17 17:22:01 by ytoshihi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,21 +27,25 @@ void	ft_pipe(t_data *data)
 	char	*str;
 	t_list	*lst;
 	char	*file_name;
+	int		saved_fd;
 
+	saved_fd = dup(STDIN_FILENO);
 	str = NULL;
 	lst = data->cmd_lst;
 	while (lst)
 	{
 		file_name = ((t_cmd *)lst->content)->output.file_name;
 		ft_exe_command(data, *(t_cmd *)lst->content);
-		if (file_name)
-		{
-			str = ft_read_file(STDIN_FILENO);
-			// ft_output_red(file_name, str, 0);
-		}
+		// if (file_name)
+		// {
+		// 	str = ft_read_file(STDIN_FILENO);
+		// 	// ft_output_red(file_name, str, 0);
+		// }
 		lst = lst->next;
+		if (lst)
+			dup2(saved_fd, STDIN_FILENO);
 	}
 	str = ft_read_file(STDIN_FILENO);
-	printf("result: %s", str);
+	printf("%s", str);
 	free(str);
 }
