@@ -6,7 +6,7 @@
 /*   By: ytoshihi <ytoshihi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 12:18:51 by ytoshihi          #+#    #+#             */
-/*   Updated: 2024/05/17 17:20:04 by ytoshihi         ###   ########.fr       */
+/*   Updated: 2024/05/17 18:19:57 by ytoshihi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,7 +136,7 @@ char	*ft_free_strjoin(char *s1, char *s2)
 {
 	char	*str;
 
-	str  = ft_strjoin(s1, s2);
+	str = ft_strjoin(s1, s2);
 	if (!str)
 		return (ft_strdup(""));
 	free(s1);

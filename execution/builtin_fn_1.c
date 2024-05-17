@@ -6,7 +6,7 @@
 /*   By: ytoshihi <ytoshihi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 14:50:18 by ytoshihi          #+#    #+#             */
-/*   Updated: 2024/05/17 18:07:38 by ytoshihi         ###   ########.fr       */
+/*   Updated: 2024/05/17 18:18:34 by ytoshihi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,14 +30,14 @@ void	ft_execve(char **args)
 	char	*tmp;
 	char	*str;
 
-	if (pipe(fds) == -1) {
+	if (pipe(fds) == -1)
+	{
 		perror("Error pipe");
-		return;
+		return ;
 	}
 	tmp = args[0];
 	args[0] = ft_strjoin("/", args[0]);
 	args[0] = ft_check_exist(args[0]);
-	// printf("tmp file: %s\n", get_next_line(fd));
 	if (!*args)
 	{
 		printf("minishell: command not found: %s\n", args[0]);
@@ -55,12 +55,12 @@ void	ft_execve(char **args)
 	}
 	else
 	{
-	close(fds[1]);
-	wait(NULL);
-	args[0] = tmp;
-	str = ft_read_file(fds[0]);
-	close(fds[0]);
-	ft_input_data(str, 0);
+		close(fds[1]);
+		wait(NULL);
+		args[0] = tmp;
+		str = ft_read_file(fds[0]);
+		close(fds[0]);
+		ft_input_data(str, 0);
 	}
 }
 
