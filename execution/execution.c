@@ -6,7 +6,7 @@
 /*   By: ytoshihi <ytoshihi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/02 10:11:47 by ytoshihi          #+#    #+#             */
-/*   Updated: 2024/05/16 21:10:42 by ytoshihi         ###   ########.fr       */
+/*   Updated: 2024/05/17 18:07:52 by ytoshihi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,6 @@
  */
 void	ft_exe_command(t_data *data, t_cmd content)
 {
-	// TODO delete
-	// printf("arg: %s\n", content.args[0]);
 	if (content.com == ECHO)
 		ft_echo(content.args);
 	else if (content.com == CD)

@@ -6,7 +6,7 @@
 /*   By: ytoshihi <ytoshihi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 14:50:18 by ytoshihi          #+#    #+#             */
-/*   Updated: 2024/05/17 17:18:54 by ytoshihi         ###   ########.fr       */
+/*   Updated: 2024/05/17 18:07:38 by ytoshihi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,51 +63,6 @@ void	ft_execve(char **args)
 	ft_input_data(str, 0);
 	}
 }
-
-// void	ft_execve(char **args)
-// {
-// 	(void)args;
-// 	int pipefd[2];
-//     pid_t pid;
-
-//     if (pipe(pipefd) == -1) {
-//         perror("pipe");
-//         exit(EXIT_FAILURE);
-//     }
-
-//     pid = fork();
-//     if (pid == -1) {
-//         perror("fork");
-//         exit(EXIT_FAILURE);
-//     }
-
-//     if (pid == 0) {    /* Child writes to pipe */
-//         close(pipefd[0]);  /* Close unused read end */
-
-//         /* Redirect stdout to the pipe */
-//         dup2(pipefd[1], STDOUT_FILENO);
-//         close(pipefd[1]);  /* Close write end, not needed anymore */
-
-//         char *argv[] = {"/bin/ls", NULL};
-//         char *envp[] = {NULL};
-
-//         execve(argv[0], argv, envp);
-
-//         /* execve only returns on error */
-//         perror("execve");
-//         exit(EXIT_FAILURE);
-//     } else {    /* Parent reads from pipe */
-//         close(pipefd[1]);  /* Close unused write end */
-
-//         /* Wait for child to finish */
-//         wait(NULL);
-
-//         /* Read from pipe and print to stdout */
-// 		ft_read_file(pipefd[0]);
-
-//         close(pipefd[0]);
-//     }
-// }
 
 /**
  * @brief change the current directory
