@@ -6,13 +6,12 @@
 /*   By: adprzyby <adprzyby@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 14:50:18 by ytoshihi          #+#    #+#             */
-/*   Updated: 2024/05/16 19:45:00 by adprzyby         ###   ########.fr       */
+/*   Updated: 2024/05/18 12:31:37 by adprzyby         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/execution.h"
 
-// For other builtin functions
 /**
  * @brief Executes a builtin function that is not made by us but installed in 
  * OS.
@@ -24,40 +23,45 @@
  * @return void
  * 
  */
-void	ft_execve(char *str)
+void	ft_execve(char **args)
 {
-	char	**args;
-	char	*path;
 	pid_t	pid;
-	int		fd;
+	int		fds[2];
+	char	*tmp;
+	char	*str;
 
-	fd = open(TMP_FILE, O_RDWR | O_CREAT, 0644);
-	str = ft_strdup(str);
-	args = ft_split(str, ' ');
-	path = ft_check_exist(args[0]);
-	if (!*path)
+	if (pipe(fds) == -1)
 	{
-		// printf("minishell: command not found: %s\n", str);
-		handle_err(NULL, args[0], 127);
-		ft_input_data("", 0);
-		free(str);
-		free(path);
-		free_arr(args);
+		perror("Error pipe");
 		return ;
 	}
-	free(str);
-	free(args[0]);
-	args[0] = path;
+	tmp = args[0];
+	args[0] = ft_strjoin("/", args[0]);
+	args[0] = ft_check_exist(args[0]);
+	if (!*args)
+	{
+		printf("minishell: command not found: %s\n", args[0]);
+		ft_input_data("", 0);
+		return ;
+	}
 	pid = fork();
 	if (pid == 0)
 	{
-		dup2(fd, STDOUT_FILENO);
-		if (execve(path, args, NULL) == -1)
+		close(fds[0]);
+		dup2(fds[1], STDOUT_FILENO);
+		close(fds[1]);
+		if (execve(args[0], args, NULL) == -1)
 			exit(EXIT_FAILURE);
 	}
-	free_arr(args);
-	wait(NULL);
-	store_output();
+	else
+	{
+		close(fds[1]);
+		wait(NULL);
+		args[0] = tmp;
+		str = ft_read_file(fds[0]);
+		close(fds[0]);
+		ft_input_data(str, 0);
+	}
 }
 
 /**
@@ -80,24 +84,20 @@ void	ft_chdir(char *path)
 /**
  * @brief read the input and send it to STDIN
  * 
- * @param data data
- * @param str string to read
- * @param flag flag string
+ * @param args arguments
  * @return void
  */
-void	ft_echo(t_data *data, char *str, char *flag)
+void	ft_echo(char **args)
 {
-	char	*arg;
+	int	i;
 
-	arg = ft_rep_env(data, str);
-	if (!ft_strncmp(flag, "-n", 2))
+	i = 1;
+	if (!ft_strncmp(args[i], "-n", 2))
 	{
-		// perror("echo: illegal option -- n\n");
-		handle_err(data, arg, 1);
-		arg = ft_free_strjoin(arg, "\n");
-	}								// TODO if therere are backslashes, it should be handled
-	ft_input_data(arg, 0);
-	free(arg);
+		i++;
+		args[i] = ft_strjoin(args[i], "\n");
+	}
+	ft_input_data(args[i], 0);
 }
 
 /**
@@ -126,15 +126,15 @@ void	ft_pwd(void)
  * @param data data
  * @return void
  */
-void	ft_env(t_data *data)
+void	ft_env(t_list *env_lst)
 {
 	t_list	*tmp;
 	char	*str;
 
-	tmp = data->env_lst;
+	tmp = env_lst;
 	str = ft_strdup("");
-	if (!str)
-		handle_err(data, "env: error duplicating string\n");
+	// if (!str)
+		// handle_err(data, "env: error duplicating string\n");
 	while (tmp)
 	{
 		str = ft_free_strjoin(str, (*(t_env *)(tmp->content)).key);

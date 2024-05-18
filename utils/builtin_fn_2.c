@@ -6,7 +6,7 @@
 /*   By: ytoshihi <ytoshihi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 12:18:51 by ytoshihi          #+#    #+#             */
-/*   Updated: 2024/05/15 13:30:32 by ytoshihi         ###   ########.fr       */
+/*   Updated: 2024/05/17 18:19:57 by ytoshihi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	free_arr(char **arr)
  * Second, assume that the param is a relative path and check if it exists.
  * 
  * @param path_name path name
- * @return If the path exist, return the path. If not, return ""
+ * @return If the path exist, return 1. If not, return 0
 */
 char	*ft_check_exist(char *path_name)
 {
@@ -55,7 +55,7 @@ char	*ft_check_exist(char *path_name)
 		if (!access(path_name, X_OK))
 		{
 			free(comb_path);
-			return (free_arr(path_arr), ft_strdup(path_name));
+			return (free_arr(path_arr), path_name);
 		}
 		if (!access(comb_path, X_OK))
 			return (free_arr(path_arr), comb_path);
@@ -115,7 +115,7 @@ char	*ft_read_file(int fd)
 
 	str = ft_strdup("");
 	line = get_next_line(fd);
-	while (line)
+	while (line && *line)
 	{
 		str = ft_free_strjoin(str, line);
 		free(line);
@@ -136,7 +136,7 @@ char	*ft_free_strjoin(char *s1, char *s2)
 {
 	char	*str;
 
-	str  = ft_strjoin(s1, s2);
+	str = ft_strjoin(s1, s2);
 	if (!str)
 		return (ft_strdup(""));
 	free(s1);
