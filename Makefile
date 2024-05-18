@@ -21,20 +21,20 @@ OBJ_DIR_COLLECTION := $(OBJ_DIR) $(addprefix $(OBJ_DIR)/, $(EXE_DIR) \
 # 		  $(addprefix $(PIPE_DIR)/, \
 # 		  pipe.c redirection.c) \
 # 		  $(addprefix $(UTILS_DIR)/, \
-# 		  builtin_fn_1.c builtin_fn_2.c utils.c utils_split.c \
+# 		  builtin_fn_1.c builtin_fn_2.c builtin_fn_3.c utils.c utils_split.c \
 # 		  utils_split1.c)\
 # 		  $(addprefix $(TEST_DIR)/, \
 # 		  set_val.c) \
 # 		  $(addprefix $(INIT_DIR)/, \
 # 		  init.c) \
 # 		  $(addprefix $(PARSING_DIR)/, \
-# 		  grouping.c process.c tokenization.c)
+# 		  grouping.c process.c redirections.c tokenization.c)
 
 SOURCE := main.c \
 		  $(addprefix $(ENV_DIR)/, \
 		  env.c) \
 		  $(addprefix $(UTILS_DIR)/, \
-		  builtin_fn_1.c builtin_fn_2.c utils.c utils_split.c \
+		  builtin_fn_1.c builtin_fn_2.c builtin_fn_3.c utils.c utils_split.c \
 		  utils_split1.c) \
 		  $(addprefix $(TEST_DIR)/, \
 		  set_val.c) \
