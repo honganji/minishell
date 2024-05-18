@@ -6,7 +6,7 @@
 /*   By: adprzyby <adprzyby@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 20:07:29 by ytoshihi          #+#    #+#             */
-/*   Updated: 2024/05/16 18:04:15 by adprzyby         ###   ########.fr       */
+/*   Updated: 2024/05/18 12:33:44 by adprzyby         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 # include <stdbool.h>
 # include <stdio.h>
 # include <stdlib.h>
-# define TMP_FILE "utils/tmp.txt"
+# define TMP_FILE "tmp.txt"
 
 # include "env.h"
 # include "execution.h"
@@ -45,7 +45,8 @@ typedef struct s_data
 	t_list	*env_lst;
 	t_list	*cmd_lst;
 	int		exit_code;
-}	t_data;
+	int		stdin_fd;
+}t_data;
 
 typedef enum e_com
 {
@@ -66,12 +67,18 @@ typedef struct s_env
 	char			*value;
 }					t_env;
 
+typedef struct s_redir
+{
+	int		is_single;
+	char	*file_name;
+}t_redir;
+
 typedef struct s_cmd
 {
 	t_com	com;
 	char	**args;
-	char	*input;
-	char	*output;
+	t_redir	input;
+	t_redir	output;
 }t_cmd;
 
 typedef enum s_type
