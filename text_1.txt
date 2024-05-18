@@ -1,2 +1,4 @@
-overwrite output
-Hello world
+adios
+king
+hant
+pink

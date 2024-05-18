@@ -6,7 +6,7 @@
 /*   By: ytoshihi <ytoshihi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 20:07:29 by ytoshihi          #+#    #+#             */
-/*   Updated: 2024/05/14 16:47:02 by ytoshihi         ###   ########.fr       */
+/*   Updated: 2024/05/17 17:41:22 by ytoshihi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,17 +19,27 @@
 # include <stdbool.h>
 # include <stdio.h>
 # include <stdlib.h>
-# define TMP_FILE "utils/tmp.txt"
+# define TMP_FILE "tmp.txt"
 
 # include "execution.h"
 # include "env.h"
 # include "pipe.h"
+# include "parsing.h"
+# include "init.h"
 // TODO delete
 # include "test.h"
 
 # include <sys/wait.h>
 # include <unistd.h>
 # include "../42-c-library/library.h"
+
+typedef struct s_data
+{
+	t_list	*env_lst;
+	t_list	*cmd_lst;
+	int		exit_code;
+	int		stdin_fd;
+}t_data;
 
 typedef enum e_com
 {
@@ -40,6 +50,7 @@ typedef enum e_com
 	UNSET,
 	ENV,
 	EXIT,
+	OUTPUT,
 	ETC
 }t_com;
 
@@ -49,16 +60,19 @@ typedef struct s_env
 	char	*value;
 }t_env;
 
-typedef struct s_data
+typedef struct s_redir
 {
-	t_list	*env_lst;
-}t_data;
+	int		is_single;
+	char	*file_name;
+}t_redir;
 
-typedef struct s_exe
+typedef struct s_cmd
 {
 	t_com	com;
-	char	*str;
-}t_exe;
+	char	**args;
+	t_redir	input;
+	t_redir	output;
+}t_cmd;
 
 typedef enum s_type
 {
@@ -79,15 +93,6 @@ typedef struct s_token
 	struct s_token	*next;
 	struct s_token	*prev;
 }					t_token;
-
-typedef struct s_cmd
-{
-	char			**args;
-	char			*input;
-	char			*output;
-	struct s_cmd	*next;
-	struct s_cmd	*prev;
-}					t_cmd;
 
 typedef struct s_split_vars
 {

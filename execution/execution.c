@@ -6,28 +6,39 @@
 /*   By: ytoshihi <ytoshihi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/02 10:11:47 by ytoshihi          #+#    #+#             */
-/*   Updated: 2024/05/13 19:02:51 by ytoshihi         ###   ########.fr       */
+/*   Updated: 2024/05/17 18:07:52 by ytoshihi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/execution.h"
 
-void	ft_exe_command(t_data *data, char *str, t_com com)
+/**
+ * @brief Depends on the command, run a function for each one.
+ * 
+ * If there is no
+ * function that I made, it runs builtin function
+ * 
+ * @param data data
+ * @param str args including command
+ * @param com enum that expresses which command they use
+ * @return void
+ */
+void	ft_exe_command(t_data *data, t_cmd content)
 {
-	if (com == ECHO)
-		ft_echo(data, str, "-k");
-	else if (com == CD)
-		ft_chdir(str);
-	else if (com == PWD)
+	if (content.com == ECHO)
+		ft_echo(content.args);
+	else if (content.com == CD)
+		ft_chdir(content.args[1]);
+	else if (content.com == PWD)
 		ft_pwd();
-	else if (com == EXPORT)
-		ft_export(data, str);
-	else if (com == UNSET)
-		ft_unset(data, str);
-	else if (com == ENV)
-		ft_env(data);
-	else if (com == EXIT)
+	else if (content.com == EXPORT)
+		ft_export(data);
+	else if (content.com == UNSET)
+		ft_unset(data);
+	else if (content.com == ENV)
+		ft_env(data->env_lst);
+	else if (content.com == EXIT)
 		exit(EXIT_SUCCESS);
-	else if (com == ETC)
-		ft_execve(str);
+	else if (content.com == ETC)
+		ft_execve(content.args);
 }
