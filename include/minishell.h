@@ -6,7 +6,7 @@
 /*   By: adprzyby <adprzyby@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 20:07:29 by ytoshihi          #+#    #+#             */
-/*   Updated: 2024/05/15 18:14:25 by adprzyby         ###   ########.fr       */
+/*   Updated: 2024/05/16 18:04:15 by adprzyby         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,12 +34,18 @@
 # include <sys/wait.h>
 # include <unistd.h>
 
+typedef struct s_redir
+{
+	int		is_single;    // 1: single, 0: double
+	char	*file_name;
+}	t_redir;
+
 typedef struct s_data
 {
 	t_list	*env_lst;
 	t_list	*cmd_lst;
 	int		exit_code;
-}t_data;
+}	t_data;
 
 typedef enum e_com
 {
@@ -73,15 +79,12 @@ typedef enum s_type
 	NOTOKEN,
 	WORD,
 	PIPE,
-	REDIR_HERE,
-	REDIR_APP_OUT,
-	REDIR_IN,
-	REDIR_OUT,
+	REDIR
 }					t_type;
 
 typedef struct s_token
 {
-	void			*data;
+	char			*data;
 	enum s_type		type;
 	int				id;
 	struct s_token	*next;

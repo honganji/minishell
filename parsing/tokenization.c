@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenization.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ytoshihi <ytoshihi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: adprzyby <adprzyby@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/27 17:04:21 by adprzyby          #+#    #+#             */
-/*   Updated: 2024/05/14 16:33:24 by ytoshihi         ###   ########.fr       */
+/*   Updated: 2024/05/16 17:58:03 by adprzyby         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	what_token(char *str)
 		if (str[i] == '|')
 			return (PIPE);
 		else if (str[i] == '>' || str[i] == '<')
-			return (what_redir(str, i));
+			return (is_redir(str, i));
 		else
 			return (WORD);
 		i++;
@@ -31,16 +31,18 @@ int	what_token(char *str)
 }
 // The what_token function takes a string as input and determines the type of token based on its content.
 
-int what_redir(char *str, int i)
+int is_redir(char *str, int i)
 {
 	if (str[i] == '>' && str[i + 1] != '\0' && str[i + 1] == '>')
-		return (REDIR_APP_OUT);
+		return (REDIR);
 	else if (str[i] == '<' && str[i + 1] != '\0' && str[i + 1] == '<')
-		return (REDIR_HERE);
+		return (REDIR);
 	else if (str[i] == '>')
-		return (REDIR_OUT);
+		return (REDIR);
 	else if (str[i] == '<')
-		return (REDIR_IN);
+		return (REDIR);
+	else
+		return (WORD);
 	return (0);
 }
 // what_redir returns the type of redirection token

@@ -6,7 +6,7 @@
 /*   By: adprzyby <adprzyby@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 14:50:18 by ytoshihi          #+#    #+#             */
-/*   Updated: 2024/05/15 17:11:44 by adprzyby         ###   ########.fr       */
+/*   Updated: 2024/05/16 19:45:00 by adprzyby         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ void	ft_echo(t_data *data, char *str, char *flag)
 		// perror("echo: illegal option -- n\n");
 		handle_err(data, arg, 1);
 		arg = ft_free_strjoin(arg, "\n");
-	}
+	}								// TODO if therere are backslashes, it should be handled
 	ft_input_data(arg, 0);
 	free(arg);
 }

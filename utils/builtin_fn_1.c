@@ -6,7 +6,7 @@
 /*   By: adprzyby <adprzyby@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/04 09:24:36 by ytoshihi          #+#    #+#             */
-/*   Updated: 2024/05/14 17:12:56 by adprzyby         ###   ########.fr       */
+/*   Updated: 2024/05/16 19:42:10 by adprzyby         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ char	*ft_rep_env(t_data *data, char *str)
 	{
 		arg[i] = *str;
 		if (*str++ == '$')
-		{
+		{								//TODO $? handling and $$ handling
 			tmp = ft_find_ele(data, str);
 			if (tmp)
 			{

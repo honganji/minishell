@@ -6,7 +6,7 @@
 /*   By: adprzyby <adprzyby@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 16:58:33 by adprzyby          #+#    #+#             */
-/*   Updated: 2024/05/15 19:30:00 by adprzyby         ###   ########.fr       */
+/*   Updated: 2024/05/16 18:24:43 by adprzyby         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,12 @@ void	parse_commands(t_token *tokens, t_data *data)
 	while (current_token != NULL)
 	{
 		if (current_token->type != PIPE)
-			add_token_to_command(current_command, current_token);
+		{
+			if (current_token->type == REDIR)								//TODO handle escaped chars
+				handle_redirections(current_token, data);
+			else
+				add_token_to_command(current_command, current_token);
+		}
 		else
 		{
 			add_command_to_list(&(data->cmd_lst), current_command);
@@ -35,7 +40,7 @@ void	parse_commands(t_token *tokens, t_data *data)
 	print_commands(data->cmd_lst);
 }
 
-// The parse_commands function takes a linked list of tokens as input and groups them into commands based on the presence of pipe tokens.
+// The parse_commands function takes a linked list of tokens as input and groups them into commands based on the presence of pipe tokens
 // It creates a new command whenever it encounters a pipe token,
 // and adds the current token to the current command otherwise.
 

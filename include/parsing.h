@@ -6,7 +6,7 @@
 /*   By: adprzyby <adprzyby@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 16:33:31 by ytoshihi          #+#    #+#             */
-/*   Updated: 2024/05/15 19:32:26 by adprzyby         ###   ########.fr       */
+/*   Updated: 2024/05/16 17:56:37 by adprzyby         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ void					process_commands(char *input);
 void					print_commands(t_list *lst);
 t_token					*tokenization(char **tokens);
 int						what_token(char *str);
-int						what_redir(char *str, int i);
+int						is_redir(char *str, int i);
+void					handle_redirections(t_token *tokens, t_data *data);
 
 #endif
