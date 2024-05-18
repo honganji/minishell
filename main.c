@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ytoshihi <ytoshihi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: adprzyby <adprzyby@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 19:42:02 by ytoshihi          #+#    #+#             */
-/*   Updated: 2024/05/17 18:20:30 by ytoshihi         ###   ########.fr       */
+/*   Updated: 2024/05/18 15:52:40 by adprzyby         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@ int	main(int argc, char **argv, char **env)
 	(void)argc;
 	(void)argv;
 	data = (t_data *)ft_calloc(2, sizeof(t_data));
+	if (!data)
+		critical_err(strerror(errno));
 	data->stdin_fd = dup(STDIN_FILENO);
 
 	// Set the valuables
@@ -44,10 +46,10 @@ int	main(int argc, char **argv, char **env)
 	{
 		// TODO reset STDIN
 		dup2(data->stdin_fd, STDIN_FILENO);
-		input = readline("Enter command: ");
+		input = readline("minishell: ");
 		if (input)
 		{
-			// process_commands(input);
+			// process_commands(input, data);
 			// // command test
 
 			// pipe
