@@ -6,13 +6,13 @@
 /*   By: adprzyby <adprzyby@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 14:09:47 by adprzyby          #+#    #+#             */
-/*   Updated: 2024/05/15 15:49:05 by adprzyby         ###   ########.fr       */
+/*   Updated: 2024/05/18 12:07:56 by adprzyby         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../include/errors.h"
 
-void	handle_err(const char *msg)
+void	critical_err(const char *msg)
 {
 	ft_putstr_fd("minishell: ", 2);
 	ft_putstr_fd(msg, 2);
@@ -20,4 +20,4 @@ void	handle_err(const char *msg)
 	exit(EXIT_FAILURE);
 }
 
-handle_err(strerror(errno));
+// critical_err(strerror(errno)); //? How to use
