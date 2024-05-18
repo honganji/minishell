@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirection.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ytoshihi <ytoshihi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: adprzyby <adprzyby@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 11:45:40 by ytoshihi          #+#    #+#             */
-/*   Updated: 2024/05/17 17:26:37 by ytoshihi         ###   ########.fr       */
+/*   Updated: 2024/05/18 16:45:05 by adprzyby         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
  * @param 
  * @return 
  */
-void	ft_output_red(char *name, char *content, int is_append)
+int	ft_output_red(char *name, char *content, int is_append)
 {
 	int	fd;
 
@@ -27,10 +27,12 @@ void	ft_output_red(char *name, char *content, int is_append)
 	else
 		fd = open(name, O_CREAT | O_WRONLY, 0744);
 	if (fd == -1)
+		return (-1);
+	if (write(fd, content, ft_strlen(content)));		//! I added a check for write
 	{
-		perror("opening file error");
-		return ;
-	}
-	write(fd, content, ft_strlen(content));
+		close(fd);
+		return (-1);
+	}			
 	close(fd);
+	return(0);
 }

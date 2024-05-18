@@ -6,11 +6,11 @@
 /*   By: adprzyby <adprzyby@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 16:16:22 by adprzyby          #+#    #+#             */
-/*   Updated: 2024/05/18 12:14:22 by adprzyby         ###   ########.fr       */
+/*   Updated: 2024/05/18 16:28:44 by adprzyby         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "minishell.h"
+# include "../include/errors.h"
 
 void set_exit_code(t_data *data, int code)
 {

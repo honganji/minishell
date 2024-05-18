@@ -6,7 +6,7 @@
 /*   By: adprzyby <adprzyby@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/27 17:04:21 by adprzyby          #+#    #+#             */
-/*   Updated: 2024/05/16 17:58:03 by adprzyby         ###   ########.fr       */
+/*   Updated: 2024/05/18 16:39:54 by adprzyby         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ int	what_token(char *str)
 	}
 	return (0);
 }
-// The what_token function takes a string as input and determines the type of token based on its content.
 
 int is_redir(char *str, int i)
 {
@@ -45,7 +44,6 @@ int is_redir(char *str, int i)
 		return (WORD);
 	return (0);
 }
-// what_redir returns the type of redirection token
 
 t_token	*tokenization(char **tokens)
 {
@@ -66,16 +64,11 @@ t_token	*tokenization(char **tokens)
 		i++;
 	}
 	tmp = token;
-	while (tmp && tmp->data)
-	{
-		printf("Token: %s\n", tmp->data);
-		printf("Type: %d\n", tmp->type);
-		tmp = tmp->next;
-	}
+	// while (tmp && tmp->data)
+	// {
+	// 	printf("Token: %s\n", tmp->data);			//!DEBUG
+	// 	printf("Type: %d\n", tmp->type);
+	// 	tmp = tmp->next;
+	// }
 	return (token);
 }
-
-// The tokenization function takes an array of strings as input and processes each string.
-// It creates a linked list of tokens,
-// where each token has a data field (the string itself) and a type field (the type of token).
-// The function uses the what_token function to determine the type of each token based on its content.

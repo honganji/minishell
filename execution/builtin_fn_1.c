@@ -6,7 +6,7 @@
 /*   By: adprzyby <adprzyby@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 14:50:18 by ytoshihi          #+#    #+#             */
-/*   Updated: 2024/05/18 12:31:37 by adprzyby         ###   ########.fr       */
+/*   Updated: 2024/05/18 16:32:59 by adprzyby         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
  * @return void
  * 
  */
-void	ft_execve(char **args)
+void	ft_execve(char **args, t_data *data)
 {
 	pid_t	pid;
 	int		fds[2];
@@ -40,7 +40,7 @@ void	ft_execve(char **args)
 	args[0] = ft_check_exist(args[0]);
 	if (!*args)
 	{
-		printf("minishell: command not found: %s\n", args[0]);
+		syntax_err(NULL, "command not found: ", args[0], 127);
 		ft_input_data("", 0);
 		return ;
 	}
@@ -70,12 +70,11 @@ void	ft_execve(char **args)
  * @param path path for the new path. It can be definite or relative path
  * @return void
  */
-void	ft_chdir(char *path)
+void	ft_chdir(char *path, t_data *data)
 {
 	if (chdir(path) == -1)
 	{
-		// perror("cd: no such file or directory: ");
-		handle_err(NULL, path, 1);
+		syntax_err(NULL, "cd: no such file or directory: ", path, 1);
 		exit(EXIT_FAILURE);
 	}
 	ft_input_data("", 0);
@@ -92,7 +91,7 @@ void	ft_echo(char **args)
 	int	i;
 
 	i = 1;
-	if (!ft_strncmp(args[i], "-n", 2))
+	if (!ft_strncmp(args[i], "-n", 2))					//TODO handle backslashes
 	{
 		i++;
 		args[i] = ft_strjoin(args[i], "\n");
@@ -105,17 +104,14 @@ void	ft_echo(char **args)
  * 
  * @return void
  */
-void	ft_pwd(void)
+void	ft_pwd(t_data *data)
 {
 	char	buffer[256];
 	char	*cur_dir;
 
 	cur_dir = getcwd(buffer, sizeof(buffer));
 	if (!cur_dir)
-	{
-		handle_err(NULL, "pwd: error retrieving current directory\n", 1);
-		exit(EXIT_FAILURE);
-	}
+		syntax_err(NULL, "pwd: error retrieving current directory\n", NULL, 1);
 	ft_input_data(cur_dir, 0);
 }
 
@@ -133,14 +129,22 @@ void	ft_env(t_list *env_lst)
 
 	tmp = env_lst;
 	str = ft_strdup("");
-	// if (!str)
-		// handle_err(data, "env: error duplicating string\n");
+	if (!str)
+		critical_err(strerror(errno));
 	while (tmp)
 	{
 		str = ft_free_strjoin(str, (*(t_env *)(tmp->content)).key);
+		if (!str)
+			critical_err(strerror(errno));
 		str = ft_free_strjoin(str, "=");
+		if (!str)
+			critical_err(strerror(errno));
 		str = ft_free_strjoin(str, (*(t_env *)(tmp->content)).value);
+		if (!str)
+			critical_err(strerror(errno));
 		str = ft_free_strjoin(str, "\n");
+		if (!str)
+			critical_err(strerror(errno));
 		tmp = tmp->next;
 	}
 	ft_input_data(str, 0);

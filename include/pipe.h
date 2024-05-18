@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipe.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ytoshihi <ytoshihi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: adprzyby <adprzyby@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 13:12:58 by ytoshihi          #+#    #+#             */
-/*   Updated: 2024/05/16 20:04:16 by ytoshihi         ###   ########.fr       */
+/*   Updated: 2024/05/18 16:44:30 by adprzyby         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,12 @@
 # include "minishell.h"
 # include "utils.h"
 
-typedef struct s_exe t_exe;
+typedef struct s_cmd t_cmd;
+typedef struct s_data t_data;
 
-void	ft_output_red(char *name, char *content, int is_append);
+int		ft_output_red(char *name, char *content, int is_append);
 void	ft_pipe(t_data *data);
+void	handle_input_and_execute(t_data *data, t_cmd *cmd);
+void	handle_output(t_data *data, t_cmd *cmd, t_list *lst);
 
 #endif

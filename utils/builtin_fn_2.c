@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_fn_2.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ytoshihi <ytoshihi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: adprzyby <adprzyby@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 12:18:51 by ytoshihi          #+#    #+#             */
-/*   Updated: 2024/05/17 18:19:57 by ytoshihi         ###   ########.fr       */
+/*   Updated: 2024/05/18 16:48:54 by adprzyby         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,12 @@ void	free_arr(char **arr)
 	int	i;
 
 	i = 0;
+	if (!arr)
+		return ;
 	while (arr[i])
 		free(arr[i++]);
-	free(arr[i]);
+	if (arr[i])
+		free(arr[i]);
 	free(arr);
 }
 
@@ -41,14 +44,18 @@ void	free_arr(char **arr)
  * @param path_name path name
  * @return If the path exist, return 1. If not, return 0
 */
-char	*ft_check_exist(char *path_name)
+char	*ft_check_exist(t_data *data, char *path_name)
 {
 	char	**path_arr;
 	char	*comb_path;
 	int		i;
+	char	*env_path;
 
 	i = 0;
-	path_arr = ft_split(getenv("PATH"), ':');
+	env_path = getenv("PATH");
+	if (!env_path)
+		syntax_err(data, "Error: ", "PATH environment variable not set", 1);
+	path_arr = ft_split(env_path, ':');
 	while (path_arr[i])
 	{
 		comb_path = ft_strjoin(path_arr[i++], path_name);
@@ -62,43 +69,6 @@ char	*ft_check_exist(char *path_name)
 		free(comb_path);
 	}
 	return (free_arr(path_arr), ft_strdup(""));
-}
-
-/**
- * @brief input data for STDIN_FILENO
- * 
- * You can decide which format string or file.
- * @param str file path or string data
- * @param is_file flag if the data is string or is located in a file
- * @return void
-*/
-void	ft_input_data(char *str, int is_file)
-{
-	int		fds[2];
-
-	if (is_file)
-	{
-		fds[0] = open(str, O_RDONLY);
-		if (fds[0] == -1)
-		{
-			perror("opening file error");
-			return ;
-		}
-		dup2(fds[0], STDIN_FILENO);
-		close(fds[0]);
-	}
-	else
-	{
-		if (pipe(fds))
-		{
-			perror("pipe error");
-			return ;
-		}
-		write(fds[1], str, ft_strlen(str));
-		close(fds[1]);
-		dup2(fds[0], STDIN_FILENO);
-		close(fds[0]);
-	}
 }
 
 /**

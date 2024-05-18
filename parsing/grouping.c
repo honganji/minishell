@@ -6,7 +6,7 @@
 /*   By: adprzyby <adprzyby@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 16:58:33 by adprzyby          #+#    #+#             */
-/*   Updated: 2024/05/16 18:24:43 by adprzyby         ###   ########.fr       */
+/*   Updated: 2024/05/18 14:31:54 by adprzyby         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,6 @@ void	parse_commands(t_token *tokens, t_data *data)
 	add_command_to_list(&(data->cmd_lst), current_command);
 	print_commands(data->cmd_lst);
 }
-
-// The parse_commands function takes a linked list of tokens as input and groups them into commands based on the presence of pipe tokens
-// It creates a new command whenever it encounters a pipe token,
-// and adds the current token to the current command otherwise.
 
 void	add_token_to_command(t_cmd *command, t_token *token)
 {
@@ -79,8 +75,6 @@ void	add_token_to_command(t_cmd *command, t_token *token)
 	}
 }
 
-// The add_token_to_command function takes a command and a token as input and adds the token to the command's arguments list.
-
 void	add_command_to_list(t_list **head, t_cmd *new_command)
 {
 	t_list	*new_node;
@@ -101,8 +95,6 @@ void	add_command_to_list(t_list **head, t_cmd *new_command)
 		current->next = new_node;
 	}
 }
-
-// The add_command_to_list function takes a list of commands and a command as input and adds the command to the list.
 
 void	print_commands(t_list *command_list)
 {

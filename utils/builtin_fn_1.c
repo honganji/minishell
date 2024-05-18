@@ -6,7 +6,7 @@
 /*   By: adprzyby <adprzyby@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/04 09:24:36 by ytoshihi          #+#    #+#             */
-/*   Updated: 2024/05/16 19:42:10 by adprzyby         ###   ########.fr       */
+/*   Updated: 2024/05/18 15:32:41 by adprzyby         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,9 @@ static int	ft_count_arg(t_data *data, char *str)
 	count = 0;
 	while (*str)
 	{
-		if (*str++ == '$')
-		{
-			tmp = ft_find_ele(data, str);
+		if (*str++ == '$')						//? What if we have $$ or $?  ?
+		{										//? Also what if we have $ followed by a space?
+			tmp = ft_find_ele(data, str);		//? Lastly - what if we have it in (single/double) quotes?
 			if (tmp)
 			{
 				count--;
@@ -37,6 +37,8 @@ static int	ft_count_arg(t_data *data, char *str)
 
 void	ft_del_node(t_data *data, t_list *lst, t_list *pre_lst)
 {
+	if (!lst || !lst->content)
+		critical_err(errno);
 	if (!pre_lst)
 	{
 		data->env_lst = data->env_lst->next;
@@ -81,6 +83,8 @@ char	*ft_rep_env(t_data *data, char *str)
 
 	i = 0;
 	arg = (char *)ft_calloc(ft_count_arg(data, str) + 1, sizeof(char));
+	if (!arg)
+		critical_err(strerror(errno));
 	while (*str)
 	{
 		arg[i] = *str;
@@ -98,7 +102,7 @@ char	*ft_rep_env(t_data *data, char *str)
 		}
 		i++;
 	}
-	arg[i] = '\0';
+	arg[i] = '\0';						//? Why do we need this? Isn't the last character of a string always '\0' with calloc?
 	return (arg);
 }
 

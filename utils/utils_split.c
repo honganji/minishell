@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_split.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ytoshihi <ytoshihi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: adprzyby <adprzyby@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/12 14:57:07 by adprzyby          #+#    #+#             */
-/*   Updated: 2024/05/14 16:27:23 by ytoshihi         ###   ########.fr       */
+/*   Updated: 2024/05/18 15:51:57 by adprzyby         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,42 +50,3 @@ void	check_chr(char const *s, int *end, char c)
 	while (s[*end] == c)
 		(*end)++;
 }
-
-// char	**split_with_quotes(char const *s, char c)
-// {
-// 	char	**tokens;
-// 	int		start;
-// 	int		end;
-// 	int		index;
-// 	int		in_s_quotes;
-// 	int		in_d_quotes;
-
-// 	tokens = (char **)malloc((count_word(s, c) + 1) * sizeof(char *));
-// 	start = 0;
-// 	end = 0;
-// 	index = 0;
-// 	in_s_quotes = 0;
-// 	in_d_quotes = 0;
-// 	if (!s || !tokens)
-// 		return (NULL);
-// 	while (s[end])
-// 	{
-// 		check_chr(s, &end, c);
-// 		start = end;
-// 		if (!s[end])
-// 			break ;
-// 		while (s[end] && (s[end] != c || in_s_quotes || in_d_quotes))
-// 		{
-// 			if (s[end] == '\'')
-// 				in_s_quotes = !in_s_quotes;
-// 			else if (s[end] == '\"')
-// 				in_d_quotes = !in_d_quotes;
-// 			end++;
-// 		}
-// 		tokens[index] = word_dup(start, end, s);
-// 		if (!tokens[index++])
-// 			return (free_arr(tokens));
-// 	}
-// 	tokens[index] = NULL;
-// 	return (tokens);
-// }
