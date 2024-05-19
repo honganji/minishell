@@ -6,14 +6,19 @@
 /*   By: ytoshihi <ytoshihi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/19 15:46:53 by ytoshihi          #+#    #+#             */
-/*   Updated: 2024/05/19 21:40:36 by ytoshihi         ###   ########.fr       */
+/*   Updated: 2024/05/19 22:10:10 by ytoshihi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/set_signal.h"
 
-// sig == 2
-void    ft_ctrl_c(int sig)
+/**
+ * @brief Function for signal ctrl-c
+ * 
+ * @param sig signal
+ * @return void
+ */
+static void    ft_ctrl_c(int sig)
 {
     (void)sig;
 	set_sig(255);
@@ -21,8 +26,13 @@ void    ft_ctrl_c(int sig)
     rl_redisplay();
 }
 
-// sig == 3
-void    ft_ctrl_bs(int sig)
+/**
+ * @brief Function for signal ctrl-backslash
+ * 
+ * @param sig signal
+ * @return void
+ */
+static void    ft_ctrl_bs(int sig)
 {
     (void)sig;
     printf("\nminishell: ");
@@ -30,6 +40,11 @@ void    ft_ctrl_bs(int sig)
 	set_sig(255);
 }
 
+/**
+ * @brief Set function for signals
+ * 
+ * @return void
+ */
 void	set_signal_fn(void)
 {
 	rl_catch_signals = 0;

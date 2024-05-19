@@ -6,7 +6,7 @@
 /*   By: ytoshihi <ytoshihi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 13:46:58 by adprzyby          #+#    #+#             */
-/*   Updated: 2024/05/19 18:39:21 by ytoshihi         ###   ########.fr       */
+/*   Updated: 2024/05/19 22:00:43 by ytoshihi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,4 +38,16 @@ t_cmd *cmd_init(void)
 	cmd->input.file_name = NULL;
 	cmd->output.file_name = NULL;
 	return (cmd);
+}
+
+void	initialize(t_data *data, char **env)
+{
+	data->stdin_fd = dup(STDIN_FILENO);
+	data->exit_code = 0;
+
+	// Set the valuables
+	set_val(data, env);
+
+	// Set signal for ctrl-c and ctrl-backslash
+	set_signal_fn();
 }

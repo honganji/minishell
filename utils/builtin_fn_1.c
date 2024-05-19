@@ -6,12 +6,19 @@
 /*   By: ytoshihi <ytoshihi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/04 09:24:36 by ytoshihi          #+#    #+#             */
-/*   Updated: 2024/05/19 18:34:51 by ytoshihi         ###   ########.fr       */
+/*   Updated: 2024/05/19 22:20:48 by ytoshihi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/utils.h"
 
+/**
+ * @brief Count number of arguments
+ * 
+ * @param data whole data
+ * @param str one of the arguments
+ * @return int count
+ */
 static int	ft_count_arg(t_data *data, char *str)
 {
 	int		count;
@@ -35,6 +42,14 @@ static int	ft_count_arg(t_data *data, char *str)
 	return (count);
 }
 
+/**
+ * @brief delete one node of env list
+ * 
+ * @param data whole data
+ * @param lst current node env list address
+ * @param pre_lst last node of env list address
+ * @return int count
+ */
 void	ft_del_node(t_data *data, t_list *lst, t_list *pre_lst)
 {
 	if (!lst || !lst->content)
@@ -59,6 +74,15 @@ void	ft_del_node(t_data *data, t_list *lst, t_list *pre_lst)
 	}
 }
 
+/**
+ * @brief find element from env list
+ * 
+ * This is used to find the node that hold the same key as input
+ * 
+ * @param data whole data
+ * @param str key string
+ * @return t_list * the node hold the same key
+ */
 t_list	*ft_find_ele(t_data *data, char *str)
 {
 	char	*key;
@@ -75,6 +99,13 @@ t_list	*ft_find_ele(t_data *data, char *str)
 	return (NULL);
 }
 
+/**
+ * @brief replace the value for expanding
+ * 
+ * @param data whole data
+ * @param str key string
+ * @return char * string that replace $() to the specific value
+ */
 char	*ft_rep_env(t_data *data, char *str)
 {
 	int		i;
@@ -106,6 +137,13 @@ char	*ft_rep_env(t_data *data, char *str)
 	return (arg);
 }
 
+/**
+ * @brief create a json for env variables using a string
+ * 
+ * @param env_json double pointer toward struct that holds key and value
+ * @param env_name env value(i.e. King=king)
+ * @return char * string that replace $() to the specific value
+ */
 void	ft_to_json(char **env_json, char *env_name)
 {
 	int	i;
