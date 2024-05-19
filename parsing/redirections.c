@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirections.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adprzyby <adprzyby@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ytoshihi <ytoshihi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 16:49:24 by adprzyby          #+#    #+#             */
-/*   Updated: 2024/05/16 18:07:04 by adprzyby         ###   ########.fr       */
+/*   Updated: 2024/05/19 18:40:10 by ytoshihi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ void	handle_redirections(t_token *tokens, t_data *data)
 	t_redir	*redir;
 	t_token	*current_token;
 
+	(void)data;
 	current_token = tokens;
 	redir = malloc(sizeof(t_redir));
 	if (redir == NULL)

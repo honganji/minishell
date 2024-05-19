@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_fn_1.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adprzyby <adprzyby@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ytoshihi <ytoshihi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/04 09:24:36 by ytoshihi          #+#    #+#             */
-/*   Updated: 2024/05/18 15:32:41 by adprzyby         ###   ########.fr       */
+/*   Updated: 2024/05/19 18:34:51 by ytoshihi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static int	ft_count_arg(t_data *data, char *str)
 void	ft_del_node(t_data *data, t_list *lst, t_list *pre_lst)
 {
 	if (!lst || !lst->content)
-		critical_err(errno);
+		critical_err(strerror(errno));
 	if (!pre_lst)
 	{
 		data->env_lst = data->env_lst->next;

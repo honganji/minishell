@@ -7,41 +7,44 @@ PIPE_DIR := pipe
 ENV_DIR := env
 TEST_DIR := test
 INIT_DIR := init
+ERRORS_DIR := errors
 PARSING_DIR := parsing
 OBJ_DIR := objs
 OBJ_DIR_COLLECTION := $(OBJ_DIR) $(addprefix $(OBJ_DIR)/, $(EXE_DIR) \
 					  $(UTILS_DIR) $(PIPE_DIR) $(ENV_DIR) $(TEST_DIR) \
-					  $(INIT_DIR) $(PARSING_DIR))
-
-# SOURCE := main.c \
-# 		  $(addprefix $(ENV_DIR)/, \
-# 		  env.c) \
-# 		  $(addprefix $(EXE_DIR)/, \
-# 		  execution.c builtin_fn_1.c builtin_fn_2.c) \
-# 		  $(addprefix $(PIPE_DIR)/, \
-# 		  pipe.c redirection.c) \
-# 		  $(addprefix $(UTILS_DIR)/, \
-# 		  builtin_fn_1.c builtin_fn_2.c builtin_fn_3.c utils.c utils_split.c \
-# 		  utils_split1.c)\
-# 		  $(addprefix $(TEST_DIR)/, \
-# 		  set_val.c) \
-# 		  $(addprefix $(INIT_DIR)/, \
-# 		  init.c) \
-# 		  $(addprefix $(PARSING_DIR)/, \
-# 		  grouping.c process.c redirections.c tokenization.c)
+					  $(INIT_DIR) $(PARSING_DIR) $(ERRORS_DIR))
 
 SOURCE := main.c \
 		  $(addprefix $(ENV_DIR)/, \
 		  env.c) \
-		  $(addprefix $(UTILS_DIR)/, \
-		  builtin_fn_1.c builtin_fn_2.c builtin_fn_3.c utils.c utils_split.c \
-		  utils_split1.c) \
-		  $(addprefix $(TEST_DIR)/, \
-		  set_val.c) \
 		  $(addprefix $(EXE_DIR)/, \
 		  execution.c builtin_fn_1.c builtin_fn_2.c) \
 		  $(addprefix $(PIPE_DIR)/, \
-		  pipe.c redirection.c)
+		  pipe.c redirection.c) \
+		  $(addprefix $(UTILS_DIR)/, \
+		  builtin_fn_1.c builtin_fn_2.c builtin_fn_3.c utils.c utils_split.c \
+		  utils_split1.c)\
+		  $(addprefix $(TEST_DIR)/, \
+		  set_val.c) \
+		  $(addprefix $(INIT_DIR)/, \
+		  init.c) \
+		  $(addprefix $(PARSING_DIR)/, \
+		  grouping.c process.c redirections.c tokenization.c) \
+		  $(addprefix $(ERRORS_DIR)/, \
+		  critical_err.c syntax_err.c)
+
+# SOURCE := main.c \
+# 		  $(addprefix $(ENV_DIR)/, \
+# 		  env.c) \
+# 		  $(addprefix $(UTILS_DIR)/, \
+# 		  builtin_fn_1.c builtin_fn_2.c builtin_fn_3.c utils.c utils_split.c \
+# 		  utils_split1.c) \
+# 		  $(addprefix $(TEST_DIR)/, \
+# 		  set_val.c) \
+# 		  $(addprefix $(EXE_DIR)/, \
+# 		  execution.c builtin_fn_1.c builtin_fn_2.c) \
+# 		  $(addprefix $(PIPE_DIR)/, \
+# 		  pipe.c redirection.c)
 
 OBJS := $(SOURCE:%.c=$(OBJ_DIR)/%.o)
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipe.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adprzyby <adprzyby@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ytoshihi <ytoshihi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/02 15:08:30 by ytoshihi          #+#    #+#             */
-/*   Updated: 2024/05/18 16:42:44 by adprzyby         ###   ########.fr       */
+/*   Updated: 2024/05/19 18:37:38 by ytoshihi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,9 @@ void	handle_input_and_execute(t_data *data, t_cmd *cmd)
 	if (input.file_name)
 	{
 		if (input.is_single)
-			ft_input_data(input.file_name, 1);
+			ft_input_data(data, input.file_name, 1);
 		else
-			ft_input_data(input.file_name, 0);
+			ft_input_data(data, input.file_name, 0);
 	}
 	ft_exe_command(data, *cmd);
 }
@@ -42,6 +42,7 @@ void	handle_output(t_data *data, t_cmd *cmd, t_list *lst)
 	char	*str;
 	t_redir	output;
 
+	str = NULL;
 	output = cmd->output;
 	if (output.file_name)
 	{
