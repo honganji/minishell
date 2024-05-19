@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adprzyby <adprzyby@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ytoshihi <ytoshihi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 17:56:48 by adprzyby          #+#    #+#             */
-/*   Updated: 2024/05/15 20:02:35 by adprzyby         ###   ########.fr       */
+/*   Updated: 2024/05/19 20:48:53 by ytoshihi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,3 +20,7 @@ int	ft_isspace(int c)
 	return (0);
 }
 
+void	set_sig(int sig)
+{
+	g_sig = sig;
+}

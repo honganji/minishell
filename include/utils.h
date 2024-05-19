@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adprzyby <adprzyby@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ytoshihi <ytoshihi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 11:57:56 by ytoshihi          #+#    #+#             */
-/*   Updated: 2024/05/18 16:49:06 by adprzyby         ###   ########.fr       */
+/*   Updated: 2024/05/19 20:48:57 by ytoshihi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,5 +33,6 @@ char	**split_with_quotes(char const *s, char c);
 char	*word_dup(int start, int end, char const *str);
 int		count_word(char const *s, char c);
 void	check_chr(char const *s, int *end, char c);
+void	set_sig(int sig);
 
 #endif

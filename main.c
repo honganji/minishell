@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adprzyby <adprzyby@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ytoshihi <ytoshihi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 19:42:02 by ytoshihi          #+#    #+#             */
-/*   Updated: 2024/05/18 15:52:40 by adprzyby         ###   ########.fr       */
+/*   Updated: 2024/05/19 21:21:27 by ytoshihi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,17 +42,26 @@ int	main(int argc, char **argv, char **env)
 
 	// Set the valuables
 	set_val(data, env);
+
+	// Set signal for ctrl-c, ctrl-d, and ctrl-backslash
+	rl_catch_signals = 0;
+	signal(SIGINT, ft_ctrl_c);
+	signal(SIGQUIT, ft_ctrl_bs);
 	while (1)
 	{
-		// TODO reset STDIN
+		// TODO delete
+		printf("global sig: %d", g_sig);
 		dup2(data->stdin_fd, STDIN_FILENO);
 		input = readline("minishell: ");
+		// FOR ctrl-d
+		if (!input)
+			exit(EXIT_SUCCESS);
 		if (input)
 		{
+			// // parsing
 			// process_commands(input, data);
-			// // command test
 
-			// pipe
+			// execution
 			ft_pipe(data);
 		}
 	}

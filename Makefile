@@ -9,10 +9,11 @@ TEST_DIR := test
 INIT_DIR := init
 ERRORS_DIR := errors
 PARSING_DIR := parsing
+SIGNAL_DIR := set_signal
 OBJ_DIR := objs
 OBJ_DIR_COLLECTION := $(OBJ_DIR) $(addprefix $(OBJ_DIR)/, $(EXE_DIR) \
 					  $(UTILS_DIR) $(PIPE_DIR) $(ENV_DIR) $(TEST_DIR) \
-					  $(INIT_DIR) $(PARSING_DIR) $(ERRORS_DIR))
+					  $(INIT_DIR) $(PARSING_DIR) $(ERRORS_DIR) $(SIGNAL_DIR))
 
 SOURCE := main.c \
 		  $(addprefix $(ENV_DIR)/, \
@@ -31,7 +32,9 @@ SOURCE := main.c \
 		  $(addprefix $(PARSING_DIR)/, \
 		  grouping.c process.c redirections.c tokenization.c) \
 		  $(addprefix $(ERRORS_DIR)/, \
-		  critical_err.c syntax_err.c)
+		  critical_err.c syntax_err.c) \
+		  $(addprefix $(SIGNAL_DIR)/, \
+		  set_sig.c)
 
 # SOURCE := main.c \
 # 		  $(addprefix $(ENV_DIR)/, \
