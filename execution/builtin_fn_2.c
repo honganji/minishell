@@ -6,7 +6,7 @@
 /*   By: adprzyby <adprzyby@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 14:50:18 by ytoshihi          #+#    #+#             */
-/*   Updated: 2024/05/18 14:26:54 by adprzyby         ###   ########.fr       */
+/*   Updated: 2024/05/19 11:44:28 by adprzyby         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	ft_export(t_data *data)
 	else
 		ft_lstadd_back(&data->env_lst, ft_lstnew(env_json));
 	free(env_arr);
-	ft_input_data("", 0);
+	ft_input_data(data, "", 0);
 }
 
 /**
@@ -72,5 +72,5 @@ void	ft_unset(t_data *data)
 		pre_lst = tmp_lst;
 		tmp_lst = tmp_lst->next;
 	}
-	ft_input_data("", 0);
+	ft_input_data(data, "", 0);
 }

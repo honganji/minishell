@@ -6,7 +6,7 @@
 /*   By: adprzyby <adprzyby@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 20:07:29 by ytoshihi          #+#    #+#             */
-/*   Updated: 2024/05/18 12:33:44 by adprzyby         ###   ########.fr       */
+/*   Updated: 2024/05/19 12:03:03 by adprzyby         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,12 +66,6 @@ typedef struct s_env
 	char			*key;
 	char			*value;
 }					t_env;
-
-typedef struct s_redir
-{
-	int		is_single;
-	char	*file_name;
-}t_redir;
 
 typedef struct s_cmd
 {

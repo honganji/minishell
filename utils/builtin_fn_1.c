@@ -6,7 +6,7 @@
 /*   By: adprzyby <adprzyby@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/04 09:24:36 by ytoshihi          #+#    #+#             */
-/*   Updated: 2024/05/18 15:32:41 by adprzyby         ###   ########.fr       */
+/*   Updated: 2024/05/19 15:56:19 by adprzyby         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,7 @@ char	*ft_rep_env(t_data *data, char *str)
 		}
 		i++;
 	}
-	arg[i] = '\0';						//? Why do we need this? Isn't the last character of a string always '\0' with calloc?
+	// arg[i] = '\0';						//? Why do we need this? Isn't the last character of a string always '\0' with calloc?
 	return (arg);
 }
 
