@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adprzyby <adprzyby@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ytoshihi <ytoshihi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 19:42:02 by ytoshihi          #+#    #+#             */
-/*   Updated: 2024/05/18 15:52:40 by adprzyby         ###   ########.fr       */
+/*   Updated: 2024/05/19 16:26:54 by ytoshihi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,8 @@ int	main(int argc, char **argv, char **env)
 		critical_err(strerror(errno));
 	data->stdin_fd = dup(STDIN_FILENO);
 
-	// Set the valuables
-	set_val(data, env);
+	// // Set the valuables
+	// set_val(data, env);
 	while (1)
 	{
 		// TODO reset STDIN
@@ -49,8 +49,10 @@ int	main(int argc, char **argv, char **env)
 		input = readline("minishell: ");
 		if (input)
 		{
-			// process_commands(input, data);
-			// // command test
+			process_commands(input, data);
+			
+			// TODO delete
+			// printf("arg1: %s", ((t_cmd *)data->cmd_lst->next->content)->args[1]);
 
 			// pipe
 			ft_pipe(data);

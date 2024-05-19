@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adprzyby <adprzyby@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ytoshihi <ytoshihi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/02 10:11:47 by ytoshihi          #+#    #+#             */
-/*   Updated: 2024/05/18 15:58:37 by adprzyby         ###   ########.fr       */
+/*   Updated: 2024/05/19 16:15:10 by ytoshihi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
 void	ft_exe_command(t_data *data, t_cmd content)
 {
 	if (content.com == ECHO)
-		ft_echo(content.args);
+		ft_echo(content.args, data);
 	else if (content.com == CD)
 		ft_chdir(content.args[1], data);
 	else if (content.com == PWD)
@@ -36,7 +36,7 @@ void	ft_exe_command(t_data *data, t_cmd content)
 	else if (content.com == UNSET)
 		ft_unset(data);
 	else if (content.com == ENV)
-		ft_env(data->env_lst);
+		ft_env(data->env_lst, data);
 	else if (content.com == EXIT)
 		exit(EXIT_SUCCESS);
 	else if (content.com == ETC)

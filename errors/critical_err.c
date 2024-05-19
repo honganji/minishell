@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   handle_err.c                                       :+:      :+:    :+:   */
+/*   critical_err.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adprzyby <adprzyby@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ytoshihi <ytoshihi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 14:09:47 by adprzyby          #+#    #+#             */
-/*   Updated: 2024/05/18 12:07:56 by adprzyby         ###   ########.fr       */
+/*   Updated: 2024/05/19 16:22:54 by ytoshihi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/errors.h"
 
-void	critical_err(const char *msg)
+void	critical_err(char *msg)
 {
 	ft_putstr_fd("minishell: ", 2);
 	ft_putstr_fd(msg, 2);

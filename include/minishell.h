@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adprzyby <adprzyby@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ytoshihi <ytoshihi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 20:07:29 by ytoshihi          #+#    #+#             */
-/*   Updated: 2024/05/18 12:33:44 by adprzyby         ###   ########.fr       */
+/*   Updated: 2024/05/19 16:12:04 by ytoshihi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@
 # include "pipe.h"
 # include "parsing.h"
 # include "init.h"
+# include "errors.h"
 // TODO delete
 # include "../42-c-library/library.h"
 # include "test.h"
@@ -66,12 +67,6 @@ typedef struct s_env
 	char			*key;
 	char			*value;
 }					t_env;
-
-typedef struct s_redir
-{
-	int		is_single;
-	char	*file_name;
-}t_redir;
 
 typedef struct s_cmd
 {
