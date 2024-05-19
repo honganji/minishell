@@ -6,7 +6,7 @@
 /*   By: ytoshihi <ytoshihi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 19:42:02 by ytoshihi          #+#    #+#             */
-/*   Updated: 2024/05/19 21:21:27 by ytoshihi         ###   ########.fr       */
+/*   Updated: 2024/05/19 21:57:52 by ytoshihi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,21 +39,24 @@ int	main(int argc, char **argv, char **env)
 	if (!data)
 		critical_err(strerror(errno));
 	data->stdin_fd = dup(STDIN_FILENO);
+	data->exit_code = 0;
 
 	// Set the valuables
 	set_val(data, env);
 
-	// Set signal for ctrl-c, ctrl-d, and ctrl-backslash
-	rl_catch_signals = 0;
-	signal(SIGINT, ft_ctrl_c);
-	signal(SIGQUIT, ft_ctrl_bs);
+	// Set signal for ctrl-c and ctrl-backslash
+	set_signal_fn();
 	while (1)
 	{
-		// TODO delete
-		printf("global sig: %d", g_sig);
 		dup2(data->stdin_fd, STDIN_FILENO);
 		input = readline("minishell: ");
-		// FOR ctrl-d
+		// TODO delete
+		// change exit code depending on the last exit code
+		if (g_sig)
+			data->exit_code = 1;
+		printf("exit code: %d\n", data->exit_code);
+		g_sig = 0;
+		// exit when ctrl-d typed
 		if (!input)
 			exit(EXIT_SUCCESS);
 		if (input)
@@ -61,7 +64,7 @@ int	main(int argc, char **argv, char **env)
 			// // parsing
 			// process_commands(input, data);
 
-			// execution
+			// // execution
 			ft_pipe(data);
 		}
 	}
