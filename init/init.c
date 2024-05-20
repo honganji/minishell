@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ytoshihi <ytoshihi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: adprzyby <adprzyby@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 13:46:58 by adprzyby          #+#    #+#             */
-/*   Updated: 2024/05/19 22:00:43 by ytoshihi         ###   ########.fr       */
+/*   Updated: 2024/05/20 13:14:46 by adprzyby         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ t_cmd *cmd_init(void)
 	if (!cmd)
 		return (NULL);
 	cmd->args = NULL;
+	cmd->com = 0;
 	cmd->input.file_name = NULL;
 	cmd->output.file_name = NULL;
 	return (cmd);
