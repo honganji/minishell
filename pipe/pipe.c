@@ -6,7 +6,7 @@
 /*   By: ytoshihi <ytoshihi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/02 15:08:30 by ytoshihi          #+#    #+#             */
-/*   Updated: 2024/05/19 20:39:17 by ytoshihi         ###   ########.fr       */
+/*   Updated: 2024/05/20 18:03:05 by ytoshihi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,36 +26,38 @@ void	ft_pipe(t_data *data)
 {
 	char	*str;
 	t_list	*lst;
-	t_redir	output;
-	t_redir	input;
+	// t_redir	output;
+	// t_redir	input;
 
 	str = NULL;
 	lst = data->cmd_lst;
 	while (lst)
 	{
-		output = ((t_cmd *)lst->content)->output;
-		input = ((t_cmd *)lst->content)->input;
-		if (input.file_name)
-		{
-			if (input.is_single)
-				ft_input_data(data, input.file_name, 1);
-			else
-				ft_input_data(data, input.file_name, 0);
-		}
+		// output = ((t_cmd *)lst->content)->output;
+		// input = ((t_cmd *)lst->content)->input;
+		// if (input.file_name)
+		// {
+		// 	if (input.is_single)
+		// 		ft_input_data(data, input.file_name, 1);
+		// 	else
+		// 		ft_input_data(data, input.file_name, 0);
+		// }
+		// ft_exe_command(data, *(t_cmd *)lst->content);
+		// if (output.file_name)
+		// {
+		// 	str = ft_read_file(STDIN_FILENO);
+		// 	ft_output_red(output.file_name, str, output.is_single);
+		// }
+		// else if (!lst->next)
+		// {
+		// 	str = ft_read_file(STDIN_FILENO);
+		// 	printf("%s", str);
+		// }
+		// lst = lst->next;
+		// if (lst)
+		// 	dup2(data->stdin_fd, STDIN_FILENO);
 		ft_exe_command(data, *(t_cmd *)lst->content);
-		if (output.file_name)
-		{
-			str = ft_read_file(STDIN_FILENO);
-			ft_output_red(output.file_name, str, output.is_single);
-		}
-		else if (!lst->next)
-		{
-			str = ft_read_file(STDIN_FILENO);
-			printf("%s", str);
-		}
 		lst = lst->next;
-		if (lst)
-			dup2(data->stdin_fd, STDIN_FILENO);
 	}
 	free(str);
 	set_sig(0);

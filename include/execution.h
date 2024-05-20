@@ -6,7 +6,7 @@
 /*   By: ytoshihi <ytoshihi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/02 15:09:17 by ytoshihi          #+#    #+#             */
-/*   Updated: 2024/05/19 18:36:45 by ytoshihi         ###   ########.fr       */
+/*   Updated: 2024/05/20 15:04:59 by ytoshihi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ typedef enum e_com t_com;
 typedef struct s_cmd t_cmd;
 
 void	ft_execve(char **args, t_data *data);
-void	ft_chdir(char *path, t_data *data);
+void	ft_chdir(char **args, t_data *data);
 void	ft_echo(char **args, t_data *data);
 void	ft_pwd(t_data *data);
 void	ft_env(t_list *env_lst, t_data *data);

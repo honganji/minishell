@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adprzyby <adprzyby@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ytoshihi <ytoshihi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 20:07:29 by ytoshihi          #+#    #+#             */
-/*   Updated: 2024/05/20 13:13:11 by adprzyby         ###   ########.fr       */
+/*   Updated: 2024/05/20 16:20:51 by ytoshihi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 # include <signal.h>
 # include <sys/wait.h>
 # include <unistd.h>
+# include <termios.h>
 
 int	g_sig;
 
@@ -54,7 +55,7 @@ typedef struct s_data
 
 typedef enum e_com
 {
-	ECHO,
+	ECH,
 	CD,
 	PWD,
 	EXPORT,

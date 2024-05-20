@@ -6,7 +6,7 @@
 /*   By: ytoshihi <ytoshihi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 14:50:18 by ytoshihi          #+#    #+#             */
-/*   Updated: 2024/05/20 14:38:10 by ytoshihi         ###   ########.fr       */
+/*   Updated: 2024/05/20 18:01:57 by ytoshihi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	ft_execve(char **args, t_data *data)
 		dup2(fds[1], STDOUT_FILENO);
 		close(fds[1]);
 		// TODO should be able to read cli if there is no input
-		dup2(data->stdin_fd, STDIN_FILENO);
+		// dup2(data->stdin_fd, STDIN_FILENO);
 		if (execve(args[0], args, NULL) == -1)
 			exit(EXIT_FAILURE);
 	}
@@ -60,7 +60,10 @@ void	ft_execve(char **args, t_data *data)
 	{
 		close(fds[1]);
 		waitpid(pid, &status, 0);
-		data->exit_code = WEXITSTATUS(status);
+		if (WIFEXITED(status))
+			data->exit_code = WEXITSTATUS(status);
+		else if (WIFSIGNALED(status))
+			data->exit_code = 128 + WTERMSIG(status);
 		args[0] = tmp;
 		str = ft_read_file(fds[0]);
 		close(fds[0]);
@@ -74,10 +77,23 @@ void	ft_execve(char **args, t_data *data)
  * @param path path for the new path. It can be definite or relative path
  * @return void
  */
-void	ft_chdir(char *path, t_data *data)
+void	ft_chdir(char **args, t_data *data)
 {
-	// TODO check args 1
-	// TODO change input parmeter to args
+	char	buffer[256];
+	char	*cur_dir;
+	char	*path;
+
+	if (!args[1])
+		path = ((t_env *)ft_find_ele(data, "HOME")->content)->value;
+	else
+		path = args[1];
+	cur_dir = getcwd(buffer, sizeof(buffer));
+	if (!cur_dir)
+	{
+		data->exit_code = 1;
+		syntax_err(NULL, "pwd: error retrieving current directory\n", NULL, 1);
+	}
+	register_env(data, "OLDPWD", cur_dir);
 	if (chdir(path) == -1)
 	{
 		syntax_err(NULL, "cd: no such file or directory: ", path, 1);
@@ -96,7 +112,8 @@ void	ft_chdir(char *path, t_data *data)
  */
 void	ft_echo(char **args, t_data *data)
 {
-	int	i;
+	int		i;
+	char	*str;
 
 	i = 1;
 	data->exit_code = 0;
@@ -105,12 +122,14 @@ void	ft_echo(char **args, t_data *data)
 		ft_input_data(data, "\n", 0);
 		return ;
 	}
-	if (!ft_strncmp(args[i], "-n", 2))					//TODO handle backslashes
+	if (ft_strncmp(args[1], "-n", ft_strlen(args[1])))
 	{
-		i++;
-		args[i] = ft_strjoin(args[i], "\n");
+		str = ft_join_with_space(&args[i]);
+		str = ft_free_strjoin(str, "\n");
 	}
-	ft_input_data(data, args[i], 0);
+	else
+		str = ft_join_with_space(&args[++i]);
+	ft_input_data(data, str, 0);
 }
 
 /**

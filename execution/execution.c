@@ -6,7 +6,7 @@
 /*   By: ytoshihi <ytoshihi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/02 10:11:47 by ytoshihi          #+#    #+#             */
-/*   Updated: 2024/05/20 14:23:05 by ytoshihi         ###   ########.fr       */
+/*   Updated: 2024/05/20 16:21:06 by ytoshihi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,10 @@
  */
 void	ft_exe_command(t_data *data, t_cmd content)
 {
-	// TODO delete
-	printf("command type: %d", content.com);
-	if (content.com == ECHO)
+	if (content.com == ECH)
 		ft_echo(content.args, data);
 	else if (content.com == CD)
-		ft_chdir(content.args[1], data);
+		ft_chdir(content.args, data);
 	else if (content.com == PWD)
 		ft_pwd(data);
 	else if (content.com == EXPORT)
