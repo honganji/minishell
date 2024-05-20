@@ -6,7 +6,7 @@
 /*   By: ytoshihi <ytoshihi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 14:50:18 by ytoshihi          #+#    #+#             */
-/*   Updated: 2024/05/19 21:51:22 by ytoshihi         ###   ########.fr       */
+/*   Updated: 2024/05/20 14:37:50 by ytoshihi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ void	ft_export(t_data *data)
 	env_json = (t_env *)malloc(1 * sizeof(t_env));
 	if (!env_arr || !env_json)
 		critical_err(strerror(errno));
+	// TODO check args 1
 	ft_to_json(env_arr, ((t_cmd *)data->cmd_lst->content)->args[1]);		//? Potentially we should protect functions like ft_to_json,
 	env_json->key = env_arr[0];												//? ft_find_ele, ft_lstnew					
 	env_json->value = env_arr[1];

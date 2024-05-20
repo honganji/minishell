@@ -6,7 +6,7 @@
 /*   By: ytoshihi <ytoshihi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 14:50:18 by ytoshihi          #+#    #+#             */
-/*   Updated: 2024/05/19 21:48:31 by ytoshihi         ###   ########.fr       */
+/*   Updated: 2024/05/20 14:38:10 by ytoshihi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,8 @@ void	ft_execve(char **args, t_data *data)
  */
 void	ft_chdir(char *path, t_data *data)
 {
+	// TODO check args 1
+	// TODO change input parmeter to args
 	if (chdir(path) == -1)
 	{
 		syntax_err(NULL, "cd: no such file or directory: ", path, 1);
@@ -127,7 +129,7 @@ void	ft_pwd(t_data *data)
 		data->exit_code = 1;
 		syntax_err(NULL, "pwd: error retrieving current directory\n", NULL, 1);
 	}
-	ft_input_data(data, cur_dir, 0);
+	ft_input_data(data, ft_strjoin(cur_dir, "\n"), 0);
 	data->exit_code = 0;
 }
 
