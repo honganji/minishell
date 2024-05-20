@@ -6,7 +6,7 @@
 /*   By: adprzyby <adprzyby@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/27 17:04:21 by adprzyby          #+#    #+#             */
-/*   Updated: 2024/05/19 15:07:55 by adprzyby         ###   ########.fr       */
+/*   Updated: 2024/05/20 16:27:31 by adprzyby         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,11 +57,6 @@ t_token	*tokenization(char **tokens)
 	while (tokens[i])
 	{
 		tmp->data = tokens[i];
-		while (tmp->data && *tmp->data)
-		{
-			if (*tmp->data == '\\' && *(tmp->data + 1) != '\0')
-				handle_backslash(&tmp->data);
-		}
 		tmp->type = what_token(tmp->data);
 		tmp->next = token_init();
 		tmp->id = i;
@@ -78,37 +73,37 @@ t_token	*tokenization(char **tokens)
 	return (token);
 }
 
-int	count_backslashes(char **str)
-{
-	int	count = 0;
-	while (**str == '\\')
-	{
-		count++;
-		(*str)++;
-	}
-	return count;
-}
+// int	count_backslashes(char **str)
+// {
+// 	int	count = 0;
+// 	while (**str == '\\')
+// 	{
+// 		count++;
+// 		(*str)++;
+// 	}
+// 	return count;
+// }
 
-void	print_string(char *str)
-{
-	int	b;
+// void	print_string(char *str)
+// {
+// 	int	b;
 
-	while (*str)
-	{
-		if (*str == '\\')
-		{
-			b = count_backslashes(&str);
-			while (b > 0)
-			{
-				write(1, "\\", 1);
-				b--;
-			}
-			if (*str == '\0')
-				break ;
-			write(1, str, 1);
-		}
-		else
-			write(1, str, 1);
-		str++;
-	}
-}
+// 	while (*str)
+// 	{
+// 		if (*str == '\\')
+// 		{
+// 			b = count_backslashes(&str);
+// 			while (b > 0)
+// 			{
+// 				write(1, "\\", 1);
+// 				b--;
+// 			}
+// 			if (*str == '\0')
+// 				break ;
+// 			write(1, str, 1);
+// 		}
+// 		else
+// 			write(1, str, 1);
+// 		str++;
+// 	}
+// }

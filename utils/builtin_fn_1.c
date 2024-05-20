@@ -6,7 +6,7 @@
 /*   By: adprzyby <adprzyby@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/04 09:24:36 by ytoshihi          #+#    #+#             */
-/*   Updated: 2024/05/20 14:17:47 by adprzyby         ###   ########.fr       */
+/*   Updated: 2024/05/20 16:22:36 by adprzyby         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,8 +120,9 @@ char	*ft_rep_env(t_data *data, char *str)
 	{
 		arg[i] = *str;
 		if (*str++ == '$')
-		{								//TODO $? handling and $$ handling
+		{
 			tmp = ft_find_ele(data, str);
+			printf("tmp: %s\n", (*(t_env *)tmp->content).value);
 			if (tmp)
 			{
 				ft_strlcpy(&arg[i], (*(t_env *)tmp->content).value,
@@ -133,7 +134,6 @@ char	*ft_rep_env(t_data *data, char *str)
 		}
 		i++;
 	}
-	// arg[i] = '\0';						//? Why do we need this? Isn't the last character of a string always '\0' with calloc?
 	return (arg);
 }
 
