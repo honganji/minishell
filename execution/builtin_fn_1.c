@@ -6,7 +6,7 @@
 /*   By: ytoshihi <ytoshihi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 14:50:18 by ytoshihi          #+#    #+#             */
-/*   Updated: 2024/05/19 21:48:31 by ytoshihi         ###   ########.fr       */
+/*   Updated: 2024/05/20 13:45:07 by ytoshihi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,12 @@ void	ft_execve(char **args, t_data *data)
 	{
 		close(fds[1]);
 		waitpid(pid, &status, 0);
-		data->exit_code = WEXITSTATUS(status);
+		if (WIFEXITED(status))
+			data->exit_code = WEXITSTATUS(status);
+		else if (WIFSIGNALED(status))
+			data->exit_code = 128 + WTERMSIG(status);
+		// TODO delete
+		printf("exit code after running builtin: %d\n", data->exit_code);
 		args[0] = tmp;
 		str = ft_read_file(fds[0]);
 		close(fds[0]);
