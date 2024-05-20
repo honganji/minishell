@@ -6,7 +6,7 @@
 /*   By: adprzyby <adprzyby@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 19:42:02 by ytoshihi          #+#    #+#             */
-/*   Updated: 2024/05/18 15:52:40 by adprzyby         ###   ########.fr       */
+/*   Updated: 2024/05/20 14:00:52 by adprzyby         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,21 +38,21 @@ int	main(int argc, char **argv, char **env)
 	data = (t_data *)ft_calloc(2, sizeof(t_data));
 	if (!data)
 		critical_err(strerror(errno));
-	data->stdin_fd = dup(STDIN_FILENO);
-
-	// Set the valuables
-	set_val(data, env);
+	initialize(data, env);
 	while (1)
 	{
-		// TODO reset STDIN
 		dup2(data->stdin_fd, STDIN_FILENO);
 		input = readline("minishell: ");
+		check_signal(data);
+		// exit when ctrl-d typed
+		if (!input)
+			exit(EXIT_SUCCESS);
 		if (input)
 		{
-			// process_commands(input, data);
-			// // command test
+			// // parsing
+			process_commands(input, data);
 
-			// pipe
+			// // execution
 			ft_pipe(data);
 		}
 	}

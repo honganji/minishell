@@ -3,15 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adprzyby <adprzyby@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ytoshihi <ytoshihi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 17:52:24 by ytoshihi          #+#    #+#             */
-/*   Updated: 2024/05/18 12:00:28 by adprzyby         ###   ########.fr       */
+/*   Updated: 2024/05/19 22:08:05 by ytoshihi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/env.h"
 
+/**
+ * @brief Store all the env variables
+ * 
+ * @param data whole data
+ * @param environ array of string that hold env variables
+ * @return void
+ */
 void	ft_store_env(t_data *data, char **environ)
 {
 	char		**env_json;
