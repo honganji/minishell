@@ -6,7 +6,7 @@
 /*   By: adprzyby <adprzyby@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/04 09:24:36 by ytoshihi          #+#    #+#             */
-/*   Updated: 2024/05/20 16:22:36 by adprzyby         ###   ########.fr       */
+/*   Updated: 2024/05/20 16:46:32 by adprzyby         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,9 @@ static int	ft_count_arg(t_data *data, char *str)
 	count = 0;
 	while (*str)
 	{
-		if (*str++ == '$')						//? What if we have $$ or $?  ?
-		{										//? Also what if we have $ followed by a space?
-			tmp = ft_find_ele(data, str);		//? Lastly - what if we have it in (single/double) quotes?
+		if (*str++ == '$')
+		{
+			tmp = ft_find_ele(data, str);		
 			if (tmp)
 			{
 				count--;
@@ -122,7 +122,9 @@ char	*ft_rep_env(t_data *data, char *str)
 		if (*str++ == '$')
 		{
 			tmp = ft_find_ele(data, str);
+			printf("somet\n");
 			printf("tmp: %s\n", (*(t_env *)tmp->content).value);
+			printf("some1\n");
 			if (tmp)
 			{
 				ft_strlcpy(&arg[i], (*(t_env *)tmp->content).value,
