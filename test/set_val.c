@@ -36,6 +36,13 @@ static t_cmd *create_cmd(t_com com, char *str, t_redir input, t_redir output)
     return (content);
 }
 
+/**
+ * @brief Set value as input
+ * 
+ * @param data whole data
+ * @param environ array of string that hold env variables
+ * @return void
+ */
 void	set_val(t_data *data, char **env)
 {
     t_list  *tmp;
@@ -47,8 +54,10 @@ void	set_val(t_data *data, char **env)
     // ft_lstadd_back(&data->cmd_lst, ft_lstnew(content));
     content = create_cmd(PWD, "pwd", (t_redir){.is_single = 1, .file_name="text_3.txt"}, (t_redir){.is_single = 1, .file_name="output_3.txt"});
     ft_lstadd_back(&data->cmd_lst, ft_lstnew(content));
-    content = create_cmd(ETC, "sort", (t_redir){.is_single = 1, .file_name="text_4.txt"}, (t_redir){.is_single = 1, .file_name="output_4.txt"});
+    content = create_cmd(ETC, "sort", (t_redir){.is_single = 1, .file_name=NULL}, (t_redir){.is_single = 1, .file_name=NULL});
     ft_lstadd_back(&data->cmd_lst, ft_lstnew(content));
+    // content = create_cmd(ECHO, "echo", (t_redir){.is_single = 1, .file_name=NULL}, (t_redir){.is_single = 1, .file_name=NULL});
+    // ft_lstadd_back(&data->cmd_lst, ft_lstnew(content));
     tmp = data->cmd_lst;
 	while (tmp)
 	{

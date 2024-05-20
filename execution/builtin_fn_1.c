@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_fn_1.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adprzyby <adprzyby@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ytoshihi <ytoshihi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 14:50:18 by ytoshihi          #+#    #+#             */
-/*   Updated: 2024/05/18 16:32:59 by adprzyby         ###   ########.fr       */
+/*   Updated: 2024/05/19 21:48:31 by ytoshihi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ void	ft_execve(char **args, t_data *data)
 	int		fds[2];
 	char	*tmp;
 	char	*str;
+	int		status;
 
 	if (pipe(fds) == -1)
 	{
@@ -37,11 +38,11 @@ void	ft_execve(char **args, t_data *data)
 	}
 	tmp = args[0];
 	args[0] = ft_strjoin("/", args[0]);
-	args[0] = ft_check_exist(args[0]);
+	args[0] = ft_check_exist(data, args[0]);
 	if (!*args)
 	{
 		syntax_err(NULL, "command not found: ", args[0], 127);
-		ft_input_data("", 0);
+		ft_input_data(data, "", 0);
 		return ;
 	}
 	pid = fork();
@@ -50,17 +51,20 @@ void	ft_execve(char **args, t_data *data)
 		close(fds[0]);
 		dup2(fds[1], STDOUT_FILENO);
 		close(fds[1]);
+		// TODO should be able to read cli if there is no input
+		dup2(data->stdin_fd, STDIN_FILENO);
 		if (execve(args[0], args, NULL) == -1)
 			exit(EXIT_FAILURE);
 	}
 	else
 	{
 		close(fds[1]);
-		wait(NULL);
+		waitpid(pid, &status, 0);
+		data->exit_code = WEXITSTATUS(status);
 		args[0] = tmp;
 		str = ft_read_file(fds[0]);
 		close(fds[0]);
-		ft_input_data(str, 0);
+		ft_input_data(data, str, 0);
 	}
 }
 
@@ -75,9 +79,11 @@ void	ft_chdir(char *path, t_data *data)
 	if (chdir(path) == -1)
 	{
 		syntax_err(NULL, "cd: no such file or directory: ", path, 1);
+		data->exit_code = 1;
 		exit(EXIT_FAILURE);
 	}
-	ft_input_data("", 0);
+	ft_input_data(data, "", 0);
+	data->exit_code = 0;
 }
 
 /**
@@ -86,17 +92,23 @@ void	ft_chdir(char *path, t_data *data)
  * @param args arguments
  * @return void
  */
-void	ft_echo(char **args)
+void	ft_echo(char **args, t_data *data)
 {
 	int	i;
 
 	i = 1;
+	data->exit_code = 0;
+	if (!args[1])
+	{
+		ft_input_data(data, "\n", 0);
+		return ;
+	}
 	if (!ft_strncmp(args[i], "-n", 2))					//TODO handle backslashes
 	{
 		i++;
 		args[i] = ft_strjoin(args[i], "\n");
 	}
-	ft_input_data(args[i], 0);
+	ft_input_data(data, args[i], 0);
 }
 
 /**
@@ -111,8 +123,12 @@ void	ft_pwd(t_data *data)
 
 	cur_dir = getcwd(buffer, sizeof(buffer));
 	if (!cur_dir)
+	{
+		data->exit_code = 1;
 		syntax_err(NULL, "pwd: error retrieving current directory\n", NULL, 1);
-	ft_input_data(cur_dir, 0);
+	}
+	ft_input_data(data, cur_dir, 0);
+	data->exit_code = 0;
 }
 
 /**
@@ -122,7 +138,7 @@ void	ft_pwd(t_data *data)
  * @param data data
  * @return void
  */
-void	ft_env(t_list *env_lst)
+void	ft_env(t_list *env_lst, t_data *data)
 {
 	t_list	*tmp;
 	char	*str;
@@ -147,6 +163,7 @@ void	ft_env(t_list *env_lst)
 			critical_err(strerror(errno));
 		tmp = tmp->next;
 	}
-	ft_input_data(str, 0);
+	ft_input_data(data, str, 0);
 	free(str);
+	data->exit_code = 0;
 }

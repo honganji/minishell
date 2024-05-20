@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adprzyby <adprzyby@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ytoshihi <ytoshihi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 20:07:29 by ytoshihi          #+#    #+#             */
-/*   Updated: 2024/05/18 12:33:44 by adprzyby         ###   ########.fr       */
+/*   Updated: 2024/05/19 21:13:10 by ytoshihi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,18 +21,22 @@
 # include <stdbool.h>
 # include <stdio.h>
 # include <stdlib.h>
-# define TMP_FILE "tmp.txt"
+# include <signal.h>
+# include <sys/wait.h>
+# include <unistd.h>
+
+int	g_sig;
 
 # include "env.h"
 # include "execution.h"
 # include "pipe.h"
 # include "parsing.h"
 # include "init.h"
+# include "errors.h"
+# include "set_signal.h"
 // TODO delete
 # include "../42-c-library/library.h"
 # include "test.h"
-# include <sys/wait.h>
-# include <unistd.h>
 
 typedef struct s_redir
 {
@@ -66,12 +70,6 @@ typedef struct s_env
 	char			*key;
 	char			*value;
 }					t_env;
-
-typedef struct s_redir
-{
-	int		is_single;
-	char	*file_name;
-}t_redir;
 
 typedef struct s_cmd
 {
