@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_fn_1.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ytoshihi <ytoshihi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: adprzyby <adprzyby@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 14:50:18 by ytoshihi          #+#    #+#             */
-/*   Updated: 2024/05/21 15:16:09 by ytoshihi         ###   ########.fr       */
+/*   Updated: 2024/05/21 16:37:24 by adprzyby         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,16 +32,13 @@ void	ft_execve(char **args, t_data *data)
 	int		status;
 
 	if (pipe(fds) == -1)
-	{
-		perror("Error pipe");			//TODO  critical_err here?
-		return ;
-	}
+		critical_err(strerror(errno));
 	tmp = args[0];
 	args[0] = ft_strjoin("/", args[0]);
 	args[0] = ft_check_exist(data, args[0]);
 	if (!*args)
 	{
-		syntax_err(NULL, "command not found: ", args[0], 127);
+		syntax_err(data, "command not found: ", args[0], 127);
 		ft_input_data(data, "", 0);
 		return ;
 	}
@@ -52,7 +49,7 @@ void	ft_execve(char **args, t_data *data)
 		dup2(fds[1], STDOUT_FILENO);
 		close(fds[1]);
 		if (execve(args[0], args, NULL) == -1)
-			exit(EXIT_FAILURE);
+			critical_err(strerror(errno));
 	}
 	else
 	{
@@ -96,7 +93,6 @@ void	ft_chdir(char **args, t_data *data)
 	{
 		syntax_err(NULL, "cd: no such file or directory: ", path, 1);
 		data->exit_code = 1;
-		exit(EXIT_FAILURE);
 	}
 	ft_input_data(data, "", 0);
 	data->exit_code = 0;
