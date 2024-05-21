@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_fn_2.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ytoshihi <ytoshihi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: adprzyby <adprzyby@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 14:50:18 by ytoshihi          #+#    #+#             */
-/*   Updated: 2024/05/21 15:16:33 by ytoshihi         ###   ########.fr       */
+/*   Updated: 2024/05/21 17:58:19 by adprzyby         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,15 @@ void	ft_export(t_data *data)
 		critical_err(strerror(errno));
 	if (!((t_cmd *)data->cmd_lst->content)->args[1])
 		return ;
-	ft_to_json(env_arr, ((t_cmd *)data->cmd_lst->content)->args[1]);		//? Potentially we should protect functions like ft_to_json,
-	env_json->key = env_arr[0];												//? ft_find_ele, ft_lstnew					
+	ft_to_json(env_arr, ((t_cmd *)data->cmd_lst->content)->args[1]);				//TODO fix endless loop and implement check for invalid key
+	env_json->key = env_arr[0];
+	if (ft_isdigit(*env_arr[0]))
+	{
+		syntax_err(data, "export: not a valid identifier: ", env_arr[0], 1);
+		free(env_arr);
+		free(env_json);
+		return ;
+	}
 	env_json->value = env_arr[1];
 	targ_lst = ft_find_ele(data, env_arr[0]);
 	if (targ_lst)
