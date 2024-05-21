@@ -6,7 +6,7 @@
 /*   By: ytoshihi <ytoshihi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 16:58:33 by adprzyby          #+#    #+#             */
-/*   Updated: 2024/05/21 09:57:34 by ytoshihi         ###   ########.fr       */
+/*   Updated: 2024/05/21 10:00:08 by ytoshihi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ void	parse_commands(t_token *tokens, t_data *data)
 			add_command_to_list(&(data->cmd_lst), current_command);
 			current_command = cmd_init();
 		}
-		printf("\ntoken: %s\n", current_token->data);
 		current_token = current_token->next;
 	}
 	add_command_to_list(&(data->cmd_lst), current_command);

@@ -6,7 +6,7 @@
 /*   By: ytoshihi <ytoshihi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 16:49:24 by adprzyby          #+#    #+#             */
-/*   Updated: 2024/05/21 09:57:09 by ytoshihi         ###   ########.fr       */
+/*   Updated: 2024/05/21 10:22:02 by ytoshihi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,17 +25,17 @@ void	handle_redirections(t_token **tokens, t_data *data, t_cmd *current_command)
 	if (ft_strchr((*tokens)->data, '>'))
 	{
 		is_input = 0;
-		if (ft_strncmp((*tokens)->data, ">", 1) == 0)
-			redir->is_single = 1;
-		else if (ft_strncmp((*tokens)->data, ">>", 2) == 0)
+		if (ft_strncmp((*tokens)->data, ">>", 2) == 0)
 			redir->is_single = 0;
+		else
+			redir->is_single = 1;
 	}
 	else
 	{
-		if (ft_strncmp((*tokens)->data, "<", 1) == 0)
-			redir->is_single = 1;
-		else if (ft_strncmp((*tokens)->data, "<<", 2) == 0)
+		if (ft_strncmp((*tokens)->data, "<<", 2) == 0)
 			redir->is_single = 0;
+		else
+			redir->is_single = 1;
 	}
 	(*tokens) = (*tokens)->next;
 	redir->file_name = (*tokens)->data;
