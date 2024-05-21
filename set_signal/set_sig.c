@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   set_sig.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yuji <yuji@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: ytoshihi <ytoshihi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/19 15:46:53 by ytoshihi          #+#    #+#             */
-/*   Updated: 2024/05/20 19:55:25 by yuji             ###   ########.fr       */
+/*   Updated: 2024/05/21 14:19:06 by ytoshihi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ static void    ft_ctrl_bs(int sig)
 void	set_signal_fn(void)
 {
     // TODO uncomment
-    // rl_catch_signals = 0;
+    rl_catch_signals = 0;
 	signal(SIGINT, ft_ctrl_c);
 	signal(SIGQUIT, ft_ctrl_bs);
 }

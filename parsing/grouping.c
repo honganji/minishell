@@ -6,7 +6,7 @@
 /*   By: ytoshihi <ytoshihi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 16:58:33 by adprzyby          #+#    #+#             */
-/*   Updated: 2024/05/21 10:00:08 by ytoshihi         ###   ########.fr       */
+/*   Updated: 2024/05/21 14:17:38 by ytoshihi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	parse_commands(t_token *tokens, t_data *data)
 			if (current_token->type == REDIR)
 				handle_redirections(&current_token, data, current_command);
 			else
-				add_token_to_command(current_command, current_token);
+				add_token_to_command(data, current_command, current_token);
 		}
 		else
 		{
@@ -69,7 +69,7 @@ t_com	detect_cmd_type(t_token *token)
 		return (ETC);
 }
 
-void	add_token_to_command(t_cmd *command, t_token *token)
+void	add_token_to_command(t_data *data, t_cmd *command, t_token *token)
 {
 	int		i;
 	int		j;
@@ -77,6 +77,12 @@ void	add_token_to_command(t_cmd *command, t_token *token)
 
 	i = 0;
 	j = 0;
+	if (token->data)
+	{
+		token->data = replace_env(data, token->data);
+		if (!token->data)
+			return ;
+	}
 	if (command->args == NULL)
 	{
 		command->args = malloc(sizeof(char *) * 2);
