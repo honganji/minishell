@@ -6,7 +6,7 @@
 /*   By: ytoshihi <ytoshihi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 16:58:33 by adprzyby          #+#    #+#             */
-/*   Updated: 2024/05/21 15:17:30 by ytoshihi         ###   ########.fr       */
+/*   Updated: 2024/05/21 16:03:21 by ytoshihi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,10 +74,13 @@ void	add_token_to_command(t_data *data, t_cmd *command, t_token *token)
 	int		i;
 	int		j;
 	char	**new_args;
+	int		is_skip;
 
 	i = 0;
 	j = 0;
-	if (token->data)
+	is_skip = 0;
+	remove_quote(&token->data, &is_skip);
+	if (token->data && !is_skip)
 	{
 		token->data = replace_env(data, token->data);
 		if (!token->data)

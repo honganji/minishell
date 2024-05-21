@@ -6,7 +6,7 @@
 /*   By: ytoshihi <ytoshihi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 11:22:38 by ytoshihi          #+#    #+#             */
-/*   Updated: 2024/05/21 14:16:01 by ytoshihi         ###   ########.fr       */
+/*   Updated: 2024/05/21 16:04:46 by ytoshihi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,4 +57,24 @@ char	*replace_env(t_data *data, char *str)
 	if (!ft_strncmp(arg, str, ft_strlen(str)))
 		return (NULL);
 	return (arg);
+}
+
+/**
+ * @brief Replace into an env variable
+ *
+ * @param data data
+ * @param str string of token
+ * @return char *
+ * 
+ */
+void	remove_quote(char **str, int *is_skip)
+{
+	if (!(*str))
+		return ;
+	if (ft_strchr(*str, '\''))
+		*is_skip = 1;
+	if (*(*str) == '\'')
+		*str = ft_strtrim(*str, "\'");
+	else
+		*str = ft_strtrim(*str, "\"");
 }
