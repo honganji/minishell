@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_fn_1.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ytoshihi <ytoshihi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: adprzyby <adprzyby@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/04 09:24:36 by ytoshihi          #+#    #+#             */
-/*   Updated: 2024/05/19 22:20:48 by ytoshihi         ###   ########.fr       */
+/*   Updated: 2024/05/21 13:58:21 by adprzyby         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,9 @@ static int	ft_count_arg(t_data *data, char *str)
 	count = 0;
 	while (*str)
 	{
-		if (*str++ == '$')						//? What if we have $$ or $?  ?
-		{										//? Also what if we have $ followed by a space?
-			tmp = ft_find_ele(data, str);		//? Lastly - what if we have it in (single/double) quotes?
+		if (*str++ == '$')
+		{
+			tmp = ft_find_ele(data, str);		
 			if (tmp)
 			{
 				count--;
@@ -120,7 +120,17 @@ char	*ft_rep_env(t_data *data, char *str)
 	{
 		arg[i] = *str;
 		if (*str++ == '$')
-		{								//TODO $? handling and $$ handling
+		{
+			if (*str++ == '\'')
+			{
+				//TODO handle single quotes
+				rv_quotes(*str);
+			}
+			else if (*str++ == '"')
+			{
+				//TODO handle double quotes
+				rv_quotes(*str);
+			}
 			tmp = ft_find_ele(data, str);
 			if (tmp)
 			{
@@ -133,7 +143,6 @@ char	*ft_rep_env(t_data *data, char *str)
 		}
 		i++;
 	}
-	arg[i] = '\0';						//? Why do we need this? Isn't the last character of a string always '\0' with calloc?
 	return (arg);
 }
 

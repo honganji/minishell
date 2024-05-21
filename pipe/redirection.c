@@ -3,20 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   redirection.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ytoshihi <ytoshihi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: adprzyby <adprzyby@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 11:45:40 by ytoshihi          #+#    #+#             */
-/*   Updated: 2024/05/19 18:38:01 by ytoshihi         ###   ########.fr       */
+/*   Updated: 2024/05/20 14:19:48 by adprzyby         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/pipe.h"
 
 /**
- * @brief 
+ * @brief Outputs the content to the file.
  * 
- * @param 
- * @return 
+ * @param name The name of the file to output.
+ * @return fd The file descriptor.
  */
 int	ft_output_red(char *name, char *content, int is_append)
 {

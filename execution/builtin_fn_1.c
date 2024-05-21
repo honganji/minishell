@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_fn_1.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ytoshihi <ytoshihi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: adprzyby <adprzyby@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 14:50:18 by ytoshihi          #+#    #+#             */
-/*   Updated: 2024/05/19 21:48:31 by ytoshihi         ###   ########.fr       */
+/*   Updated: 2024/05/20 14:19:26 by adprzyby         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	ft_execve(char **args, t_data *data)
 
 	if (pipe(fds) == -1)
 	{
-		perror("Error pipe");
+		perror("Error pipe");			//TODO  critical_err here?
 		return ;
 	}
 	tmp = args[0];
