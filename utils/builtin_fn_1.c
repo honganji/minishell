@@ -6,7 +6,7 @@
 /*   By: adprzyby <adprzyby@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/04 09:24:36 by ytoshihi          #+#    #+#             */
-/*   Updated: 2024/05/20 16:46:32 by adprzyby         ###   ########.fr       */
+/*   Updated: 2024/05/21 13:58:21 by adprzyby         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,10 +121,17 @@ char	*ft_rep_env(t_data *data, char *str)
 		arg[i] = *str;
 		if (*str++ == '$')
 		{
+			if (*str++ == '\'')
+			{
+				//TODO handle single quotes
+				rv_quotes(*str);
+			}
+			else if (*str++ == '"')
+			{
+				//TODO handle double quotes
+				rv_quotes(*str);
+			}
 			tmp = ft_find_ele(data, str);
-			printf("somet\n");
-			printf("tmp: %s\n", (*(t_env *)tmp->content).value);
-			printf("some1\n");
 			if (tmp)
 			{
 				ft_strlcpy(&arg[i], (*(t_env *)tmp->content).value,

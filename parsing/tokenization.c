@@ -6,7 +6,7 @@
 /*   By: adprzyby <adprzyby@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/27 17:04:21 by adprzyby          #+#    #+#             */
-/*   Updated: 2024/05/20 16:27:31 by adprzyby         ###   ########.fr       */
+/*   Updated: 2024/05/21 13:53:00 by adprzyby         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,46 +64,31 @@ t_token	*tokenization(char **tokens)
 		i++;
 	}
 	tmp = token;
-	// while (tmp && tmp->data)
-	// {
-	// 	printf("Token: %s\n", tmp->data);			//!DEBUG
-	// 	printf("Type: %d\n", tmp->type);
-	// 	tmp = tmp->next;
-	// }
+	while (tmp && tmp->data)
+	{
+		printf("Token: %s\n", tmp->data);			//!DEBUG
+		printf("Type: %d\n", tmp->type);
+		tmp = tmp->next;
+	}
 	return (token);
 }
 
-// int	count_backslashes(char **str)
-// {
-// 	int	count = 0;
-// 	while (**str == '\\')
-// 	{
-// 		count++;
-// 		(*str)++;
-// 	}
-// 	return count;
-// }
+void	rv_quotes(char *str)
+{
+	int start;
+	int end;
+	int j;
 
-// void	print_string(char *str)
-// {
-// 	int	b;
-
-// 	while (*str)
-// 	{
-// 		if (*str == '\\')
-// 		{
-// 			b = count_backslashes(&str);
-// 			while (b > 0)
-// 			{
-// 				write(1, "\\", 1);
-// 				b--;
-// 			}
-// 			if (*str == '\0')
-// 				break ;
-// 			write(1, str, 1);
-// 		}
-// 		else
-// 			write(1, str, 1);
-// 		str++;
-// 	}
-// }
+	j = 0;
+	start = 0;
+	end = strlen(str) - 1;
+	if (!str)
+		return ;
+	if (str[start] == '\'' || str[start] == '\"')
+		start++;
+	if (str[end] == '\'' || str[end] == '\"')
+		end--;
+	while (start <= end)
+		str[j++] = str[start++];
+	str[j] = '\0';
+}
