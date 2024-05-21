@@ -1,4 +1,5 @@
 NAME := minishell
+NAME_TEST := test
 
 LIB_DIR := 42-c-library
 EXE_DIR := execution
@@ -23,8 +24,8 @@ SOURCE := main.c \
 		  $(addprefix $(PIPE_DIR)/, \
 		  pipe.c redirection.c) \
 		  $(addprefix $(UTILS_DIR)/, \
-		  builtin_fn_1.c builtin_fn_2.c builtin_fn_3.c utils.c utils_split.c \
-		  utils_split1.c)\
+		  builtin_fn_1.c builtin_fn_2.c builtin_fn_3.c builtin_fn_4.c utils.c \
+		  utils_split.c utils_split1.c) \
 		  $(addprefix $(TEST_DIR)/, \
 		  set_val.c) \
 		  $(addprefix $(INIT_DIR)/, \
@@ -36,18 +37,8 @@ SOURCE := main.c \
 		  $(addprefix $(SIGNAL_DIR)/, \
 		  set_sig.c)
 
-# SOURCE := main.c \
-# 		  $(addprefix $(ENV_DIR)/, \
-# 		  env.c) \
-# 		  $(addprefix $(UTILS_DIR)/, \
-# 		  builtin_fn_1.c builtin_fn_2.c builtin_fn_3.c utils.c utils_split.c \
-# 		  utils_split1.c) \
-# 		  $(addprefix $(TEST_DIR)/, \
-# 		  set_val.c) \
-# 		  $(addprefix $(EXE_DIR)/, \
-# 		  execution.c builtin_fn_1.c builtin_fn_2.c) \
-# 		  $(addprefix $(PIPE_DIR)/, \
-# 		  pipe.c redirection.c)
+SOURCE_TEST := $(addprefix $(UTILS_DIR)/, \
+			   builtin_fn_3.c builtin_fn_4.c)
 
 OBJS := $(SOURCE:%.c=$(OBJ_DIR)/%.o)
 
@@ -89,8 +80,12 @@ fclean: clean
 
 re: fclean all
 
-exe: all
+exe: re
 	./$(NAME)
+
+test: $(LIBFT)
+	@$(CC) $(CC_FLAG) $(SOURCE_TEST) $(LIBFT) $(L_READ_LIB) -o $(NAME_TEST)
+	./$(NAME_TEST)
 
 clean_lib:
 	@cd $(LIB_DIR) && ls -A | xargs rm -rf

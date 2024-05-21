@@ -6,7 +6,7 @@
 /*   By: adprzyby <adprzyby@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/27 17:04:21 by adprzyby          #+#    #+#             */
-/*   Updated: 2024/05/18 16:39:54 by adprzyby         ###   ########.fr       */
+/*   Updated: 2024/05/21 13:53:00 by adprzyby         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,11 +64,31 @@ t_token	*tokenization(char **tokens)
 		i++;
 	}
 	tmp = token;
-	// while (tmp && tmp->data)
-	// {
-	// 	printf("Token: %s\n", tmp->data);			//!DEBUG
-	// 	printf("Type: %d\n", tmp->type);
-	// 	tmp = tmp->next;
-	// }
+	while (tmp && tmp->data)
+	{
+		printf("Token: %s\n", tmp->data);			//!DEBUG
+		printf("Type: %d\n", tmp->type);
+		tmp = tmp->next;
+	}
 	return (token);
+}
+
+void	rv_quotes(char *str)
+{
+	int start;
+	int end;
+	int j;
+
+	j = 0;
+	start = 0;
+	end = strlen(str) - 1;
+	if (!str)
+		return ;
+	if (str[start] == '\'' || str[start] == '\"')
+		start++;
+	if (str[end] == '\'' || str[end] == '\"')
+		end--;
+	while (start <= end)
+		str[j++] = str[start++];
+	str[j] = '\0';
 }

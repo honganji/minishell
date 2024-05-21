@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipe.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adprzyby <adprzyby@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ytoshihi <ytoshihi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 13:12:58 by ytoshihi          #+#    #+#             */
-/*   Updated: 2024/05/18 16:44:30 by adprzyby         ###   ########.fr       */
+/*   Updated: 2024/05/21 10:02:05 by ytoshihi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 typedef struct s_cmd t_cmd;
 typedef struct s_data t_data;
 
-int		ft_output_red(char *name, char *content, int is_append);
+int     ft_output_red(char *name, char *content, int is_ow);
 void	ft_pipe(t_data *data);
 void	handle_input_and_execute(t_data *data, t_cmd *cmd);
 void	handle_output(t_data *data, t_cmd *cmd, t_list *lst);
