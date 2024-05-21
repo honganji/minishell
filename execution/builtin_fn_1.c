@@ -6,7 +6,7 @@
 /*   By: ytoshihi <ytoshihi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 14:50:18 by ytoshihi          #+#    #+#             */
-/*   Updated: 2024/05/21 13:11:02 by ytoshihi         ###   ########.fr       */
+/*   Updated: 2024/05/21 15:16:09 by ytoshihi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	ft_execve(char **args, t_data *data)
 
 	if (pipe(fds) == -1)
 	{
-		perror("Error pipe");
+		perror("Error pipe");			//TODO  critical_err here?
 		return ;
 	}
 	tmp = args[0];

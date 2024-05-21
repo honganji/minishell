@@ -6,7 +6,7 @@
 /*   By: adprzyby <adprzyby@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 17:51:37 by adprzyby          #+#    #+#             */
-/*   Updated: 2024/05/18 14:35:20 by adprzyby         ###   ########.fr       */
+/*   Updated: 2024/05/21 13:32:51 by adprzyby         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,13 @@ void	process_commands(char *input, t_data *data)
 {
 	char	**raw_tokens;
 	t_token	*tokens;
+	int		i;
 
+	i = 0;
 	add_history(input);
 	raw_tokens = split_with_quotes(input, ' ');
 	tokens = tokenization(raw_tokens);
-	parse_commands(tokens, data);					
+	parse_commands(tokens, data);
 	free(raw_tokens);
 	free(input);
 }

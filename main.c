@@ -6,7 +6,7 @@
 /*   By: ytoshihi <ytoshihi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 19:42:02 by ytoshihi          #+#    #+#             */
-/*   Updated: 2024/05/21 12:36:44 by ytoshihi         ###   ########.fr       */
+/*   Updated: 2024/05/21 15:15:02 by ytoshihi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,14 +60,12 @@ int	main(int argc, char **argv, char **env)
 	initialize(data, env);
 	while (1)
 	{
-		dup2(data->stdin_fd, STDIN_FILENO);
+		// dup2(data->stdin_fd, STDIN_FILENO);
 		input = readline("minishell: ");
-		check_signal(data, input);
-		// TODO delete
-		printf("exit code: %d\n", data->exit_code);
+		// check_signal(data);
 		// exit when ctrl-d typed
-		if (!input)
-			exit(EXIT_SUCCESS);
+		// if (!input)
+		// 	exit(EXIT_SUCCESS);
 		if (input)
 		{
 			// parsing
