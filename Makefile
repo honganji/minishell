@@ -89,7 +89,7 @@ fclean: clean
 
 re: fclean all
 
-exe: all
+exe: re
 	./$(NAME)
 
 clean_lib:
