@@ -6,7 +6,7 @@
 /*   By: ytoshihi <ytoshihi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/02 15:08:30 by ytoshihi          #+#    #+#             */
-/*   Updated: 2024/05/21 10:28:39 by ytoshihi         ###   ########.fr       */
+/*   Updated: 2024/05/21 11:13:06 by ytoshihi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,6 @@ void	ft_pipe(t_data *data)
 			printf("%s", str);
 		}
 		lst = lst->next;
-		if (lst)
-			dup2(data->stdin_fd, STDIN_FILENO);
 	}
 	free(str);
 	set_sig(0);

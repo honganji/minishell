@@ -6,7 +6,7 @@
 /*   By: ytoshihi <ytoshihi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 14:50:18 by ytoshihi          #+#    #+#             */
-/*   Updated: 2024/05/20 18:01:57 by ytoshihi         ###   ########.fr       */
+/*   Updated: 2024/05/21 11:13:09 by ytoshihi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,6 @@ void	ft_execve(char **args, t_data *data)
 		close(fds[0]);
 		dup2(fds[1], STDOUT_FILENO);
 		close(fds[1]);
-		// TODO should be able to read cli if there is no input
-		// dup2(data->stdin_fd, STDIN_FILENO);
 		if (execve(args[0], args, NULL) == -1)
 			exit(EXIT_FAILURE);
 	}
