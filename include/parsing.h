@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adprzyby <adprzyby@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yuji <yuji@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 16:33:31 by ytoshihi          #+#    #+#             */
-/*   Updated: 2024/05/20 13:17:49 by adprzyby         ###   ########.fr       */
+/*   Updated: 2024/05/20 20:19:44 by yuji             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ typedef struct s_token	t_token;
 typedef struct s_cmd	t_cmd;
 typedef struct s_data	t_data;
 typedef enum e_com		t_com;
+typedef struct s_redir	t_redir;
 
 void					parse_commands(t_token *tokens, t_data *data);
 void					add_token_to_command(t_cmd *command, t_token *token);
@@ -29,6 +30,6 @@ void					print_commands(t_list *lst);	//TODO remove
 t_token					*tokenization(char **tokens);
 int						what_token(char *str);
 int						is_redir(char *str, int i);
-void					handle_redirections(t_token *tokens, t_data *data);
+t_redir					*handle_redirections(t_token *tokens, t_data *data);
 
 #endif

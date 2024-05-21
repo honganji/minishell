@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adprzyby <adprzyby@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yuji <yuji@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 13:46:58 by adprzyby          #+#    #+#             */
-/*   Updated: 2024/05/20 13:14:46 by adprzyby         ###   ########.fr       */
+/*   Updated: 2024/05/20 19:55:31 by yuji             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,7 @@
 t_token	*token_init(void)
 {
 	t_token	*token;
-	int	i;
 
-	i = 0;
 	token = malloc(sizeof(t_token));
 	if (!token)
 		return (NULL);

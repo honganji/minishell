@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ytoshihi <ytoshihi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yuji <yuji@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 19:42:02 by ytoshihi          #+#    #+#             */
-/*   Updated: 2024/05/20 17:47:06 by ytoshihi         ###   ########.fr       */
+/*   Updated: 2024/05/20 20:14:36 by yuji             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,21 +31,21 @@
 
 // TODO delete
 // for displaying the input
-// static void	check_input(t_data *data)
-// {
-//     t_list  *tmp;
+static void	check_input(t_data *data)
+{
+    t_list  *tmp;
 
-// 	tmp = data->cmd_lst;
-// 	while (tmp)
-// 	{
-// 		printf("command:\n");
-// 		printf("cmd: %d\n", ((t_cmd *)tmp->content)->com);
-// 		printf("args: %s\n", ((t_cmd *)tmp->content)->args[0]);
-// 		printf("input: %s\n", ((t_cmd *)tmp->content)->input.file_name);
-// 		printf("output: %s\n\n", ((t_cmd *)tmp->content)->output.file_name);
-// 		tmp = tmp->next;
-//     }
-// }
+	tmp = data->cmd_lst;
+	while (tmp)
+	{
+		printf("command:\n");
+		printf("cmd: %d\n", ((t_cmd *)tmp->content)->com);
+		printf("args: %s\n", ((t_cmd *)tmp->content)->args[0]);
+		printf("input: %s\n", ((t_cmd *)tmp->content)->input.file_name);
+		printf("output: %s\n\n", ((t_cmd *)tmp->content)->output.file_name);
+		tmp = tmp->next;
+    }
+}
 
 int	main(int argc, char **argv, char **env)
 {
@@ -74,7 +74,7 @@ int	main(int argc, char **argv, char **env)
 			process_commands(input, data);
 
 			// TODO delete
-			// check_input(data);
+			check_input(data);
 			// execution
 			ft_pipe(data);
 		}

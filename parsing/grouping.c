@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   grouping.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ytoshihi <ytoshihi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yuji <yuji@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 16:58:33 by adprzyby          #+#    #+#             */
-/*   Updated: 2024/05/20 17:13:13 by ytoshihi         ###   ########.fr       */
+/*   Updated: 2024/05/20 20:20:52 by yuji             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	parse_commands(t_token *tokens, t_data *data)
 		if (current_token->type != PIPE)
 		{
 			if (current_token->type == REDIR)
-				handle_redirections(current_token, data);
+				current_command->output = *(handle_redirections(current_token, data));
 			else
 				add_token_to_command(current_command, current_token);
 		}
