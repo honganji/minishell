@@ -6,7 +6,7 @@
 /*   By: ytoshihi <ytoshihi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 16:33:31 by ytoshihi          #+#    #+#             */
-/*   Updated: 2024/05/21 09:39:38 by ytoshihi         ###   ########.fr       */
+/*   Updated: 2024/05/21 09:57:23 by ytoshihi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,6 @@ void					print_commands(t_list *lst);	//TODO remove
 t_token					*tokenization(char **tokens);
 int						what_token(char *str);
 int						is_redir(char *str, int i);
-void                    handle_redirections(t_token *tokens, t_data *data,t_cmd *current_command);
+void                    handle_redirections(t_token **tokens, t_data *data,t_cmd *current_command);
 
 #endif
