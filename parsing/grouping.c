@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   grouping.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adprzyby <adprzyby@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ytoshihi <ytoshihi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 16:58:33 by adprzyby          #+#    #+#             */
-/*   Updated: 2024/05/20 15:32:46 by adprzyby         ###   ########.fr       */
+/*   Updated: 2024/05/21 15:17:30 by ytoshihi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,30 +16,35 @@ void	parse_commands(t_token *tokens, t_data *data)
 {
 	t_cmd	*current_command;
 	t_token	*current_token;
+	int		is_first;
 
 	current_command = cmd_init();
 	current_token = tokens;
 	data->cmd_lst = NULL;
+	is_first = 1;
 	while (current_token != NULL)
 	{
+		if (is_first && current_token != NULL && current_token->data != NULL)
+        {
+			is_first = 0;
+			current_command->com = detect_cmd_type(current_token);
+		}
 		if (current_token->type != PIPE)
 		{
 			if (current_token->type == REDIR)
-				handle_redirections(current_token, data);
+				handle_redirections(&current_token, data, current_command);
 			else
-				add_token_to_command(current_command, current_token);
-			if (current_token->data != NULL)
-                current_command->com = detect_cmd_type(current_token);
+				add_token_to_command(data, current_command, current_token);
 		}
 		else
 		{
+			is_first = 1;
 			add_command_to_list(&(data->cmd_lst), current_command);
 			current_command = cmd_init();
 		}
 		current_token = current_token->next;
 	}
 	add_command_to_list(&(data->cmd_lst), current_command);
-	print_commands(data->cmd_lst);
 }
 
 t_com	detect_cmd_type(t_token *token)
@@ -47,7 +52,7 @@ t_com	detect_cmd_type(t_token *token)
 	if (!token || !token->data)
 		return (ETC);
 	if (ft_strncmp(token->data, "echo", 5) == 0)
-		return (ECHO);
+		return (ECH);
 	else if (ft_strncmp(token->data, "cd", 3) == 0)
 		return (CD);
 	else if (ft_strncmp(token->data, "pwd", 4) == 0)
@@ -64,7 +69,7 @@ t_com	detect_cmd_type(t_token *token)
 		return (ETC);
 }
 
-void	add_token_to_command(t_cmd *command, t_token *token)
+void	add_token_to_command(t_data *data, t_cmd *command, t_token *token)
 {
 	int		i;
 	int		j;
@@ -72,6 +77,12 @@ void	add_token_to_command(t_cmd *command, t_token *token)
 
 	i = 0;
 	j = 0;
+	if (token->data)
+	{
+		token->data = replace_env(data, token->data);
+		if (!token->data)
+			return ;
+	}
 	if (command->args == NULL)
 	{
 		command->args = malloc(sizeof(char *) * 2);

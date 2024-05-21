@@ -6,7 +6,7 @@
 /*   By: ytoshihi <ytoshihi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/02 15:08:30 by ytoshihi          #+#    #+#             */
-/*   Updated: 2024/05/19 20:39:17 by ytoshihi         ###   ########.fr       */
+/*   Updated: 2024/05/21 11:50:40 by ytoshihi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,8 @@ void	ft_pipe(t_data *data)
 			if (input.is_single)
 				ft_input_data(data, input.file_name, 1);
 			else
-				ft_input_data(data, input.file_name, 0);
+				input_heredoc(data, input.file_name);
+				// ft_input_data(data, input.file_name, 0);
 		}
 		ft_exe_command(data, *(t_cmd *)lst->content);
 		if (output.file_name)
@@ -54,8 +55,6 @@ void	ft_pipe(t_data *data)
 			printf("%s", str);
 		}
 		lst = lst->next;
-		if (lst)
-			dup2(data->stdin_fd, STDIN_FILENO);
 	}
 	free(str);
 	set_sig(0);

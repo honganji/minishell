@@ -6,7 +6,7 @@
 /*   By: ytoshihi <ytoshihi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 17:56:48 by adprzyby          #+#    #+#             */
-/*   Updated: 2024/05/19 22:06:46 by ytoshihi         ###   ########.fr       */
+/*   Updated: 2024/05/20 17:46:59 by ytoshihi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,9 @@ void	set_sig(int sig)
 }
 
 // change exit code depending on the last exit code
-void	check_signal(t_data *data)
+void	check_signal(t_data *data, char *input)
 {
-	if (g_sig)
+	if (g_sig && !*input)
 		data->exit_code = 1;
-	// TODO delete
-	printf("exit code: %d\n", data->exit_code);
 	g_sig = 0;
 }
