@@ -6,7 +6,7 @@
 /*   By: ytoshihi <ytoshihi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 14:50:18 by ytoshihi          #+#    #+#             */
-/*   Updated: 2024/05/21 15:16:09 by ytoshihi         ###   ########.fr       */
+/*   Updated: 2024/05/21 17:21:53 by ytoshihi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,47 +25,30 @@
  */
 void	ft_execve(char **args, t_data *data)
 {
-	pid_t	pid;
-	int		fds[2];
-	char	*tmp;
-	char	*str;
-	int		status;
+	t_exe	params;
 
-	if (pipe(fds) == -1)
-	{
-		perror("Error pipe");			//TODO  critical_err here?
-		return ;
-	}
-	tmp = args[0];
+	params.status = 0;
+	if (pipe(params.fds) == -1)
+		critical_err(strerror(errno));
+	params.tmp = args[0];
 	args[0] = ft_strjoin("/", args[0]);
 	args[0] = ft_check_exist(data, args[0]);
-	if (!*args)
+	if (!*(args[0]))
 	{
-		syntax_err(NULL, "command not found: ", args[0], 127);
+		syntax_err(data, "command not found", params.tmp, 127);
 		ft_input_data(data, "", 0);
 		return ;
 	}
-	pid = fork();
-	if (pid == 0)
-	{
-		close(fds[0]);
-		dup2(fds[1], STDOUT_FILENO);
-		close(fds[1]);
-		if (execve(args[0], args, NULL) == -1)
-			exit(EXIT_FAILURE);
-	}
+	params.pid = fork();
+	if (params.pid == 0)
+		exe_builtin(params.fds, args);
 	else
 	{
-		close(fds[1]);
-		waitpid(pid, &status, 0);
-		if (WIFEXITED(status))
-			data->exit_code = WEXITSTATUS(status);
-		else if (WIFSIGNALED(status))
-			data->exit_code = 128 + WTERMSIG(status);
-		args[0] = tmp;
-		str = ft_read_file(fds[0]);
-		close(fds[0]);
-		ft_input_data(data, str, 0);
+		store_ec(data, params.status, params.fds, params.pid);
+		args[0] = params.tmp;
+		params.str = ft_read_file(params.fds[0]);
+		close(params.fds[0]);
+		ft_input_data(data, params.str, 0);
 	}
 }
 
@@ -183,6 +166,5 @@ void	ft_env(t_list *env_lst, t_data *data)
 		tmp = tmp->next;
 	}
 	ft_input_data(data, str, 0);
-	free(str);
-	data->exit_code = 0;
+	return (free(str), set_exit_code(data, 0));
 }

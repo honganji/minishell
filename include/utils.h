@@ -6,7 +6,7 @@
 /*   By: ytoshihi <ytoshihi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 11:57:56 by ytoshihi          #+#    #+#             */
-/*   Updated: 2024/05/21 15:56:10 by ytoshihi         ###   ########.fr       */
+/*   Updated: 2024/05/21 16:46:54 by ytoshihi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,5 +40,7 @@ void	register_env(t_data* data, char *key, char *value);
 void    input_heredoc(t_data *data, char *eof);
 char	*replace_env(t_data *data, char *str);
 void	remove_quote(char **str, int *is_skip);
+void	store_ec(t_data *data, int status, int fds[2], pid_t pid);
+void	exe_builtin(int fds[2], char **args);
 
 #endif

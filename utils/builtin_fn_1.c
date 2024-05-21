@@ -6,7 +6,7 @@
 /*   By: ytoshihi <ytoshihi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/04 09:24:36 by ytoshihi          #+#    #+#             */
-/*   Updated: 2024/05/21 15:41:24 by ytoshihi         ###   ########.fr       */
+/*   Updated: 2024/05/21 16:25:50 by ytoshihi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,16 +121,6 @@ char	*ft_rep_env(t_data *data, char *str)
 		arg[i] = *str;
 		if (*str++ == '$')
 		{
-			// if (*str++ == '\'')
-			// {
-			// 	//TODO handle single quotes
-			// 	rv_quotes(str);
-			// }
-			// else if (*str++ == '"')
-			// {
-			// 	//TODO handle double quotes
-			// 	rv_quotes(str);
-			// }
 			tmp = ft_find_ele(data, str);
 			if (tmp)
 			{

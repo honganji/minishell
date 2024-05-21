@@ -6,7 +6,7 @@
 /*   By: ytoshihi <ytoshihi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 16:33:31 by ytoshihi          #+#    #+#             */
-/*   Updated: 2024/05/21 15:16:53 by ytoshihi         ###   ########.fr       */
+/*   Updated: 2024/05/21 16:22:25 by ytoshihi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ void					process_commands(char *input, t_data *data);
 t_com 					detect_cmd_type(t_token *token);
 void					print_commands(t_list *lst);	//TODO remove
 t_token					*tokenization(char **tokens);
-void					rv_quotes(char *str);
 int						what_token(char *str);
 int						is_redir(char *str, int i);
 void                    handle_redirections(t_token **tokens, t_data *data,t_cmd *current_command);
