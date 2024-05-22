@@ -1,26 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   process.c                                          :+:      :+:    :+:   */
+/*   ft_pwd.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ytoshihi <ytoshihi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/13 17:51:37 by adprzyby          #+#    #+#             */
-/*   Updated: 2024/05/22 17:22:51 by ytoshihi         ###   ########.fr       */
+/*   Created: 2024/05/22 14:21:39 by ytoshihi          #+#    #+#             */
+/*   Updated: 2024/05/22 14:22:33 by ytoshihi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
+#include "../include/execution.h"
 
-void	process_commands(char *input, t_data *data)
+/**
+ * @brief get the current definite directory path
+ * 
+ * @return void
+ */
+void	ft_pwd(t_data *data)
 {
-	char	**raw_tokens;
-	t_token	*tokens;
+	char	buffer[256];
+	char	*cur_dir;
 
-	add_history(input);
-	raw_tokens = split_with_quotes(input, ' ');
-	tokens = tokenization(raw_tokens);
-	parse_commands(tokens, data);
-	free(raw_tokens);
-	free(input);
+	cur_dir = getcwd(buffer, sizeof(buffer));
+	if (!cur_dir)
+	{
+		data->exit_code = 1;
+		syntax_err(NULL, "pwd: error retrieving current directory\n", NULL, 1);
+	}
+	ft_input_data(data, ft_strjoin(cur_dir, "\n"), 0);
+	data->exit_code = 0;
 }

@@ -6,7 +6,7 @@
 /*   By: ytoshihi <ytoshihi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 13:11:29 by ytoshihi          #+#    #+#             */
-/*   Updated: 2024/05/09 14:28:32 by ytoshihi         ###   ########.fr       */
+/*   Updated: 2024/05/22 15:56:51 by ytoshihi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 # include "minishell.h"
 # include "utils.h"
 
-typedef struct s_data t_data;
+typedef struct s_data	t_data;
 
 void	ft_store_env(t_data *data, char **environ);
 

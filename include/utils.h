@@ -6,7 +6,7 @@
 /*   By: ytoshihi <ytoshihi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 11:57:56 by ytoshihi          #+#    #+#             */
-/*   Updated: 2024/05/21 16:46:54 by ytoshihi         ###   ########.fr       */
+/*   Updated: 2024/05/22 16:23:26 by ytoshihi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include "../42-c-library/library.h"
 # include "minishell.h"
 
-typedef struct s_data t_data;
+typedef struct s_data	t_data;
 
 void	ft_del_node(t_data *data, t_list *lst, t_list *pre_lst);
 t_list	*ft_find_ele(t_data *data, char *str);
@@ -36,8 +36,8 @@ void	check_chr(char const *s, int *end, char c);
 void	set_sig(int sig);
 void	check_signal(t_data *data);
 char	*ft_join_with_space(char **args);
-void	register_env(t_data* data, char *key, char *value);
-void    input_heredoc(t_data *data, char *eof);
+void	register_env(t_data *data, char *key, char *value);
+void	input_heredoc(t_data *data, char *eof);
 char	*replace_env(t_data *data, char *str);
 void	remove_quote(char **str, int *is_skip);
 void	store_ec(t_data *data, int status, int fds[2], pid_t pid);

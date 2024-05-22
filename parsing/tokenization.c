@@ -6,7 +6,7 @@
 /*   By: ytoshihi <ytoshihi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/27 17:04:21 by adprzyby          #+#    #+#             */
-/*   Updated: 2024/05/21 16:31:37 by ytoshihi         ###   ########.fr       */
+/*   Updated: 2024/05/22 17:22:41 by ytoshihi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	what_token(char *str)
 	return (0);
 }
 
-int is_redir(char *str, int i)
+int	is_redir(char *str, int i)
 {
 	if (str[i] == '>' && str[i + 1] != '\0' && str[i + 1] == '>')
 		return (REDIR);

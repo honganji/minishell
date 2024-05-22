@@ -6,7 +6,7 @@
 /*   By: ytoshihi <ytoshihi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 11:22:38 by ytoshihi          #+#    #+#             */
-/*   Updated: 2024/05/21 16:46:47 by ytoshihi         ###   ########.fr       */
+/*   Updated: 2024/05/22 16:20:04 by ytoshihi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
  * @return void
  * 
  */
-void    input_heredoc(t_data *data, char *eof)
+void	input_heredoc(t_data *data, char *eof)
 {
 	char	*str;
 	char	*tmp;
@@ -29,7 +29,7 @@ void    input_heredoc(t_data *data, char *eof)
 	while (!ft_strnstr(str, eof, ft_strlen(str)))
 	{
 		printf("> ");
-        rl_redisplay();
+		rl_redisplay();
 		tmp = readline("");
 		str = ft_free_strjoin(str, tmp);
 		str = ft_free_strjoin(str, "\n");

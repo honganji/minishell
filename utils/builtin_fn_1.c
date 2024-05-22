@@ -6,7 +6,7 @@
 /*   By: ytoshihi <ytoshihi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/04 09:24:36 by ytoshihi          #+#    #+#             */
-/*   Updated: 2024/05/21 16:25:50 by ytoshihi         ###   ########.fr       */
+/*   Updated: 2024/05/22 16:22:14 by ytoshihi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static int	ft_count_arg(t_data *data, char *str)
 	{
 		if (*str++ == '$')
 		{
-			tmp = ft_find_ele(data, str);		
+			tmp = ft_find_ele(data, str);
 			if (tmp)
 			{
 				count--;
@@ -126,9 +126,8 @@ char	*ft_rep_env(t_data *data, char *str)
 			{
 				ft_strlcpy(&arg[i], (*(t_env *)tmp->content).value,
 					ft_strlen((*(t_env *)tmp->content).value) + 1);
-				i += ft_strlen((*(t_env *)tmp->content).value);
+				i += (ft_strlen((*(t_env *)tmp->content).value) - 1);
 				str += ft_strlen((*(t_env *)tmp->content).key);
-				i--;
 			}
 		}
 		i++;

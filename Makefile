@@ -6,7 +6,6 @@ EXE_DIR := execution
 UTILS_DIR := utils
 PIPE_DIR := pipe
 ENV_DIR := env
-TEST_DIR := test
 INIT_DIR := init
 ERRORS_DIR := errors
 PARSING_DIR := parsing
@@ -20,18 +19,17 @@ SOURCE := main.c \
 		  $(addprefix $(ENV_DIR)/, \
 		  env.c) \
 		  $(addprefix $(EXE_DIR)/, \
-		  execution.c builtin_fn_1.c builtin_fn_2.c ft_chdir.c) \
+		  execution.c ft_export.c ft_chdir.c ft_echo.c \
+		  ft_env.c ft_pwd.c ft_execve.c ft_unset.c) \
 		  $(addprefix $(PIPE_DIR)/, \
 		  pipe.c redirection.c) \
 		  $(addprefix $(UTILS_DIR)/, \
 		  builtin_fn_1.c builtin_fn_2.c builtin_fn_3.c builtin_fn_4.c utils.c \
 		  utils_split.c utils_split1.c) \
-		  $(addprefix $(TEST_DIR)/, \
-		  set_val.c) \
 		  $(addprefix $(INIT_DIR)/, \
 		  init.c) \
 		  $(addprefix $(PARSING_DIR)/, \
-		  grouping.c process.c redirections.c tokenization.c) \
+		  grouping.c process.c redirections.c tokenization.c add_command.c) \
 		  $(addprefix $(ERRORS_DIR)/, \
 		  critical_err.c syntax_err.c) \
 		  $(addprefix $(SIGNAL_DIR)/, \

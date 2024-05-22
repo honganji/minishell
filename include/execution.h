@@ -6,7 +6,7 @@
 /*   By: ytoshihi <ytoshihi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/02 15:09:17 by ytoshihi          #+#    #+#             */
-/*   Updated: 2024/05/21 17:18:52 by ytoshihi         ###   ########.fr       */
+/*   Updated: 2024/05/22 15:58:57 by ytoshihi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,22 +21,22 @@
 # include "minishell.h"
 # include "utils.h"
 
-typedef struct s_data t_data;
-typedef enum e_com t_com;
-typedef struct s_cmd t_cmd;
+typedef struct s_data	t_data;
+typedef enum e_com		t_com;
+typedef struct s_cmd	t_cmd;
 
 typedef struct s_exe
 {
-    pid_t	pid;
+	pid_t	pid;
 	int		fds[2];
 	char	*tmp;
 	char	*str;
 	int		status;
-}               t_exe;
+}			t_exe;
 
 typedef struct s_ft_env
 {
-    t_list	*tmp;
+	t_list	*tmp;
 	char	*str;
 }t_ft_env;
 

@@ -6,7 +6,7 @@
 /*   By: ytoshihi <ytoshihi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 16:58:33 by adprzyby          #+#    #+#             */
-/*   Updated: 2024/05/21 16:03:21 by ytoshihi         ###   ########.fr       */
+/*   Updated: 2024/05/22 17:17:54 by ytoshihi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,27 +23,7 @@ void	parse_commands(t_token *tokens, t_data *data)
 	data->cmd_lst = NULL;
 	is_first = 1;
 	while (current_token != NULL)
-	{
-		if (is_first && current_token != NULL && current_token->data != NULL)
-        {
-			is_first = 0;
-			current_command->com = detect_cmd_type(current_token);
-		}
-		if (current_token->type != PIPE)
-		{
-			if (current_token->type == REDIR)
-				handle_redirections(&current_token, data, current_command);
-			else
-				add_token_to_command(data, current_command, current_token);
-		}
-		else
-		{
-			is_first = 1;
-			add_command_to_list(&(data->cmd_lst), current_command);
-			current_command = cmd_init();
-		}
-		current_token = current_token->next;
-	}
+		store_command(data, &current_command, &current_token, &is_first);
 	add_command_to_list(&(data->cmd_lst), current_command);
 }
 
@@ -71,13 +51,8 @@ t_com	detect_cmd_type(t_token *token)
 
 void	add_token_to_command(t_data *data, t_cmd *command, t_token *token)
 {
-	int		i;
-	int		j;
-	char	**new_args;
 	int		is_skip;
 
-	i = 0;
-	j = 0;
 	is_skip = 0;
 	remove_quote(&token->data, &is_skip);
 	if (token->data && !is_skip)
@@ -95,22 +70,7 @@ void	add_token_to_command(t_data *data, t_cmd *command, t_token *token)
 		command->args[1] = NULL;
 	}
 	else
-	{
-		while (command->args[i] != NULL)
-			i++;
-		new_args = malloc(sizeof(char *) * (i + 2));
-		if (new_args == NULL)
-			return ;
-		while (j < i)
-		{
-			new_args[j] = command->args[j];
-			j++;
-		}
-		new_args[i] = token->data;
-		new_args[i + 1] = NULL;
-		free(command->args);
-		command->args = new_args;
-	}
+		store_token(command, token);
 }
 
 void	add_command_to_list(t_list **head, t_cmd *new_command)

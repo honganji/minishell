@@ -6,7 +6,7 @@
 /*   By: ytoshihi <ytoshihi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/18 15:49:45 by adprzyby          #+#    #+#             */
-/*   Updated: 2024/05/20 15:52:33 by ytoshihi         ###   ########.fr       */
+/*   Updated: 2024/05/22 16:19:43 by ytoshihi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ char	*ft_join_with_space(char **args)
 	return (str);
 }
 
-void	register_env(t_data* data, char *key, char *value)
+void	register_env(t_data *data, char *key, char *value)
 {
 	t_env	*env_json;
 	t_list	*targ_lst;
