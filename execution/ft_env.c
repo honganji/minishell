@@ -6,11 +6,37 @@
 /*   By: ytoshihi <ytoshihi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/22 14:22:18 by ytoshihi          #+#    #+#             */
-/*   Updated: 2024/05/22 14:22:30 by ytoshihi         ###   ########.fr       */
+/*   Updated: 2024/05/22 18:27:29 by ytoshihi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/execution.h"
+
+static void	join_str(char **str, t_list *tmp)
+{
+	(*str) = ft_free_strjoin((*str), (*(t_env *)(tmp->content)).key);
+	if (!(*str))
+		critical_err(strerror(errno));
+	(*str) = ft_free_strjoin((*str), "=");
+	if (!(*str))
+		critical_err(strerror(errno));
+	(*str) = ft_free_strjoin((*str), (*(t_env *)(tmp->content)).value);
+	if (!(*str))
+		critical_err(strerror(errno));
+	(*str) = ft_free_strjoin((*str), "\n");
+	if (!(*str))
+		critical_err(strerror(errno));
+}
+
+static void	env_err(t_data *data, char *arg)
+{
+	set_exit_code(data, 127);
+	ft_putstr_fd("env: ", 2);
+	ft_putstr_fd(arg, 2);
+	ft_putstr_fd(": ", 2);
+	ft_putstr_fd("No such file or directory", 2);
+	ft_putstr_fd("\n", 2);
+}
 
 /**
  * @brief get all the env variable and send them to input parameter
@@ -19,7 +45,7 @@
  * @param data data
  * @return void
  */
-void	ft_env(t_list *env_lst, t_data *data)
+void	ft_env(t_list *env_lst, t_data *data, char *arg)
 {
 	t_list	*tmp;
 	char	*str;
@@ -28,20 +54,15 @@ void	ft_env(t_list *env_lst, t_data *data)
 	str = ft_strdup("");
 	if (!str)
 		critical_err(strerror(errno));
+	if (arg)
+	{
+		env_err(data, arg);
+		ft_input_data(data, "", 0);
+		return ;
+	}
 	while (tmp)
 	{
-		str = ft_free_strjoin(str, (*(t_env *)(tmp->content)).key);
-		if (!str)
-			critical_err(strerror(errno));
-		str = ft_free_strjoin(str, "=");
-		if (!str)
-			critical_err(strerror(errno));
-		str = ft_free_strjoin(str, (*(t_env *)(tmp->content)).value);
-		if (!str)
-			critical_err(strerror(errno));
-		str = ft_free_strjoin(str, "\n");
-		if (!str)
-			critical_err(strerror(errno));
+		join_str(&str, tmp);
 		tmp = tmp->next;
 	}
 	ft_input_data(data, str, 0);

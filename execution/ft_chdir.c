@@ -6,7 +6,7 @@
 /*   By: ytoshihi <ytoshihi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/22 13:24:33 by ytoshihi          #+#    #+#             */
-/*   Updated: 2024/05/22 17:16:45 by ytoshihi         ###   ########.fr       */
+/*   Updated: 2024/05/22 18:15:46 by ytoshihi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ static void	change_dir(t_data *data, char *path, int is_oldpwd)
 		reg_cur_dir(data);
 	if (chdir(path) == -1)
 	{
-		path = ft_strjoin(path, ": No such file or directory: ");
+		path = ft_strjoin(path, ": No such file or directory");
 		syntax_err(data, path, "cd", 1);
 		ft_input_data(data, "", 0);
 		return (free(path));

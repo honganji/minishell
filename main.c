@@ -6,7 +6,7 @@
 /*   By: ytoshihi <ytoshihi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 19:42:02 by ytoshihi          #+#    #+#             */
-/*   Updated: 2024/05/22 17:03:53 by ytoshihi         ###   ########.fr       */
+/*   Updated: 2024/05/22 18:29:13 by ytoshihi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,8 @@ int	main(int argc, char **argv, char **env)
 		check_signal(data);
 		if (!input)
 			exit(EXIT_SUCCESS);
+		if (!*input)
+			continue;
 		if (input)
 		{
 			process_commands(input, data);
