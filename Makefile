@@ -20,7 +20,7 @@ SOURCE := main.c \
 		  $(addprefix $(ENV_DIR)/, \
 		  env.c) \
 		  $(addprefix $(EXE_DIR)/, \
-		  execution.c builtin_fn_1.c builtin_fn_2.c) \
+		  execution.c builtin_fn_1.c builtin_fn_2.c ft_chdir.c) \
 		  $(addprefix $(PIPE_DIR)/, \
 		  pipe.c redirection.c) \
 		  $(addprefix $(UTILS_DIR)/, \

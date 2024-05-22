@@ -6,7 +6,7 @@
 /*   By: ytoshihi <ytoshihi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 14:50:18 by ytoshihi          #+#    #+#             */
-/*   Updated: 2024/05/22 11:04:13 by ytoshihi         ###   ########.fr       */
+/*   Updated: 2024/05/22 13:25:40 by ytoshihi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,63 +50,6 @@ void	ft_execve(char **args, t_data *data)
 		close(params.fds[0]);
 		ft_input_data(data, params.str, 0);
 	}
-}
-
-/**
- * @brief change the current directory
- * After change the current directory, set empty string into STDIN
- * @param path path for the new path. It can be definite or relative path
- * @return void
- */
-void	ft_chdir(char **args, t_data *data)
-{
-	char	buffer[256];
-	char	*cur_dir;
-	char	*path;
-	t_list	*tmp;
-
-	tmp = NULL;
-	if (!args[1])
-	{
-		tmp = ft_find_ele(data, "HOME");
-		if (!tmp)
-		{
-			syntax_err(data, "HOME not set", "cd", 1);
-			ft_input_data(data, "", 0);
-			return ;
-		}
-	}
-	else if (ft_strnstr(args[1], "-", 1))
-	{
-		tmp = ft_find_ele(data, "OLDPWD");
-		if (!tmp)
-		{
-			syntax_err(data, "OLDPWD not set", "cd", 1);
-			ft_input_data(data, "", 0);
-			return ;
-		}
-	}
-	if (tmp)
-		path = ((t_env *)tmp->content)->value;
-	else
-		path = args[1];
-	if (chdir(path) == -1)
-	{
-		path = ft_strjoin(path, ": No such file or directory: ");
-		syntax_err(data, path, "cd", 1);
-		ft_input_data(data, "", 0);
-		return (free(path));
-	}
-	cur_dir = getcwd(buffer, sizeof(buffer));
-	if (!cur_dir)
-	{
-		syntax_err(data, "pwd: error retrieving current directory\n", NULL, 1);
-		ft_input_data(data, "", 0);
-		return ;
-	}
-	register_env(data, "OLDPWD", cur_dir);
-	ft_input_data(data, "", 0);
-	data->exit_code = 0;
 }
 
 /**
