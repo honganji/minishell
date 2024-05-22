@@ -6,7 +6,7 @@
 /*   By: ytoshihi <ytoshihi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/02 15:08:30 by ytoshihi          #+#    #+#             */
-/*   Updated: 2024/05/21 11:50:40 by ytoshihi         ###   ########.fr       */
+/*   Updated: 2024/05/21 20:25:17 by ytoshihi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,5 +57,5 @@ void	ft_pipe(t_data *data)
 		lst = lst->next;
 	}
 	free(str);
-	set_sig(0);
+	// set_sig(0);
 }
