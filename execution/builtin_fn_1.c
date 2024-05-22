@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_fn_1.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ytoshihi <ytoshihi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yuji <yuji@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 14:50:18 by ytoshihi          #+#    #+#             */
-/*   Updated: 2024/05/21 15:16:09 by ytoshihi         ###   ########.fr       */
+/*   Updated: 2024/05/22 08:56:45 by yuji             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,23 +80,48 @@ void	ft_chdir(char **args, t_data *data)
 	char	buffer[256];
 	char	*cur_dir;
 	char	*path;
+	t_list	*tmp;
 
+	tmp = NULL;
 	if (!args[1])
-		path = ((t_env *)ft_find_ele(data, "HOME")->content)->value;
+	{
+		tmp = ft_find_ele(data, "HOME");
+		if (!tmp)
+		{
+			syntax_err(data, "HOME not set", "cd", 1);
+			ft_input_data(data, "", 0);
+			return ;
+		}
+	}
+	else if (ft_strnstr(args[1], "-", 1))
+	{
+		printf("come here!\n");
+		tmp = ft_find_ele(data, "OLDPWD");
+		if (!tmp)
+		{
+			syntax_err(data, "OLDPWD not set", "cd", 1);
+			ft_input_data(data, "", 0);
+			return ;
+		}
+	}
+	if (tmp)
+		path = ((t_env *)tmp->content)->value;
 	else
 		path = args[1];
 	cur_dir = getcwd(buffer, sizeof(buffer));
 	if (!cur_dir)
 	{
-		data->exit_code = 1;
-		syntax_err(NULL, "pwd: error retrieving current directory\n", NULL, 1);
+		syntax_err(data, "pwd: error retrieving current directory\n", NULL, 1);
+		ft_input_data(data, "", 0);
+		return ;
 	}
 	register_env(data, "OLDPWD", cur_dir);
 	if (chdir(path) == -1)
 	{
-		syntax_err(NULL, "cd: no such file or directory: ", path, 1);
-		data->exit_code = 1;
-		exit(EXIT_FAILURE);
+		// TODO fix the order
+		syntax_err(data, "cd: no such file or directory: ",  path, 1);
+		ft_input_data(data, "", 0);
+		return ;
 	}
 	ft_input_data(data, "", 0);
 	data->exit_code = 0;

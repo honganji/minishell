@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipe.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ytoshihi <ytoshihi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yuji <yuji@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/02 15:08:30 by ytoshihi          #+#    #+#             */
-/*   Updated: 2024/05/21 11:50:40 by ytoshihi         ###   ########.fr       */
+/*   Updated: 2024/05/22 08:43:13 by yuji             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,8 @@ void	ft_pipe(t_data *data)
 			str = ft_read_file(STDIN_FILENO);
 			printf("%s", str);
 		}
+		if (data->exit_code)
+			return ;
 		lst = lst->next;
 	}
 	free(str);
