@@ -6,7 +6,7 @@
 /*   By: ytoshihi <ytoshihi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/22 14:25:05 by ytoshihi          #+#    #+#             */
-/*   Updated: 2024/05/22 14:25:24 by ytoshihi         ###   ########.fr       */
+/*   Updated: 2024/05/23 11:51:08 by ytoshihi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,11 @@ void	ft_unset(t_data *data)
 	pre_lst = NULL;
 	tmp_lst = data->env_lst;
 	str = ((t_cmd *)data->cmd_lst->content)->args[1];
+	if (!str)
+	{
+		ft_input_data(data, "", 0);
+		return ;
+	}
 	while (tmp_lst)
 	{
 		key = (*(t_env *)((tmp_lst)->content)).key;

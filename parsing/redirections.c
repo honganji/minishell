@@ -6,15 +6,15 @@
 /*   By: ytoshihi <ytoshihi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 16:49:24 by adprzyby          #+#    #+#             */
-/*   Updated: 2024/05/22 17:22:14 by ytoshihi         ###   ########.fr       */
+/*   Updated: 2024/05/22 18:37:03 by ytoshihi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-static void	detect_input(int is_input, t_token *tokens, t_redir *redir)
+static void	detect_input(int *is_input, t_token *tokens, t_redir *redir)
 {
-	is_input = 0;
+	*is_input = 0;
 	if (ft_strncmp(tokens->data, ">>", 2) == 0)
 		redir->is_single = 0;
 	else
@@ -33,7 +33,7 @@ void	handle_redirections(
 	if (redir == NULL)
 		return ;
 	if (ft_strchr((*tokens)->data, '>'))
-		detect_input(is_input, *tokens, redir);
+		detect_input(&is_input, *tokens, redir);
 	else
 	{
 		if (ft_strncmp((*tokens)->data, "<<", 2) == 0)

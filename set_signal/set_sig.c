@@ -6,7 +6,7 @@
 /*   By: ytoshihi <ytoshihi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/19 15:46:53 by ytoshihi          #+#    #+#             */
-/*   Updated: 2024/05/22 16:16:25 by ytoshihi         ###   ########.fr       */
+/*   Updated: 2024/05/22 18:54:10 by ytoshihi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,15 +39,7 @@ static void	ft_ctrl_c(int sig)
  */
 static void	ft_ctrl_bs(int sig)
 {
-	struct termios	term;
-
-	tcgetattr(STDIN_FILENO, &term);
-	if (term.c_lflag & ICANON)
-	{
-		printf("\nminishell: ");
-		rl_redisplay();
-	}
-	set_sig(sig);
+	(void)sig;
 }
 
 /**
