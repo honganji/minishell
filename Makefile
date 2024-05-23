@@ -23,8 +23,9 @@ SOURCE := main.c \
 		  $(addprefix $(PIPE_DIR)/, \
 		  pipe.c redirection.c) \
 		  $(addprefix $(UTILS_DIR)/, \
-		  builtin_fn_1.c builtin_fn_2.c builtin_fn_3.c builtin_fn_4.c utils.c \
-		  utils_split.c utils_split1.c free_fn.c) \
+		  builtin_fn_1.c builtin_fn_2.c builtin_fn_3.c builtin_fn_4.c \
+		  builtin_fn_5.c builtin_fn_6.c utils.c utils_split.c utils_split1.c \
+		  free_fn.c) \
 		  $(addprefix $(INIT_DIR)/, \
 		  init.c) \
 		  $(addprefix $(PARSING_DIR)/, \

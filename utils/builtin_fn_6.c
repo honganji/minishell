@@ -1,52 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_export.c                                        :+:      :+:    :+:   */
+/*   builtin_fn_6.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ytoshihi <ytoshihi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/03 14:50:18 by ytoshihi          #+#    #+#             */
-/*   Updated: 2024/05/23 17:13:08 by ytoshihi         ###   ########.fr       */
+/*   Created: 2024/05/23 17:15:55 by ytoshihi          #+#    #+#             */
+/*   Updated: 2024/05/23 17:16:07 by ytoshihi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/execution.h"
+#include "../include/utils.h"
 
 /**
- * @brief export value into env linked list
- * 
+ * @brief checks and updates env variable or creates a new one
+ *
  * @param data data
- * @param str string include key and value connected with '='
+ * @param env_json env list of key and value
+ * @param env_arr array of arguments (key and value)
  * @return void
  */
-void	ft_export(t_data *data)
+void	update_env_var(t_data *data, t_env *env_json, char **env_arr)
 {
-	char	**env_arr;
-	t_env	*env_json;
 	t_list	*targ_lst;
-	char	*arg;
-	t_list	*tmp;
 
-	arg = ft_strdup("");
-	if (!((t_cmd *)data->cmd_lst->content)->args[1])
-	{
-		tmp = data->env_lst;
-		arg = join_to_export(arg, tmp);
-		ft_input_data(data, arg, 0);
-		return ;
-	}
-	arg = ((t_cmd *)data->cmd_lst->content)->args[1];
-	if (!ft_strchr(arg, '='))
-	{
-		ft_input_data(data, "", 0);
-		return ;
-	}
-	env_arr = (char **)ft_calloc(2, sizeof(char *));
-	env_json = (t_env *)malloc(sizeof(t_env));
-	if (!env_arr || !env_json)
-		critical_err(strerror(errno));
-	ft_to_json(env_arr, arg);
-	env_json->key = env_arr[0];
 	if (ft_isdigit(*env_json->key))
 	{
 		syntax_err(data, "export: not a valid identifier: ", env_json->key, 1);
@@ -55,7 +32,6 @@ void	ft_export(t_data *data)
 		ft_input_data(data, "", 0);
 		return ;
 	}
-	env_json->value = env_arr[1];
 	targ_lst = ft_find_ele(data, env_json->key);
 	if (targ_lst)
 	{
