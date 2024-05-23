@@ -6,7 +6,7 @@
 /*   By: adprzyby <adprzyby@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 14:50:18 by ytoshihi          #+#    #+#             */
-/*   Updated: 2024/05/21 16:37:24 by adprzyby         ###   ########.fr       */
+/*   Updated: 2024/05/23 14:03:19 by adprzyby         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -161,23 +161,8 @@ void	ft_env(t_list *env_lst, t_data *data)
 	tmp = env_lst;
 	str = ft_strdup("");
 	if (!str)
-		critical_err(strerror(errno));
-	while (tmp)
-	{
-		str = ft_free_strjoin(str, (*(t_env *)(tmp->content)).key);
-		if (!str)
-			critical_err(strerror(errno));
-		str = ft_free_strjoin(str, "=");
-		if (!str)
-			critical_err(strerror(errno));
-		str = ft_free_strjoin(str, (*(t_env *)(tmp->content)).value);
-		if (!str)
-			critical_err(strerror(errno));
-		str = ft_free_strjoin(str, "\n");
-		if (!str)
-			critical_err(strerror(errno));
-		tmp = tmp->next;
-	}
+		critical_err(strerror(errno));							//TODO add prefix + quotes around value like in export
+	str = join_to_env(str, tmp);
 	ft_input_data(data, str, 0);
 	free(str);
 	data->exit_code = 0;
