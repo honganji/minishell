@@ -6,7 +6,7 @@
 /*   By: adprzyby <adprzyby@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 11:57:56 by ytoshihi          #+#    #+#             */
-/*   Updated: 2024/05/21 17:57:50 by adprzyby         ###   ########.fr       */
+/*   Updated: 2024/05/23 13:42:24 by adprzyby         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,5 +40,6 @@ void	register_env(t_data* data, char *key, char *value);
 void    input_heredoc(t_data *data, char *eof);
 char	*replace_env(t_data *data, char *str);
 void	remove_quote(char **str, int *is_skip);
+char 	*join_to_env(char *str, t_list *env_list);
 
 #endif
