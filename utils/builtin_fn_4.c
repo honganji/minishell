@@ -6,7 +6,7 @@
 /*   By: adprzyby <adprzyby@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 11:22:38 by ytoshihi          #+#    #+#             */
-/*   Updated: 2024/05/23 14:21:48 by adprzyby         ###   ########.fr       */
+/*   Updated: 2024/05/23 17:13:37 by adprzyby         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@
  * @param data data
  * @param eof end of file
  * @return void
- * 
+ *
  */
-void    input_heredoc(t_data *data, char *eof)
+void	input_heredoc(t_data *data, char *eof)
 {
 	char	*str;
 	char	*tmp;
@@ -29,7 +29,7 @@ void    input_heredoc(t_data *data, char *eof)
 	while (!ft_strnstr(str, eof, ft_strlen(str)))
 	{
 		printf("> ");
-        rl_redisplay();
+		rl_redisplay();
 		tmp = readline("");
 		str = ft_free_strjoin(str, tmp);
 		str = ft_free_strjoin(str, "\n");
@@ -43,7 +43,7 @@ void    input_heredoc(t_data *data, char *eof)
  * @param data data
  * @param str string of token
  * @return char *
- * 
+ *
  */
 char	*replace_env(t_data *data, char *str)
 {
@@ -60,12 +60,12 @@ char	*replace_env(t_data *data, char *str)
 }
 
 /**
- * @brief Replace into an env variable
+ * @brief Remove quote from string
  *
- * @param data data
  * @param str string of token
- * @return char *
- * 
+ * @param is_skip flag to skip
+ * @return void
+ *
  */
 void	remove_quote(char **str, int *is_skip)
 {
@@ -77,33 +77,4 @@ void	remove_quote(char **str, int *is_skip)
 		*str = ft_strtrim(*str, "\'");
 	else
 		*str = ft_strtrim(*str, "\"");
-}
-
-/**
- * @brief Join env variable list into a string
- * 
- * @param str string
- * @param env_list env variable list
- * @return char* 
- * 
-*/
-char	*join_to_env(char *str, t_list *env_list)
-{
-	while (env_list)
-	{
-		str = ft_free_strjoin(str, (*(t_env *)(env_list->content)).key);
-		if (!str)
-			critical_err(strerror(errno));
-		str = ft_free_strjoin(str, "=");
-		if (!str)
-			critical_err(strerror(errno));
-		str = ft_free_strjoin(str, (*(t_env *)(env_list->content)).value);
-		if (!str)
-			critical_err(strerror(errno));
-		str = ft_free_strjoin(str, "\n");
-		if (!str)
-			critical_err(strerror(errno));
-		env_list = env_list->next;
-	}
-	return (str);
 }
