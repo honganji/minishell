@@ -6,7 +6,7 @@
 /*   By: adprzyby <adprzyby@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 14:50:18 by ytoshihi          #+#    #+#             */
-/*   Updated: 2024/05/21 17:58:19 by adprzyby         ###   ########.fr       */
+/*   Updated: 2024/05/23 14:12:48 by adprzyby         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 /**
  * @brief export value into env linked list
- * 
+ *
  * @param data data
  * @param str string include key and value connected with '='
  * @return void
@@ -24,24 +24,41 @@ void	ft_export(t_data *data)
 	char	**env_arr;
 	t_env	*env_json;
 	t_list	*targ_lst;
+	char	*arg;
 
-	env_arr = (char **)ft_calloc(1, sizeof(char *));
-	env_json = (t_env *)malloc(1 * sizeof(t_env));
+	if (!((t_cmd *)data->cmd_lst->content)->args[1])
+	{
+		ft_input_data(data, "", 0);
+		while (data->env_lst)
+		{
+			env_json = (t_env *)data->env_lst->content;
+			ft_printf("declare -x %s=\"%s\"\n", env_json->key, env_json->value);
+			data->env_lst = data->env_lst->next;
+		}
+		return ;
+	}
+	arg = ((t_cmd *)data->cmd_lst->content)->args[1];
+	if (!ft_strchr(arg, '='))
+	{
+		ft_input_data(data, "", 0);
+		return ;
+	}
+	env_arr = (char **)ft_calloc(2, sizeof(char *));
+	env_json = (t_env *)malloc(sizeof(t_env));
 	if (!env_arr || !env_json)
 		critical_err(strerror(errno));
-	if (!((t_cmd *)data->cmd_lst->content)->args[1])
-		return ;
-	ft_to_json(env_arr, ((t_cmd *)data->cmd_lst->content)->args[1]);				//TODO fix endless loop and implement check for invalid key
+	ft_to_json(env_arr, arg);
 	env_json->key = env_arr[0];
-	if (ft_isdigit(*env_arr[0]))
+	if (ft_isdigit(*env_json->key))
 	{
-		syntax_err(data, "export: not a valid identifier: ", env_arr[0], 1);
+		syntax_err(data, "export: not a valid identifier: ", env_json->key, 1);
 		free(env_arr);
 		free(env_json);
+		ft_input_data(data, "", 0);
 		return ;
 	}
 	env_json->value = env_arr[1];
-	targ_lst = ft_find_ele(data, env_arr[0]);
+	targ_lst = ft_find_ele(data, env_json->key);
 	if (targ_lst)
 	{
 		free((*(t_env *)targ_lst->content).key);
@@ -59,7 +76,7 @@ void	ft_export(t_data *data)
 
 /**
  * @brief export value into env linked list
- * 
+ *
  * @param data data
  * @param str string include key and value connected with '='
  * @return void

@@ -6,7 +6,7 @@
 /*   By: adprzyby <adprzyby@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 11:22:38 by ytoshihi          #+#    #+#             */
-/*   Updated: 2024/05/21 17:22:10 by adprzyby         ###   ########.fr       */
+/*   Updated: 2024/05/23 13:42:10 by adprzyby         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,4 +77,25 @@ void	remove_quote(char **str, int *is_skip)
 		*str = ft_strtrim(*str, "\'");
 	else
 		*str = ft_strtrim(*str, "\"");
+}
+
+char 	*join_to_env(char *str, t_list *env_list)
+{
+	while (env_list)
+	{
+		str = ft_free_strjoin(str, (*(t_env *)(env_list->content)).key);
+		if (!str)
+			critical_err(strerror(errno));
+		str = ft_free_strjoin(str, "=");
+		if (!str)
+			critical_err(strerror(errno));
+		str = ft_free_strjoin(str, (*(t_env *)(env_list->content)).value);
+		if (!str)
+			critical_err(strerror(errno));
+		str = ft_free_strjoin(str, "\n");
+		if (!str)
+			critical_err(strerror(errno));
+		env_list = env_list->next;
+	}
+	return (str);
 }
