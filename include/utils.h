@@ -6,7 +6,7 @@
 /*   By: adprzyby <adprzyby@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 11:57:56 by ytoshihi          #+#    #+#             */
-/*   Updated: 2024/05/23 13:42:24 by adprzyby         ###   ########.fr       */
+/*   Updated: 2024/05/23 16:03:54 by adprzyby         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include "minishell.h"
 
 typedef struct s_data t_data;
+typedef struct s_env t_env;
 
 void	ft_del_node(t_data *data, t_list *lst, t_list *pre_lst);
 t_list	*ft_find_ele(t_data *data, char *str);
@@ -40,6 +41,11 @@ void	register_env(t_data* data, char *key, char *value);
 void    input_heredoc(t_data *data, char *eof);
 char	*replace_env(t_data *data, char *str);
 void	remove_quote(char **str, int *is_skip);
+char	*safe_strjoin(char *str, char *append);
 char 	*join_to_env(char *str, t_list *env_list);
+char 	*join_to_export(char *str, t_list *env_list);
+void	handle_no_args(t_data *data, char *arg);
+void	handle_args(char *arg, char **env_arr, t_env *env_json);
+void	update_env_var(t_data *data, t_env *env_json, char **env_arr);
 
 #endif
