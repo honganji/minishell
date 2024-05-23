@@ -6,7 +6,7 @@
 /*   By: ytoshihi <ytoshihi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 11:57:56 by ytoshihi          #+#    #+#             */
-/*   Updated: 2024/05/22 16:23:26 by ytoshihi         ###   ########.fr       */
+/*   Updated: 2024/05/23 12:53:32 by ytoshihi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include "minishell.h"
 
 typedef struct s_data	t_data;
+typedef struct s_token	t_token;
 
 void	ft_del_node(t_data *data, t_list *lst, t_list *pre_lst);
 t_list	*ft_find_ele(t_data *data, char *str);
@@ -42,5 +43,8 @@ char	*replace_env(t_data *data, char *str);
 void	remove_quote(char **str, int *is_skip);
 void	store_ec(t_data *data, int status, int fds[2], pid_t pid);
 void	exe_builtin(int fds[2], char **args);
+void	free_env_lst(t_data *data);
+void	free_cmd_lst(t_data *data);
+void	free_token(t_token *token);
 
 #endif

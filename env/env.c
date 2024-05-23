@@ -6,7 +6,7 @@
 /*   By: ytoshihi <ytoshihi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 17:52:24 by ytoshihi          #+#    #+#             */
-/*   Updated: 2024/05/21 20:15:45 by ytoshihi         ###   ########.fr       */
+/*   Updated: 2024/05/23 12:58:44 by ytoshihi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	ft_store_env(t_data *data, char **environ)
 		return ;
 	while (*environ)
 	{
-		env_json = (char **)ft_calloc(1, sizeof(char *));
+		env_json = (char **)ft_calloc(2, sizeof(char *));
 		if (!env_json)
 			critical_err(strerror(errno));
 		ft_to_json(env_json, *environ++);

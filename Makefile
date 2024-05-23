@@ -1,5 +1,4 @@
 NAME := minishell
-NAME_TEST := test
 
 LIB_DIR := 42-c-library
 EXE_DIR := execution
@@ -20,12 +19,12 @@ SOURCE := main.c \
 		  env.c) \
 		  $(addprefix $(EXE_DIR)/, \
 		  execution.c ft_export.c ft_chdir.c ft_echo.c \
-		  ft_env.c ft_pwd.c ft_execve.c ft_unset.c) \
+		  ft_env.c ft_pwd.c ft_execve.c ft_unset.c ft_exit.c) \
 		  $(addprefix $(PIPE_DIR)/, \
 		  pipe.c redirection.c) \
 		  $(addprefix $(UTILS_DIR)/, \
 		  builtin_fn_1.c builtin_fn_2.c builtin_fn_3.c builtin_fn_4.c utils.c \
-		  utils_split.c utils_split1.c) \
+		  utils_split.c utils_split1.c free_fn.c) \
 		  $(addprefix $(INIT_DIR)/, \
 		  init.c) \
 		  $(addprefix $(PARSING_DIR)/, \
@@ -34,9 +33,6 @@ SOURCE := main.c \
 		  critical_err.c syntax_err.c) \
 		  $(addprefix $(SIGNAL_DIR)/, \
 		  set_sig.c)
-
-SOURCE_TEST := $(addprefix $(UTILS_DIR)/, \
-			   builtin_fn_3.c builtin_fn_4.c)
 
 OBJS := $(SOURCE:%.c=$(OBJ_DIR)/%.o)
 
@@ -80,10 +76,6 @@ re: fclean all
 
 exe: re
 	./$(NAME)
-
-test: $(LIBFT)
-	@$(CC) $(CC_FLAG) $(SOURCE_TEST) $(LIBFT) $(L_READ_LIB) -o $(NAME_TEST)
-	./$(NAME_TEST)
 
 clean_lib:
 	@cd $(LIB_DIR) && ls -A | xargs rm -rf
