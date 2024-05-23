@@ -6,7 +6,7 @@
 /*   By: adprzyby <adprzyby@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 14:52:05 by adprzyby          #+#    #+#             */
-/*   Updated: 2024/05/23 14:54:29 by adprzyby         ###   ########.fr       */
+/*   Updated: 2024/05/23 16:16:12 by adprzyby         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ char	*join_to_export(char *str, t_list *env_list)
 {
 	while (env_list)
 	{
-		str = safe_strjoin(str, "declare -x");
+		str = safe_strjoin(str, "declare -x ");
 		str = safe_strjoin(str, (*(t_env *)(env_list->content)).key);
 		str = safe_strjoin(str, "=");
 		str = safe_strjoin(str, "\"");
