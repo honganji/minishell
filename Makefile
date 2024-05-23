@@ -24,7 +24,8 @@ SOURCE := main.c \
 		  $(addprefix $(PIPE_DIR)/, \
 		  pipe.c redirection.c) \
 		  $(addprefix $(UTILS_DIR)/, \
-		  builtin_fn_1.c builtin_fn_2.c builtin_fn_3.c builtin_fn_4.c utils.c \
+		  builtin_fn_1.c builtin_fn_2.c builtin_fn_3.c builtin_fn_4.c \
+		  builtin_fn_5.c utils.c \
 		  utils_split.c utils_split1.c) \
 		  $(addprefix $(TEST_DIR)/, \
 		  set_val.c) \

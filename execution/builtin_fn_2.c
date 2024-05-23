@@ -6,7 +6,7 @@
 /*   By: adprzyby <adprzyby@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 14:50:18 by ytoshihi          #+#    #+#             */
-/*   Updated: 2024/05/23 14:22:10 by adprzyby         ###   ########.fr       */
+/*   Updated: 2024/05/23 15:37:28 by adprzyby         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,16 +25,14 @@ void	ft_export(t_data *data)
 	t_env	*env_json;
 	t_list	*targ_lst;
 	char	*arg;
+	t_list	*tmp;
 
+	arg = ft_strdup("");
 	if (!((t_cmd *)data->cmd_lst->content)->args[1])
 	{
-		ft_input_data(data, "", 0);
-		while (data->env_lst)
-		{
-			env_json = (t_env *)data->env_lst->content;
-			ft_printf("declare -x %s=\"%s\"\n", env_json->key, env_json->value);
-			data->env_lst = data->env_lst->next;
-		}
+		tmp = data->env_lst;
+		arg = join_to_export(arg, tmp);
+		ft_input_data(data, arg, 0);
 		return ;
 	}
 	arg = ((t_cmd *)data->cmd_lst->content)->args[1];
