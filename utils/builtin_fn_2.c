@@ -6,7 +6,7 @@
 /*   By: adprzyby <adprzyby@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 12:18:51 by ytoshihi          #+#    #+#             */
-/*   Updated: 2024/05/18 16:48:54 by adprzyby         ###   ########.fr       */
+/*   Updated: 2024/05/23 13:24:24 by adprzyby         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,8 @@ char	*ft_read_file(int fd)
 	char	*str;
 
 	str = ft_strdup("");
+	if (!str)
+		return (NULL);
 	line = get_next_line(fd);
 	while (line && *line)
 	{
