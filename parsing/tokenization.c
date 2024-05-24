@@ -6,7 +6,7 @@
 /*   By: ytoshihi <ytoshihi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/27 17:04:21 by adprzyby          #+#    #+#             */
-/*   Updated: 2024/05/23 12:14:10 by ytoshihi         ###   ########.fr       */
+/*   Updated: 2024/05/24 12:04:30 by ytoshihi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,11 @@ t_token	*tokenization(char **tokens)
 	{
 		tmp->data = tokens[i];
 		tmp->type = what_token(tmp->data);
+		if (!tokens[i + 1])
+		{
+			tmp->next = NULL;
+			break ;
+		}
 		tmp->next = token_init();
 		tmp->id = i;
 		tmp = tmp->next;

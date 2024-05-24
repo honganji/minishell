@@ -6,7 +6,7 @@
 /*   By: ytoshihi <ytoshihi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 11:57:56 by ytoshihi          #+#    #+#             */
-/*   Updated: 2024/05/23 17:19:18 by ytoshihi         ###   ########.fr       */
+/*   Updated: 2024/05/24 11:36:07 by ytoshihi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,5 +52,6 @@ void	handle_args(char *arg, char **env_arr, t_env *env_json);
 void	free_env_lst(t_data *data);
 void	free_cmd_lst(t_data *data);
 void	free_token(t_token *token);
+void	free_data(t_data *data);
 
 #endif

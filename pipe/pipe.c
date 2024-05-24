@@ -6,7 +6,7 @@
 /*   By: ytoshihi <ytoshihi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/02 15:08:30 by ytoshihi          #+#    #+#             */
-/*   Updated: 2024/05/22 16:13:43 by ytoshihi         ###   ########.fr       */
+/*   Updated: 2024/05/24 10:14:25 by ytoshihi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,11 +50,13 @@ static void	check_output(t_list *cmd_lst)
 	{
 		str = ft_read_file(STDIN_FILENO);
 		ft_output_red(output.file_name, str, output.is_single);
+		free(str);
 	}
 	else if (!cmd_lst->next)
 	{
 		str = ft_read_file(STDIN_FILENO);
 		printf("%s", str);
+		free(str);
 	}
 }
 

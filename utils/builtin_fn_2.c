@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_fn_2.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adprzyby <adprzyby@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ytoshihi <ytoshihi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 12:18:51 by ytoshihi          #+#    #+#             */
-/*   Updated: 2024/05/18 16:48:54 by adprzyby         ###   ########.fr       */
+/*   Updated: 2024/05/24 10:08:26 by ytoshihi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,8 +107,8 @@ char	*ft_free_strjoin(char *s1, char *s2)
 	char	*str;
 
 	str = ft_strjoin(s1, s2);
+	free(s1);
 	if (!str)
 		return (ft_strdup(""));
-	free(s1);
 	return (str);
 }
