@@ -6,7 +6,7 @@
 /*   By: ytoshihi <ytoshihi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/22 13:24:33 by ytoshihi          #+#    #+#             */
-/*   Updated: 2024/05/23 11:43:28 by ytoshihi         ###   ########.fr       */
+/*   Updated: 2024/05/24 20:02:35 by ytoshihi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ static void	reg_cur_dir(t_data *data)
  */
 static void	change_dir(t_data *data, char *path)
 {
+	path = strdup(path);
 	reg_cur_dir(data);
 	if (chdir(path) == -1)
 	{
@@ -50,6 +51,7 @@ static void	change_dir(t_data *data, char *path)
 		ft_input_data(data, "", 0);
 		return (free(path));
 	}
+	return (free(path));
 }
 
 /**
@@ -109,6 +111,7 @@ static int	cd_oldpwd(t_data *data, char *arg)
 		change_dir(data, path);
 		cur_dir = ft_strjoin(getcwd(buffer, sizeof(buffer)), "\n");
 		ft_input_data(data, cur_dir, 0);
+		free(cur_dir);
 		set_exit_code(data, 0);
 		return (0);
 	}

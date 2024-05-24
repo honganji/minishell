@@ -6,7 +6,7 @@
 /*   By: ytoshihi <ytoshihi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/22 14:25:05 by ytoshihi          #+#    #+#             */
-/*   Updated: 2024/05/23 11:51:08 by ytoshihi         ###   ########.fr       */
+/*   Updated: 2024/05/24 20:49:55 by ytoshihi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,10 +38,12 @@ void	ft_unset(t_data *data)
 	{
 		key = (*(t_env *)((tmp_lst)->content)).key;
 		if (!ft_strncmp(key, str, ft_strlen(str)))
+		{
 			ft_del_node(data, tmp_lst, pre_lst);
+			break ;
+		}
 		pre_lst = tmp_lst;
 		tmp_lst = tmp_lst->next;
 	}
-	ft_input_data(data, "", 0);
-	data->exit_code = 0;
+	return (ft_input_data(data, "", 0), set_exit_code(data, 0));
 }

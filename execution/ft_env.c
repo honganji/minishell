@@ -6,7 +6,7 @@
 /*   By: ytoshihi <ytoshihi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/22 14:22:18 by ytoshihi          #+#    #+#             */
-/*   Updated: 2024/05/22 18:27:29 by ytoshihi         ###   ########.fr       */
+/*   Updated: 2024/05/24 20:05:04 by ytoshihi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ void	ft_env(t_list *env_lst, t_data *data, char *arg)
 	{
 		env_err(data, arg);
 		ft_input_data(data, "", 0);
+		free(str);
 		return ;
 	}
 	while (tmp)

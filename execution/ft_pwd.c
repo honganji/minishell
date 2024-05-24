@@ -6,7 +6,7 @@
 /*   By: ytoshihi <ytoshihi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/22 14:21:39 by ytoshihi          #+#    #+#             */
-/*   Updated: 2024/05/22 14:22:33 by ytoshihi         ###   ########.fr       */
+/*   Updated: 2024/05/24 20:19:48 by ytoshihi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ void	ft_pwd(t_data *data)
 		data->exit_code = 1;
 		syntax_err(NULL, "pwd: error retrieving current directory\n", NULL, 1);
 	}
-	ft_input_data(data, ft_strjoin(cur_dir, "\n"), 0);
+	cur_dir = ft_strjoin(cur_dir, "\n");
+	ft_input_data(data, cur_dir, 0);
+	free(cur_dir);
 	data->exit_code = 0;
 }

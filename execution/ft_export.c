@@ -6,7 +6,7 @@
 /*   By: ytoshihi <ytoshihi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 14:50:18 by ytoshihi          #+#    #+#             */
-/*   Updated: 2024/05/23 17:43:54 by ytoshihi         ###   ########.fr       */
+/*   Updated: 2024/05/24 20:17:22 by ytoshihi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,9 +63,9 @@ static int	check_no_arg(t_data *data)
 		tmp = data->env_lst;
 		arg = join_to_export(arg, tmp);
 		ft_input_data(data, arg, 0);
-		return (1);
+		return (free(arg), 1);
 	}
-	return (0);
+	return (free(arg), 0);
 }
 
 /**

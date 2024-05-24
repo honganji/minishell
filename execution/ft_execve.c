@@ -6,7 +6,7 @@
 /*   By: ytoshihi <ytoshihi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 14:50:18 by ytoshihi          #+#    #+#             */
-/*   Updated: 2024/05/22 18:56:21 by ytoshihi         ###   ########.fr       */
+/*   Updated: 2024/05/24 20:11:22 by ytoshihi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@
 void	ft_execve(char **args, t_data *data)
 {
 	t_exe	params;
+	char	*tmp;
 
 	params.status = 0;
 	if (pipe(params.fds) == -1)
@@ -45,9 +46,12 @@ void	ft_execve(char **args, t_data *data)
 	else
 	{
 		store_ec(data, params.status, params.fds, params.pid);
+		tmp = args[0];
 		args[0] = params.tmp;
+		free(tmp);
 		params.str = ft_read_file(params.fds[0]);
 		close(params.fds[0]);
 		ft_input_data(data, params.str, 0);
+		free(params.str);
 	}
 }

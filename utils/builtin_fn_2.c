@@ -6,7 +6,7 @@
 /*   By: ytoshihi <ytoshihi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 12:18:51 by ytoshihi          #+#    #+#             */
-/*   Updated: 2024/05/24 10:08:26 by ytoshihi         ###   ########.fr       */
+/*   Updated: 2024/05/24 20:07:16 by ytoshihi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ char	*ft_check_exist(t_data *data, char *path_name)
 			return (free_arr(path_arr), path_name);
 		}
 		if (!access(comb_path, X_OK))
-			return (free_arr(path_arr), comb_path);
+			return (free_arr(path_arr), free(path_name), comb_path);
 		free(comb_path);
 	}
 	return (free_arr(path_arr), ft_strdup(""));

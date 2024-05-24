@@ -6,7 +6,7 @@
 /*   By: ytoshihi <ytoshihi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/04 09:24:36 by ytoshihi          #+#    #+#             */
-/*   Updated: 2024/05/22 16:22:14 by ytoshihi         ###   ########.fr       */
+/*   Updated: 2024/05/24 20:40:01 by ytoshihi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,23 +55,13 @@ void	ft_del_node(t_data *data, t_list *lst, t_list *pre_lst)
 	if (!lst || !lst->content)
 		critical_err(strerror(errno));
 	if (!pre_lst)
-	{
 		data->env_lst = data->env_lst->next;
-		free(((t_env *)(lst->content))->key);
-		free(((t_env *)(lst->content))->value);
-		free(lst->content);
-		free(lst);
-		return ;
-	}
 	else
-	{
 		pre_lst->next = lst->next;
-		free(((t_env *)(lst->content))->key);
-		free(((t_env *)(lst->content))->value);
-		free(lst->content);
-		free(lst);
-		return ;
-	}
+	free(((t_env *)(lst->content))->key);
+	free(((t_env *)(lst->content))->value);
+	free(lst->content);
+	free(lst);
 }
 
 /**

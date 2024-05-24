@@ -6,7 +6,7 @@
 /*   By: ytoshihi <ytoshihi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 11:22:38 by ytoshihi          #+#    #+#             */
-/*   Updated: 2024/05/22 16:20:04 by ytoshihi         ###   ########.fr       */
+/*   Updated: 2024/05/24 20:54:42 by ytoshihi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,12 @@
  */
 void	input_heredoc(t_data *data, char *eof)
 {
+	char	*str1;
 	char	*str;
 	char	*tmp;
 
-	str = readline("> ");
+	str1 = readline("> ");
+	str = ft_strdup(str1);
 	while (!ft_strnstr(str, eof, ft_strlen(str)))
 	{
 		printf("> ");
