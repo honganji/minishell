@@ -6,7 +6,7 @@
 /*   By: ytoshihi <ytoshihi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 19:42:02 by ytoshihi          #+#    #+#             */
-/*   Updated: 2024/05/24 11:40:13 by ytoshihi         ###   ########.fr       */
+/*   Updated: 2024/05/25 10:11:44 by ytoshihi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,9 @@ int	main(int argc, char **argv, char **env)
 		input = readline("minishell: ");
 		check_signal(data);
 		if (!input)
-			exit(EXIT_SUCCESS);
+			ft_exit(0, data, 0);
 		if (!*input)
-			continue;
+			continue ;
 		if (input)
 		{
 			process_commands(input, data);

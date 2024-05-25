@@ -6,7 +6,7 @@
 /*   By: ytoshihi <ytoshihi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/02 15:09:17 by ytoshihi          #+#    #+#             */
-/*   Updated: 2024/05/23 12:31:38 by ytoshihi         ###   ########.fr       */
+/*   Updated: 2024/05/25 10:11:21 by ytoshihi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,6 @@ void	ft_env(t_list *env_lst, t_data *data, char *arg);
 void	ft_export(t_data *data);
 void	ft_unset(t_data *data);
 void	ft_exe_command(t_data *data, t_cmd content);
-void	ft_exit(int code, t_data *data);
+void	ft_exit(int code, t_data *data, int is_cmd);
 
 #endif
