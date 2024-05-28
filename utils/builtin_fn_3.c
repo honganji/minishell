@@ -6,7 +6,7 @@
 /*   By: adprzyby <adprzyby@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/18 15:49:45 by adprzyby          #+#    #+#             */
-/*   Updated: 2024/05/22 17:51:34 by adprzyby         ###   ########.fr       */
+/*   Updated: 2024/05/28 13:40:43 by adprzyby         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,26 +93,44 @@ char	*ft_join_with_space(char **args)
 	return (str);
 }
 
-void	register_env(t_data* data, char *key, char *value)
+void	register_env(t_data *data, char *key, char *value)
 {
 	t_env	*env_json;
 	t_list	*targ_lst;
+	void	*tmp;
+	// char	*key_tmp;
+	// char	*value_tmp;
 
 	env_json = (t_env *)malloc(1 * sizeof(t_env));
 	if (!env_json)
 		critical_err(strerror(errno));
-	if (!((t_cmd *)data->cmd_lst->content)->args[1])
-		return ;
 	env_json->key = ft_strdup(key);
 	env_json->value = ft_strdup(value);
 	targ_lst = ft_find_ele(data, key);
 	if (targ_lst)
 	{
-		free((*(t_env *)targ_lst->content).key);
-		free((*(t_env *)targ_lst->content).value);
-		(*(t_env *)targ_lst->content).key = env_json->key;
-		(*(t_env *)targ_lst->content).value = env_json->value;
-		free(env_json);
+		tmp = targ_lst->content;
+		targ_lst->content = env_json;
+		free(((t_env *)tmp)->key);
+		free(((t_env *)tmp)->value);
+		free(tmp);
+		// key_tmp = ((t_env *)targ_lst->content)->key;
+		// value_tmp = ((t_env *)targ_lst->content)->value;
+		// // TODO delete
+		// printf("pointer1: %p\n", &key_tmp);
+		// free(key_tmp);
+		// free(value_tmp);
+		// ((t_env *)targ_lst->content)->key = env_json->key;
+		// // TODO delete
+		// printf("pointer2: %p\n", &((t_env *)targ_lst->content)->key);
+		// ((t_env *)targ_lst->content)->value = env_json->value;
+		// free(env_json);
+
+		// tmp = targ_lst->content;
+		// targ_lst->content = env_json;
+		// free(tmp->key);
+		// free(tmp->value);
+		// free(tmp);
 	}
 	else
 		ft_lstadd_back(&data->env_lst, ft_lstnew(env_json));

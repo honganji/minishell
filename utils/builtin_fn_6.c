@@ -5,43 +5,12 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: adprzyby <adprzyby@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/23 15:50:38 by adprzyby          #+#    #+#             */
-/*   Updated: 2024/05/23 16:06:51 by adprzyby         ###   ########.fr       */
+/*   Created: 2024/05/23 17:15:55 by ytoshihi          #+#    #+#             */
+/*   Updated: 2024/05/28 13:41:05 by adprzyby         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/utils.h"
-
-/**
- * @brief helper function to handle no args
- * 
- * @param data data
- * @param arg string to export
- * @return void
- */
-void	handle_no_args(t_data *data, char *arg)
-{
-	t_list	*tmp;
-
-	tmp = data->env_lst;
-	arg = join_to_export(arg, tmp);
-	ft_input_data(data, arg, 0);
-}
-
-/**
- * @brief helper function to handle args
- * 
- * @param env_arr array of key and value
- * @param env_json env list of key and value
- * @return void
- * 
- */
-void	handle_args(char *arg, char **env_arr, t_env *env_json)
-{
-	ft_to_json(env_arr, arg);
-	env_json->key = env_arr[0];
-	env_json->value = env_arr[1];
-}
 
 /**
  * @brief checks and updates env variable or creates a new one

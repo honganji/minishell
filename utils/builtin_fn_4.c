@@ -6,7 +6,7 @@
 /*   By: adprzyby <adprzyby@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 11:22:38 by ytoshihi          #+#    #+#             */
-/*   Updated: 2024/05/23 17:13:37 by adprzyby         ###   ########.fr       */
+/*   Updated: 2024/05/28 13:40:50 by adprzyby         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,12 @@
  */
 void	input_heredoc(t_data *data, char *eof)
 {
+	char	*str1;
 	char	*str;
 	char	*tmp;
 
-	str = readline("> ");
+	str1 = readline("> ");
+	str = ft_strdup(str1);
 	while (!ft_strnstr(str, eof, ft_strlen(str)))
 	{
 		printf("> ");
@@ -77,4 +79,41 @@ void	remove_quote(char **str, int *is_skip)
 		*str = ft_strtrim(*str, "\'");
 	else
 		*str = ft_strtrim(*str, "\"");
+}
+
+/**
+ * @brief Store exit code
+ *
+ * @param data data
+ * @param status the status to get exit code
+ * @param fds two file descriptors for a pipe
+ * @param pid process id
+ * @return void
+ * 
+ */
+void	store_ec(t_data *data, int status, int fds[2], pid_t pid)
+{
+	close(fds[1]);
+	waitpid(pid, &status, 0);
+	if (WIFEXITED(status))
+		data->exit_code = WEXITSTATUS(status);
+	else if (WIFSIGNALED(status))
+		data->exit_code = 128 + WTERMSIG(status);
+}
+
+/**
+ * @brief Replace into an env variable
+ *
+ * @param data data
+ * @param str string of token
+ * @return char *
+ * 
+ */
+void	exe_builtin(int fds[2], char **args)
+{
+	close(fds[0]);
+	dup2(fds[1], STDOUT_FILENO);
+	close(fds[1]);
+	if (execve(args[0], args, NULL) == -1)
+		exit(EXIT_FAILURE);
 }

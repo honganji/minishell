@@ -6,7 +6,7 @@
 /*   By: adprzyby <adprzyby@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/04 09:24:36 by ytoshihi          #+#    #+#             */
-/*   Updated: 2024/05/22 15:52:13 by adprzyby         ###   ########.fr       */
+/*   Updated: 2024/05/28 13:40:33 by adprzyby         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,23 +55,13 @@ void	ft_del_node(t_data *data, t_list *lst, t_list *pre_lst)
 	if (!lst || !lst->content)
 		critical_err(strerror(errno));
 	if (!pre_lst)
-	{
 		data->env_lst = data->env_lst->next;
-		free(((t_env *)(lst->content))->key);
-		free(((t_env *)(lst->content))->value);
-		free(lst->content);
-		free(lst);
-		return ;
-	}
 	else
-	{
 		pre_lst->next = lst->next;
-		free(((t_env *)(lst->content))->key);
-		free(((t_env *)(lst->content))->value);
-		free(lst->content);
-		free(lst);
-		return ;
-	}
+	free(((t_env *)(lst->content))->key);
+	free(((t_env *)(lst->content))->value);
+	free(lst->content);
+	free(lst);
 }
 
 /**
@@ -126,9 +116,8 @@ char	*ft_rep_env(t_data *data, char *str)
 			{
 				ft_strlcpy(&arg[i], (*(t_env *)tmp->content).value,
 					ft_strlen((*(t_env *)tmp->content).value) + 1);
-				i += ft_strlen((*(t_env *)tmp->content).value);
+				i += (ft_strlen((*(t_env *)tmp->content).value) - 1);
 				str += ft_strlen((*(t_env *)tmp->content).key);
-				i--;
 			}
 		}
 		i++;
