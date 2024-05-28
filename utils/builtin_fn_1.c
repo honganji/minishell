@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_fn_1.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ytoshihi <ytoshihi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: adprzyby <adprzyby@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/04 09:24:36 by ytoshihi          #+#    #+#             */
-/*   Updated: 2024/05/21 15:41:24 by ytoshihi         ###   ########.fr       */
+/*   Updated: 2024/05/28 13:40:33 by adprzyby         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 /**
  * @brief Count number of arguments
- * 
+ *
  * @param data whole data
  * @param str one of the arguments
  * @return int count
@@ -29,7 +29,7 @@ static int	ft_count_arg(t_data *data, char *str)
 	{
 		if (*str++ == '$')
 		{
-			tmp = ft_find_ele(data, str);		
+			tmp = ft_find_ele(data, str);
 			if (tmp)
 			{
 				count--;
@@ -44,7 +44,7 @@ static int	ft_count_arg(t_data *data, char *str)
 
 /**
  * @brief delete one node of env list
- * 
+ *
  * @param data whole data
  * @param lst current node env list address
  * @param pre_lst last node of env list address
@@ -55,30 +55,20 @@ void	ft_del_node(t_data *data, t_list *lst, t_list *pre_lst)
 	if (!lst || !lst->content)
 		critical_err(strerror(errno));
 	if (!pre_lst)
-	{
 		data->env_lst = data->env_lst->next;
-		free(((t_env *)(lst->content))->key);
-		free(((t_env *)(lst->content))->value);
-		free(lst->content);
-		free(lst);
-		return ;
-	}
 	else
-	{
 		pre_lst->next = lst->next;
-		free(((t_env *)(lst->content))->key);
-		free(((t_env *)(lst->content))->value);
-		free(lst->content);
-		free(lst);
-		return ;
-	}
+	free(((t_env *)(lst->content))->key);
+	free(((t_env *)(lst->content))->value);
+	free(lst->content);
+	free(lst);
 }
 
 /**
  * @brief find element from env list
- * 
+ *
  * This is used to find the node that hold the same key as input
- * 
+ *
  * @param data whole data
  * @param str key string
  * @return t_list * the node hold the same key
@@ -101,7 +91,7 @@ t_list	*ft_find_ele(t_data *data, char *str)
 
 /**
  * @brief replace the value for expanding
- * 
+ *
  * @param data whole data
  * @param str key string
  * @return char * string that replace $() to the specific value
@@ -121,24 +111,13 @@ char	*ft_rep_env(t_data *data, char *str)
 		arg[i] = *str;
 		if (*str++ == '$')
 		{
-			// if (*str++ == '\'')
-			// {
-			// 	//TODO handle single quotes
-			// 	rv_quotes(str);
-			// }
-			// else if (*str++ == '"')
-			// {
-			// 	//TODO handle double quotes
-			// 	rv_quotes(str);
-			// }
 			tmp = ft_find_ele(data, str);
 			if (tmp)
 			{
 				ft_strlcpy(&arg[i], (*(t_env *)tmp->content).value,
 					ft_strlen((*(t_env *)tmp->content).value) + 1);
-				i += ft_strlen((*(t_env *)tmp->content).value);
+				i += (ft_strlen((*(t_env *)tmp->content).value) - 1);
 				str += ft_strlen((*(t_env *)tmp->content).key);
-				i--;
 			}
 		}
 		i++;
@@ -148,7 +127,7 @@ char	*ft_rep_env(t_data *data, char *str)
 
 /**
  * @brief create a json for env variables using a string
- * 
+ *
  * @param env_json double pointer toward struct that holds key and value
  * @param env_name env value(i.e. King=king)
  * @return char * string that replace $() to the specific value

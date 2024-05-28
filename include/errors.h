@@ -6,7 +6,7 @@
 /*   By: ytoshihi <ytoshihi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/18 12:03:26 by adprzyby          #+#    #+#             */
-/*   Updated: 2024/05/19 18:35:47 by ytoshihi         ###   ########.fr       */
+/*   Updated: 2024/05/22 15:57:56 by ytoshihi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,10 @@
 # include "minishell.h"
 # include "utils.h"
 
-typedef struct s_data t_data;
+typedef struct s_data	t_data;
 
 void	critical_err(char *msg);
-void 	set_exit_code(t_data *data, int code);
-void    syntax_err(t_data *data, char *str, char *cmd, int code);
+void	set_exit_code(t_data *data, int code);
+void	syntax_err(t_data *data, char *str, char *cmd, int code);
 
 #endif

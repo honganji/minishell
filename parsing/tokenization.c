@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenization.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adprzyby <adprzyby@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ytoshihi <ytoshihi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/27 17:04:21 by adprzyby          #+#    #+#             */
-/*   Updated: 2024/05/21 13:53:00 by adprzyby         ###   ########.fr       */
+/*   Updated: 2024/05/24 12:04:30 by ytoshihi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	what_token(char *str)
 	return (0);
 }
 
-int is_redir(char *str, int i)
+int	is_redir(char *str, int i)
 {
 	if (str[i] == '>' && str[i + 1] != '\0' && str[i + 1] == '>')
 		return (REDIR);
@@ -58,37 +58,15 @@ t_token	*tokenization(char **tokens)
 	{
 		tmp->data = tokens[i];
 		tmp->type = what_token(tmp->data);
+		if (!tokens[i + 1])
+		{
+			tmp->next = NULL;
+			break ;
+		}
 		tmp->next = token_init();
 		tmp->id = i;
 		tmp = tmp->next;
 		i++;
 	}
-	tmp = token;
-	while (tmp && tmp->data)
-	{
-		printf("Token: %s\n", tmp->data);			//!DEBUG
-		printf("Type: %d\n", tmp->type);
-		tmp = tmp->next;
-	}
 	return (token);
-}
-
-void	rv_quotes(char *str)
-{
-	int start;
-	int end;
-	int j;
-
-	j = 0;
-	start = 0;
-	end = strlen(str) - 1;
-	if (!str)
-		return ;
-	if (str[start] == '\'' || str[start] == '\"')
-		start++;
-	if (str[end] == '\'' || str[end] == '\"')
-		end--;
-	while (start <= end)
-		str[j++] = str[start++];
-	str[j] = '\0';
 }

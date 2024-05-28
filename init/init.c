@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yuji <yuji@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: ytoshihi <ytoshihi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 13:46:58 by adprzyby          #+#    #+#             */
-/*   Updated: 2024/05/20 19:55:31 by yuji             ###   ########.fr       */
+/*   Updated: 2024/05/24 12:04:02 by ytoshihi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "../include/init.h"
+#include "../include/init.h"
 
 t_token	*token_init(void)
 {
@@ -25,7 +25,7 @@ t_token	*token_init(void)
 	return (token);
 }
 
-t_cmd *cmd_init(void)
+t_cmd	*cmd_init(void)
 {
 	t_cmd	*cmd;
 
@@ -42,11 +42,7 @@ t_cmd *cmd_init(void)
 void	initialize(t_data *data, char **env)
 {
 	data->stdin_fd = dup(STDIN_FILENO);
-	data->exit_code = 0;
-
-	// Set the valuables
-	set_val(data, env);
-
-	// Set signal for ctrl-c and ctrl-backslash
+	set_exit_code(data, 0);
+	ft_store_env(data, env);
 	set_signal_fn();
 }

@@ -8,6 +8,7 @@
 		"string_view": "c",
 		"vector": "c",
 		"execution.h": "c",
-		"utils.h": "c"
+		"utils.h": "c",
+		"errors.h": "c"
 	}
 }

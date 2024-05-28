@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ytoshihi <ytoshihi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: adprzyby <adprzyby@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 11:57:56 by ytoshihi          #+#    #+#             */
-/*   Updated: 2024/05/21 15:56:10 by ytoshihi         ###   ########.fr       */
+/*   Updated: 2024/05/28 13:40:19 by adprzyby         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,9 @@
 # include "../42-c-library/library.h"
 # include "minishell.h"
 
-typedef struct s_data t_data;
+typedef struct s_data	t_data;
+typedef struct s_token	t_token;
+typedef struct s_env	t_env;
 
 void	ft_del_node(t_data *data, t_list *lst, t_list *pre_lst);
 t_list	*ft_find_ele(t_data *data, char *str);
@@ -36,9 +38,20 @@ void	check_chr(char const *s, int *end, char c);
 void	set_sig(int sig);
 void	check_signal(t_data *data);
 char	*ft_join_with_space(char **args);
-void	register_env(t_data* data, char *key, char *value);
-void    input_heredoc(t_data *data, char *eof);
+void	register_env(t_data *data, char *key, char *value);
+void	input_heredoc(t_data *data, char *eof);
 char	*replace_env(t_data *data, char *str);
 void	remove_quote(char **str, int *is_skip);
+void	store_ec(t_data *data, int status, int fds[2], pid_t pid);
+void	exe_builtin(int fds[2], char **args);
+void	update_env_var(t_data *data, t_env *env_json, char **env_arr);
+char	*join_to_env(char *str, t_list *env_list);
+char	*join_to_export(char *str, t_list *env_list);
+void	handle_no_args(t_data *data, char *arg);
+void	handle_args(char *arg, char **env_arr, t_env *env_json);
+void	free_env_lst(t_data *data);
+void	free_cmd_lst(t_data *data);
+void	free_token(t_token *token);
+void	free_data(t_data *data);
 
 #endif
