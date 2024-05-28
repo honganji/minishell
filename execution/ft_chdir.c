@@ -6,7 +6,7 @@
 /*   By: ytoshihi <ytoshihi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/22 13:24:33 by ytoshihi          #+#    #+#             */
-/*   Updated: 2024/05/24 20:02:35 by ytoshihi         ###   ########.fr       */
+/*   Updated: 2024/05/28 18:27:55 by ytoshihi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static void	reg_cur_dir(t_data *data)
  * @param path path to be
  * @return void
  */
-static void	change_dir(t_data *data, char *path)
+static int	change_dir(t_data *data, char *path)
 {
 	path = strdup(path);
 	reg_cur_dir(data);
@@ -49,9 +49,9 @@ static void	change_dir(t_data *data, char *path)
 		path = ft_strjoin(path, ": No such file or directory");
 		syntax_err(data, path, "cd", 1);
 		ft_input_data(data, "", 0);
-		return (free(path));
+		return (free(path), 1);
 	}
-	return (free(path));
+	return (free(path), 0);
 }
 
 /**
@@ -76,8 +76,8 @@ static int	cd_home(t_data *data, char *arg)
 			return (1);
 		}
 		path = ((t_env *)tmp->content)->value;
-		change_dir(data, path);
-		ft_input_data(data, "", 0);
+		if (change_dir(data, path))
+			return (0);
 		set_exit_code(data, 0);
 		return (0);
 	}
@@ -108,7 +108,8 @@ static int	cd_oldpwd(t_data *data, char *arg)
 			return (1);
 		}
 		path = ((t_env *)tmp->content)->value;
-		change_dir(data, path);
+		if (change_dir(data, path))
+			ft_input_data(data, "", 0);
 		cur_dir = ft_strjoin(getcwd(buffer, sizeof(buffer)), "\n");
 		ft_input_data(data, cur_dir, 0);
 		free(cur_dir);
@@ -134,7 +135,8 @@ void	ft_chdir(char **args, t_data *data)
 	result = cd_oldpwd(data, args[1]);
 	if (!result || result == 1)
 		return ;
-	change_dir(data, args[1]);
+	if (change_dir(data, args[1]))
+			return ;
 	ft_input_data(data, "", 0);
 	set_exit_code(data, 0);
 }

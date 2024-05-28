@@ -6,7 +6,7 @@
 /*   By: ytoshihi <ytoshihi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 11:57:56 by ytoshihi          #+#    #+#             */
-/*   Updated: 2024/05/28 18:13:50 by ytoshihi         ###   ########.fr       */
+/*   Updated: 2024/05/28 18:37:45 by ytoshihi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,5 +57,6 @@ char	*remove_quotes(char *str);
 int		ft_str_isdigit(char *str);
 int		check_minus(char *str);
 int		arr_len(char **arr);
+int		ft_isstr_alpha(char *str);
 
 #endif

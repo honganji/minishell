@@ -6,7 +6,7 @@
 /*   By: ytoshihi <ytoshihi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/02 10:11:47 by ytoshihi          #+#    #+#             */
-/*   Updated: 2024/05/25 10:12:11 by ytoshihi         ###   ########.fr       */
+/*   Updated: 2024/05/28 18:47:30 by ytoshihi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	ft_exe_command(t_data *data, t_cmd content)
 	else if (content.com == ENV)
 		ft_env(data->env_lst, data, content.args[1]);
 	else if (content.com == EXIT)
-		ft_exit(EXIT_SUCCESS, data, 1);
+		ft_exit(data, 1, content.args[1], content.args);
 	else if (content.com == ETC)
 		ft_execve(content.args, data);
 }
