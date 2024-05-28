@@ -6,7 +6,7 @@
 /*   By: ytoshihi <ytoshihi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 14:50:18 by ytoshihi          #+#    #+#             */
-/*   Updated: 2024/05/24 20:17:22 by ytoshihi         ###   ########.fr       */
+/*   Updated: 2024/05/28 18:19:08 by ytoshihi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,13 @@ void	add_value(t_data *data, t_env *env_json)
 
 static int	check_equal(t_data *data, char *arg)
 {
-	if (!ft_strchr(arg, '='))
+	char	*str;
+
+	if (*arg == '=' || !check_minus(arg))
 	{
+		str = ft_strjoin(arg, ": not a valid identifier");
+		syntax_err(data, str, "export", 1);
+		free(str);
 		ft_input_data(data, "", 0);
 		return (1);
 	}
@@ -41,9 +46,13 @@ static int	check_equal(t_data *data, char *arg)
 
 static int	check_if_digit(t_data *data, t_env *env_json, char **env_arr)
 {
-	if (ft_isdigit(*env_json->key))
+	char	*str;
+	
+	if (!ft_str_isdigit(env_json->key))
 	{
-		syntax_err(data, "export: not a valid identifier: ", env_json->key, 1);
+		str = ft_strjoin(env_json->key, ": not a valid identifier");
+		syntax_err(data, str, "export", 1);
+		free(str);
 		free(env_arr);
 		free(env_json);
 		ft_input_data(data, "", 0);
@@ -52,7 +61,7 @@ static int	check_if_digit(t_data *data, t_env *env_json, char **env_arr)
 	return (0);
 }
 
-static int	check_no_arg(t_data *data)
+static int	check_arg(t_data *data)
 {
 	char	*arg;
 	t_list	*tmp;
@@ -64,6 +73,11 @@ static int	check_no_arg(t_data *data)
 		arg = join_to_export(arg, tmp);
 		ft_input_data(data, arg, 0);
 		return (free(arg), 1);
+	}
+	if (arr_len(((t_cmd *)data->cmd_lst->content)->args) > 2)
+	{
+		ft_input_data(data, "", 0);
+		return (1);
 	}
 	return (free(arg), 0);
 }
@@ -81,7 +95,7 @@ void	ft_export(t_data *data)
 	t_env	*env_json;
 	char	*arg;
 
-	if (check_no_arg(data))
+	if (check_arg(data))
 		return ;
 	arg = ((t_cmd *)data->cmd_lst->content)->args[1];
 	if (check_equal(data, arg))

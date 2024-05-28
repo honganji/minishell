@@ -6,7 +6,7 @@
 /*   By: ytoshihi <ytoshihi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 11:57:56 by ytoshihi          #+#    #+#             */
-/*   Updated: 2024/05/24 11:36:07 by ytoshihi         ###   ########.fr       */
+/*   Updated: 2024/05/28 18:13:50 by ytoshihi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,5 +53,9 @@ void	free_env_lst(t_data *data);
 void	free_cmd_lst(t_data *data);
 void	free_token(t_token *token);
 void	free_data(t_data *data);
+char	*remove_quotes(char *str);
+int		ft_str_isdigit(char *str);
+int		check_minus(char *str);
+int		arr_len(char **arr);
 
 #endif
