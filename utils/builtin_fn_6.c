@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_fn_6.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ytoshihi <ytoshihi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: adprzyby <adprzyby@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 17:15:55 by ytoshihi          #+#    #+#             */
-/*   Updated: 2024/05/28 18:15:43 by ytoshihi         ###   ########.fr       */
+/*   Updated: 2024/05/29 18:40:52 by adprzyby         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,33 +50,58 @@ void	update_env_var(t_data *data, t_env *env_json, char **env_arr)
 
 char	*remove_quotes(char *str)
 {
+	int		i = 0, j;
+	int		in_quotes;
+	char	start_quote;
 	char	*new_str;
-	int		i;
-	int		j;
 
+	i = 0;
+	j = 0;
+	in_quotes = 0;
+	start_quote = 0;
+	new_str = (char *)malloc((strlen(str) + 1) * sizeof(char));
+	if (!new_str)
+		return (NULL);
+	while (str[i])
+	{
+		if (str[i] == '"' || str[i] == '\'')
+		{
+			start_quote = str[i];
+			break ;
+		}
+		i++;
+	}
 	i = 0;
 	while (str[i])
 	{
-		if (!str[i])
-			break ;
-		if (str[i] == '\'' || str[i] == '\"')
+		if (str[i] == '"' || str[i] == '\'')
 		{
-			j = i;
-			while (str[j])
+			in_quotes = 1;
+			while (str[i] && str[i] != start_quote)
 			{
-				if (!str[j + 1])
-					str[j] = '\0';
-				else
-					str[j] = str[j + 1];
+				new_str[j] = str[i];
 				j++;
+				i++;
 			}
-			j = 0;
+			if (!str[i])
+				break ;
+			if (str[i] == start_quote && in_quotes == 1)		//TODO fix and compress
+			{
+				i++;
+				in_quotes = 0;
+			}
+			else
+				new_str[j] = str[i];
+				j++;
 		}
 		else
-			i++;
+		{
+			new_str[j] = str[i];
+			j++;
+		}
+		i++;
 	}
-	new_str = ft_strdup(str);
-	free(str);
+	new_str[j] = '\0';
 	return (new_str);
 }
 

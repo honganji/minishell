@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenization.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ytoshihi <ytoshihi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: adprzyby <adprzyby@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/27 17:04:21 by adprzyby          #+#    #+#             */
-/*   Updated: 2024/05/24 12:04:30 by ytoshihi         ###   ########.fr       */
+/*   Updated: 2024/05/29 12:16:02 by adprzyby         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,17 +32,16 @@ int	what_token(char *str)
 
 int	is_redir(char *str, int i)
 {
-	if (str[i] == '>' && str[i + 1] != '\0' && str[i + 1] == '>')
+	if (str[i] == '>' && (str[i + 1] == '\0' || str[i + 1] != '>'))
 		return (REDIR);
-	else if (str[i] == '<' && str[i + 1] != '\0' && str[i + 1] == '<')
+	else if (str[i] == '<' && (str[i + 1] == '\0' || str[i + 1] != '<'))
 		return (REDIR);
-	else if (str[i] == '>')
+	else if (str[i] == '>' && (str[i + 1] == '>' && (str[i + 2] == '\0' || str[i + 2] != '>')))
 		return (REDIR);
-	else if (str[i] == '<')
+	else if (str[i] == '<' && (str[i + 1] == '<' && (str[i + 2] == '\0' || str[i + 2] != '<')))
 		return (REDIR);
 	else
 		return (WORD);
-	return (0);
 }
 
 t_token	*tokenization(char **tokens)

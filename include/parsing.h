@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ytoshihi <ytoshihi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: adprzyby <adprzyby@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 16:33:31 by ytoshihi          #+#    #+#             */
-/*   Updated: 2024/05/22 17:02:28 by ytoshihi         ###   ########.fr       */
+/*   Updated: 2024/05/29 10:37:54 by adprzyby         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ void					add_token_to_command(
 void					add_command_to_list(t_list **lst, t_cmd *command);
 void					process_commands(char *input, t_data *data);
 t_com					detect_cmd_type(t_token *token);
-void					print_commands(t_list *lst);	//TODO remove
 t_token					*tokenization(char **tokens);
 int						what_token(char *str);
 int						is_redir(char *str, int i);
@@ -36,5 +35,6 @@ void					handle_redirections(t_token **tokens,
 void					store_command(t_data *data, t_cmd **cmd,
 							t_token **token, int *is_first);
 void					store_token(t_cmd *command, t_token *token);
+int						check_syntax(t_data *data, t_token **current_token, int *is_first);
 
 #endif

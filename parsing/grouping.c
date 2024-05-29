@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   grouping.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ytoshihi <ytoshihi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: adprzyby <adprzyby@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 16:58:33 by adprzyby          #+#    #+#             */
-/*   Updated: 2024/05/24 11:29:17 by ytoshihi         ###   ########.fr       */
+/*   Updated: 2024/05/29 12:47:31 by adprzyby         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,11 @@ void	parse_commands(t_token *tokens, t_data *data)
 	data->cmd_lst = NULL;
 	is_first = 1;
 	while (current_token != NULL)
+	{
+		if (check_syntax(data, &current_token, &is_first))
+			return ;
 		store_command(data, &current_command, &current_token, &is_first);
+	}
 	add_command_to_list(&(data->cmd_lst), current_command);
 }
 
