@@ -6,7 +6,7 @@
 /*   By: adprzyby <adprzyby@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 17:15:55 by ytoshihi          #+#    #+#             */
-/*   Updated: 2024/05/29 18:40:52 by adprzyby         ###   ########.fr       */
+/*   Updated: 2024/05/30 17:52:37 by adprzyby         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,61 +48,14 @@ void	update_env_var(t_data *data, t_env *env_json, char **env_arr)
 	data->exit_code = 0;
 }
 
-char	*remove_quotes(char *str)
+int	ft_isstr_alpha(char *str)
 {
-	int		i = 0, j;
-	int		in_quotes;
-	char	start_quote;
-	char	*new_str;
-
-	i = 0;
-	j = 0;
-	in_quotes = 0;
-	start_quote = 0;
-	new_str = (char *)malloc((strlen(str) + 1) * sizeof(char));
-	if (!new_str)
-		return (NULL);
-	while (str[i])
+	while (*str)
 	{
-		if (str[i] == '"' || str[i] == '\'')
-		{
-			start_quote = str[i];
-			break ;
-		}
-		i++;
+		if (!ft_isalpha((int)*str++))
+			return (0);
 	}
-	i = 0;
-	while (str[i])
-	{
-		if (str[i] == '"' || str[i] == '\'')
-		{
-			in_quotes = 1;
-			while (str[i] && str[i] != start_quote)
-			{
-				new_str[j] = str[i];
-				j++;
-				i++;
-			}
-			if (!str[i])
-				break ;
-			if (str[i] == start_quote && in_quotes == 1)		//TODO fix and compress
-			{
-				i++;
-				in_quotes = 0;
-			}
-			else
-				new_str[j] = str[i];
-				j++;
-		}
-		else
-		{
-			new_str[j] = str[i];
-			j++;
-		}
-		i++;
-	}
-	new_str[j] = '\0';
-	return (new_str);
+	return (1);
 }
 
 int	ft_str_isdigit(char *str)
@@ -134,6 +87,8 @@ int	arr_len(char **arr)
 	int	len;
 
 	len = 0;
+	if (arr == NULL)
+		return len;
 	while (arr[len])
 		len++;
 	return (len);

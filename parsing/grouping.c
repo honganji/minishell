@@ -6,7 +6,7 @@
 /*   By: adprzyby <adprzyby@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 16:58:33 by adprzyby          #+#    #+#             */
-/*   Updated: 2024/05/29 12:47:31 by adprzyby         ###   ########.fr       */
+/*   Updated: 2024/05/30 18:20:54 by adprzyby         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ void	parse_commands(t_token *tokens, t_data *data)
 	{
 		if (check_syntax(data, &current_token, &is_first))
 			return ;
+		is_first = 1;
 		store_command(data, &current_command, &current_token, &is_first);
 	}
 	add_command_to_list(&(data->cmd_lst), current_command);

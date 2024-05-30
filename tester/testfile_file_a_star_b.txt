@@ -1,0 +1,24 @@
+hello bye
+file_adprzyby
+bash_outfiles
+b
+hello bye$
+file_adprzyby$
+bash_outfiles$
+b$
+hello bye$
+file_adprzyby$
+bash_outfiles$
+b$
+hello bye$
+file_adprzyby$
+bash_outfiles$
+b$
+hello bye$
+file_adprzyby$
+bash_outfiles$
+b$
+hello bye$
+file_adprzyby$
+bash_outfiles$
+b$

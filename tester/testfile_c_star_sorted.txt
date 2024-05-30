@@ -1,0 +1,2 @@
+ c echo testfile_c_star_sorted.txt yàic^U
+New content
