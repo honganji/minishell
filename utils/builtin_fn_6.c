@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_fn_6.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ytoshihi <ytoshihi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: adprzyby <adprzyby@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 17:15:55 by ytoshihi          #+#    #+#             */
-/*   Updated: 2024/05/28 18:15:43 by ytoshihi         ###   ########.fr       */
+/*   Updated: 2024/05/31 16:27:02 by adprzyby         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,6 +109,8 @@ int	arr_len(char **arr)
 	int	len;
 
 	len = 0;
+	if (!arr)
+		return (0);
 	while (arr[len])
 		len++;
 	return (len);
