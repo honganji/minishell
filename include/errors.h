@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   errors.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ytoshihi <ytoshihi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: adprzyby <adprzyby@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/18 12:03:26 by adprzyby          #+#    #+#             */
-/*   Updated: 2024/05/22 15:57:56 by ytoshihi         ###   ########.fr       */
+/*   Updated: 2024/05/31 15:51:21 by adprzyby         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,5 +25,8 @@ typedef struct s_data	t_data;
 void	critical_err(char *msg);
 void	set_exit_code(t_data *data, int code);
 void	syntax_err(t_data *data, char *str, char *cmd, int code);
+int     check_syntax(t_data *data, t_token *tokens);
+void	token_syntax_err(t_data *data, char *str, int code);
+int	pipe_check(t_data *data, t_token *tmp, int first_in_lst, int first_in_cmd);
 
 #endif
