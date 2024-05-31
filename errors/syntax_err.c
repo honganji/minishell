@@ -6,7 +6,7 @@
 /*   By: adprzyby <adprzyby@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 16:16:22 by adprzyby          #+#    #+#             */
-/*   Updated: 2024/05/31 15:52:58 by adprzyby         ###   ########.fr       */
+/*   Updated: 2024/05/31 16:56:50 by adprzyby         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int check_syntax(t_data *data, t_token *tokens)
     tmp = tokens;
     while (tmp != NULL)
 	{
-        printf("Current token: %p, data: %s, type: %d\n", tmp, tmp->data, tmp->type);
+        // printf("Current token: %p, data: %s, type: %d\n", tmp, tmp->data, tmp->type);
         if (tmp->type == PIPE)
 		{
             if (pipe_check(data, tmp, first_in_lst, first_in_cmd) == 1)
@@ -55,11 +55,8 @@ int check_syntax(t_data *data, t_token *tokens)
         }
 		else if (tmp->type == REDIR)
 		{
-            if (tmp->next == NULL || tmp->next->type != WORD)
-			{
-                token_syntax_err(data, "newline", 2);
-                return (1);
-            }
+            if (redir_check(data, tmp) == 1)
+				return (1);
         }
         tmp = tmp->next;
         first_in_cmd = 0;
@@ -86,4 +83,29 @@ int	pipe_check(t_data *data, t_token *tmp, int first_in_lst, int first_in_cmd)
 		return (1);
 	}
 	return(0);
+}
+
+int redir_check(t_data *data, t_token *tmp)
+{
+	if (tmp->next == NULL)
+	{
+		token_syntax_err(data, "newline", 2);
+		return (1);
+	}
+	else if (tmp->next->type == PIPE)
+	{
+		token_syntax_err(data, "|", 2);
+		return (1);
+	}
+	else if (tmp->next->type != WORD && tmp->next->type != REDIR)
+	{
+		token_syntax_err(data, "newline", 2);
+		return (1);
+	}
+	else if (tmp->next->type == REDIR)
+	{
+		token_syntax_err(data, tmp->next->data, 2);
+		return (1);
+	}
+	return (0);
 }
