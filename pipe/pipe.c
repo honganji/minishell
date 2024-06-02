@@ -6,7 +6,7 @@
 /*   By: ytoshihi <ytoshihi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/02 15:08:30 by ytoshihi          #+#    #+#             */
-/*   Updated: 2024/05/27 11:31:51 by ytoshihi         ###   ########.fr       */
+/*   Updated: 2024/05/28 19:00:02 by ytoshihi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,8 +77,6 @@ void	ft_pipe(t_data *data)
 
 	str = NULL;
 	cmd_lst = data->cmd_lst;
-	// TODO remove
-	// printf("what is in cmd_lst: %s\n", ((t_cmd *)cmd_lst->content)->args[1]);
 	while (cmd_lst)
 	{
 		check_input(data, cmd_lst);

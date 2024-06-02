@@ -6,7 +6,7 @@
 /*   By: ytoshihi <ytoshihi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/22 13:24:33 by ytoshihi          #+#    #+#             */
-/*   Updated: 2024/05/28 18:27:55 by ytoshihi         ###   ########.fr       */
+/*   Updated: 2024/06/02 10:00:35 by ytoshihi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,7 @@ static int	cd_home(t_data *data, char *arg)
 		path = ((t_env *)tmp->content)->value;
 		if (change_dir(data, path))
 			return (0);
+		ft_input_data(data, "", 0);
 		set_exit_code(data, 0);
 		return (0);
 	}
