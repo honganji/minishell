@@ -6,7 +6,7 @@
 /*   By: ytoshihi <ytoshihi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 19:42:02 by ytoshihi          #+#    #+#             */
-/*   Updated: 2024/05/28 18:49:33 by ytoshihi         ###   ########.fr       */
+/*   Updated: 2024/06/02 10:13:12 by ytoshihi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,7 @@ int	main(int argc, char **argv, char **env)
 	t_data	*data;
 	char	*input;
 
-	(void)argc;
-	(void)argv;
+	(void)argc, (void)argv;
 	data = (t_data *)ft_calloc(1, sizeof(t_data));
 	if (!data)
 		critical_err(strerror(errno));

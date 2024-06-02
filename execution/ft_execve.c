@@ -6,7 +6,7 @@
 /*   By: ytoshihi <ytoshihi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 14:50:18 by ytoshihi          #+#    #+#             */
-/*   Updated: 2024/05/24 20:11:22 by ytoshihi         ###   ########.fr       */
+/*   Updated: 2024/06/02 10:37:54 by ytoshihi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,7 @@ void	ft_execve(char **args, t_data *data)
 	char	*tmp;
 
 	params.status = 0;
-	if (pipe(params.fds) == -1)
-		critical_err(strerror(errno));
-	params.tmp = args[0];
-	args[0] = ft_strjoin("/", args[0]);
-	args[0] = ft_check_exist(data, args[0]);
+	setup_arg(&params, args, data);
 	if (!*(args[0]))
 	{
 		syntax_err(data, "command not found", params.tmp, 127);

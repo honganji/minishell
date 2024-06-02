@@ -6,7 +6,7 @@
 /*   By: ytoshihi <ytoshihi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 14:50:18 by ytoshihi          #+#    #+#             */
-/*   Updated: 2024/05/28 18:19:08 by ytoshihi         ###   ########.fr       */
+/*   Updated: 2024/06/02 10:18:52 by ytoshihi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ static int	check_equal(t_data *data, char *arg)
 static int	check_if_digit(t_data *data, t_env *env_json, char **env_arr)
 {
 	char	*str;
-	
+
 	if (!ft_str_isdigit(env_json->key))
 	{
 		str = ft_strjoin(env_json->key, ": not a valid identifier");

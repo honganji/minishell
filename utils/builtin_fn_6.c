@@ -6,7 +6,7 @@
 /*   By: ytoshihi <ytoshihi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 17:15:55 by ytoshihi          #+#    #+#             */
-/*   Updated: 2024/05/28 18:15:43 by ytoshihi         ###   ########.fr       */
+/*   Updated: 2024/06/02 10:21:22 by ytoshihi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,38 +46,6 @@ void	update_env_var(t_data *data, t_env *env_json, char **env_arr)
 	free(env_arr);
 	ft_input_data(data, "", 0);
 	data->exit_code = 0;
-}
-
-char	*remove_quotes(char *str)
-{
-	char	*new_str;
-	int		i;
-	int		j;
-
-	i = 0;
-	while (str[i])
-	{
-		if (!str[i])
-			break ;
-		if (str[i] == '\'' || str[i] == '\"')
-		{
-			j = i;
-			while (str[j])
-			{
-				if (!str[j + 1])
-					str[j] = '\0';
-				else
-					str[j] = str[j + 1];
-				j++;
-			}
-			j = 0;
-		}
-		else
-			i++;
-	}
-	new_str = ft_strdup(str);
-	free(str);
-	return (new_str);
 }
 
 int	ft_str_isdigit(char *str)

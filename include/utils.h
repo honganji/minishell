@@ -6,7 +6,7 @@
 /*   By: ytoshihi <ytoshihi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 11:57:56 by ytoshihi          #+#    #+#             */
-/*   Updated: 2024/05/28 18:37:45 by ytoshihi         ###   ########.fr       */
+/*   Updated: 2024/06/02 10:36:29 by ytoshihi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 typedef struct s_data	t_data;
 typedef struct s_token	t_token;
 typedef struct s_env	t_env;
+typedef struct s_exe	t_exe;
 
 void	ft_del_node(t_data *data, t_list *lst, t_list *pre_lst);
 t_list	*ft_find_ele(t_data *data, char *str);
@@ -53,10 +54,10 @@ void	free_env_lst(t_data *data);
 void	free_cmd_lst(t_data *data);
 void	free_token(t_token *token);
 void	free_data(t_data *data);
-char	*remove_quotes(char *str);
 int		ft_str_isdigit(char *str);
 int		check_minus(char *str);
 int		arr_len(char **arr);
 int		ft_isstr_alpha(char *str);
+void	setup_arg(t_exe	*params, char **args, t_data *data);
 
 #endif

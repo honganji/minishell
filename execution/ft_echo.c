@@ -6,7 +6,7 @@
 /*   By: ytoshihi <ytoshihi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/22 14:20:54 by ytoshihi          #+#    #+#             */
-/*   Updated: 2024/05/27 11:39:56 by ytoshihi         ###   ########.fr       */
+/*   Updated: 2024/06/02 10:20:53 by ytoshihi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ void	ft_echo(char **args, t_data *data)
 	}
 	else
 		str = ft_join_with_space(&args[++i]);
-	str = remove_quotes(str);
 	ft_input_data(data, str, 0);
 	free(str);
 }

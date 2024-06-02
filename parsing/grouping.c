@@ -6,7 +6,7 @@
 /*   By: ytoshihi <ytoshihi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 16:58:33 by adprzyby          #+#    #+#             */
-/*   Updated: 2024/05/24 11:29:17 by ytoshihi         ###   ########.fr       */
+/*   Updated: 2024/06/02 10:19:18 by ytoshihi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,23 +75,6 @@ void	add_token_to_command(t_data *data, t_cmd *command, t_token *token)
 
 void	add_command_to_list(t_list **head, t_cmd *new_command)
 {
-	// t_list	*new_node;
-	// t_list	*current;
-
-	// new_node = malloc(sizeof(t_list));
-	// if (!new_node)
-	// 	return ;
-	// new_node->content = new_command;
-	// new_node->next = NULL;
-	// if (*head == NULL)
-	// 	*head = new_node;
-	// else
-	// {
-	// 	current = *head;
-	// 	while (current->next != NULL)
-	// 		current = current->next;
-	// 	current->next = new_node;
-	// }
 	ft_lstadd_back(head, ft_lstnew(new_command));
 }
 

@@ -6,7 +6,7 @@
 /*   By: ytoshihi <ytoshihi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 11:59:57 by ytoshihi          #+#    #+#             */
-/*   Updated: 2024/05/24 12:13:20 by ytoshihi         ###   ########.fr       */
+/*   Updated: 2024/06/02 10:21:52 by ytoshihi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ void	free_env_lst(t_data *data)
 		node = node->next;
 		free(tmp);
 	}
-	// free(data->env_lst);
 }
 
 void	free_cmd_lst(t_data *data)

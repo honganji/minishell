@@ -6,7 +6,7 @@
 /*   By: ytoshihi <ytoshihi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/22 13:24:33 by ytoshihi          #+#    #+#             */
-/*   Updated: 2024/06/02 10:00:35 by ytoshihi         ###   ########.fr       */
+/*   Updated: 2024/06/02 10:13:37 by ytoshihi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,7 +137,7 @@ void	ft_chdir(char **args, t_data *data)
 	if (!result || result == 1)
 		return ;
 	if (change_dir(data, args[1]))
-			return ;
+		return ;
 	ft_input_data(data, "", 0);
 	set_exit_code(data, 0);
 }

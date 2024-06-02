@@ -6,7 +6,7 @@
 /*   By: ytoshihi <ytoshihi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 20:07:29 by ytoshihi          #+#    #+#             */
-/*   Updated: 2024/05/23 11:57:14 by ytoshihi         ###   ########.fr       */
+/*   Updated: 2024/06/02 10:39:06 by ytoshihi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@
 # include "errors.h"
 # include "set_signal.h"
 
-// int	g_sig;
+int	g_sig;
 
 typedef struct s_redir
 {
