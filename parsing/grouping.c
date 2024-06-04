@@ -6,7 +6,7 @@
 /*   By: ytoshihi <ytoshihi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 16:58:33 by adprzyby          #+#    #+#             */
-/*   Updated: 2024/06/02 10:19:18 by ytoshihi         ###   ########.fr       */
+/*   Updated: 2024/06/04 14:21:52 by ytoshihi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,29 +76,4 @@ void	add_token_to_command(t_data *data, t_cmd *command, t_token *token)
 void	add_command_to_list(t_list **head, t_cmd *new_command)
 {
 	ft_lstadd_back(head, ft_lstnew(new_command));
-}
-
-void	print_commands(t_list *command_list)
-{
-	t_list	*current_node;
-	int		i;
-	t_cmd	*current_command;
-
-	current_node = command_list;
-	while (current_node != NULL)
-	{
-		current_command = (t_cmd *)current_node->content;
-		printf("Command:\n");
-		if (current_command->args != NULL)
-		{
-			i = 0;
-			while (current_command->args[i] != NULL)
-			{
-				printf("Argument %d: %s\n", i, current_command->args[i]);
-				i++;
-			}
-			printf("\n");
-		}
-		current_node = current_node->next;
-	}
 }

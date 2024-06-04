@@ -6,7 +6,7 @@
 /*   By: ytoshihi <ytoshihi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 17:15:55 by ytoshihi          #+#    #+#             */
-/*   Updated: 2024/06/02 10:21:22 by ytoshihi         ###   ########.fr       */
+/*   Updated: 2024/06/04 14:13:51 by ytoshihi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,8 @@ int	arr_len(char **arr)
 	int	len;
 
 	len = 0;
+	if (!arr)
+		return (0);
 	while (arr[len])
 		len++;
 	return (len);

@@ -6,7 +6,7 @@
 /*   By: ytoshihi <ytoshihi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 11:57:56 by ytoshihi          #+#    #+#             */
-/*   Updated: 2024/06/02 10:36:29 by ytoshihi         ###   ########.fr       */
+/*   Updated: 2024/06/04 14:20:16 by ytoshihi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,5 +59,6 @@ int		check_minus(char *str);
 int		arr_len(char **arr);
 int		ft_isstr_alpha(char *str);
 void	setup_arg(t_exe	*params, char **args, t_data *data);
+int		redir_check(t_data *data, t_token *tmp);
 
 #endif
