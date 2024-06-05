@@ -29,7 +29,8 @@ SOURCE := main.c \
 		  $(addprefix $(INIT_DIR)/, \
 		  init.c) \
 		  $(addprefix $(PARSING_DIR)/, \
-		  grouping.c process.c redirections.c tokenization.c add_command.c) \
+		  grouping.c process.c redirections.c tokenization.c add_command.c \
+		  tokenization_2.c) \
 		  $(addprefix $(ERRORS_DIR)/, \
 		  critical_err.c syntax_err.c) \
 		  $(addprefix $(SIGNAL_DIR)/, \

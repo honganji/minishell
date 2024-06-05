@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ytoshihi <ytoshihi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: adprzyby <adprzyby@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 16:33:31 by ytoshihi          #+#    #+#             */
-/*   Updated: 2024/06/04 14:21:57 by ytoshihi         ###   ########.fr       */
+/*   Updated: 2024/06/05 10:54:34 by adprzyby         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,9 @@ void					store_command(t_data *data, t_cmd **cmd,
 							t_token **token, int *is_first);
 void					store_token(t_cmd *command, t_token *token);
 t_token					*split_combined_tokens(t_token *token);
-char					*ft_strndup(const char *s, size_t n);
-
+t_token	*create_and_link_token(t_token *tmp, t_token **token,
+		t_token **last_token, char *data);
+		t_token	*create_new_token(t_token *token, int i);
+		int	check_in_quotes(t_token *token, int i);
+t_token	*check_redirections(t_token *token, int i);
 #endif
