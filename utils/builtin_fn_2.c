@@ -6,7 +6,7 @@
 /*   By: ytoshihi <ytoshihi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 12:18:51 by ytoshihi          #+#    #+#             */
-/*   Updated: 2024/05/24 20:07:16 by ytoshihi         ###   ########.fr       */
+/*   Updated: 2024/06/05 18:11:48 by ytoshihi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,16 @@ void	free_arr(char **arr)
 	free(arr);
 }
 
+static char	*ft_getenv(t_data *data, char *name)
+{
+	t_list	*tmp;
+
+	tmp = ft_find_ele(data, name);
+	if (!tmp)
+		return (NULL);
+	return (((t_env *)tmp->content)->value);
+}
+
 /**
  * @brief check if the path exists in the OS
  * 
@@ -52,9 +62,9 @@ char	*ft_check_exist(t_data *data, char *path_name)
 	char	*env_path;
 
 	i = 0;
-	env_path = getenv("PATH");
+	env_path = ft_getenv(data, "PATH");
 	if (!env_path)
-		syntax_err(data, "Error: ", "PATH environment variable not set", 1);
+		return (ft_strdup(""));
 	path_arr = ft_split(env_path, ':');
 	while (path_arr[i])
 	{
