@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   grouping.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ytoshihi <ytoshihi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: adprzyby <adprzyby@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 16:58:33 by adprzyby          #+#    #+#             */
-/*   Updated: 2024/06/04 14:21:52 by ytoshihi         ###   ########.fr       */
+/*   Updated: 2024/06/05 18:01:53 by adprzyby         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,20 @@
 
 void	parse_commands(t_token *tokens, t_data *data)
 {
-	t_cmd	*current_command;
-	t_token	*current_token;
+	t_cmd	*curr_command;
+	t_token	*curr_token;
 	int		is_first;
 
-	current_command = cmd_init();
-	current_token = tokens;
+	curr_command = cmd_init();
+	curr_token = tokens;
 	data->cmd_lst = NULL;
 	is_first = 1;
-	while (current_token != NULL)
-		store_command(data, &current_command, &current_token, &is_first);
-	add_command_to_list(&(data->cmd_lst), current_command);
+	while (curr_token != NULL)
+	{
+		if (store_command(data, &curr_command, &curr_token, &is_first) == 1)
+			return ;
+	}
+	add_command_to_list(&(data->cmd_lst), curr_command);
 }
 
 t_com	detect_cmd_type(t_token *token)

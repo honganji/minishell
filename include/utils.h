@@ -6,7 +6,7 @@
 /*   By: adprzyby <adprzyby@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 11:57:56 by ytoshihi          #+#    #+#             */
-/*   Updated: 2024/06/05 10:52:38 by adprzyby         ###   ########.fr       */
+/*   Updated: 2024/06/05 18:10:23 by adprzyby         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ void					ft_input_data(t_data *data, char *str, int is_file);
 char					*ft_read_file(int fd);
 char					*ft_free_strjoin(char *s1, char *s2);
 int						ft_isspace(int c);
-int						in_quotes(char *str);
 char					**split_with_quotes(char const *s, char c);
 char					*word_dup(int start, int end, char const *str);
 int						count_word(char const *s, char c);

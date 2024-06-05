@@ -6,7 +6,7 @@
 /*   By: adprzyby <adprzyby@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 16:33:31 by ytoshihi          #+#    #+#             */
-/*   Updated: 2024/06/05 11:11:33 by adprzyby         ###   ########.fr       */
+/*   Updated: 2024/06/05 18:02:23 by adprzyby         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int						what_token(char *str);
 int						is_redir(char *str, int i);
 void					handle_redirections(t_token **tokens, t_data *data,
 							t_cmd *current_command);
-void					store_command(t_data *data, t_cmd **cmd,
+int						store_command(t_data *data, t_cmd **cmd,
 							t_token **token, int *is_first);
 void					store_token(t_cmd *command, t_token *token);
 t_token					*split_combined_tokens(t_token *token);

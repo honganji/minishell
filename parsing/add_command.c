@@ -3,19 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   add_command.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ytoshihi <ytoshihi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: adprzyby <adprzyby@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/22 16:31:42 by ytoshihi          #+#    #+#             */
-/*   Updated: 2024/05/23 14:19:13 by ytoshihi         ###   ########.fr       */
+/*   Updated: 2024/06/05 17:59:43 by adprzyby         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/parsing.h"
 
-void	store_command(t_data *data, t_cmd **cmd, t_token **token, int *is_first)
+int	store_command(t_data *data, t_cmd **cmd, t_token **token, int *is_first)
 {
 	if (*is_first && (*token) != NULL && (*token)->data != NULL)
 	{
+		if ((*token)->data[0] == '$')
+		{
+			syntax_err(data, "command not found", (*token)->data, 127);
+			return (1);
+		}
 		*is_first = 0;
 		(*cmd)->com = detect_cmd_type((*token));
 	}
@@ -33,6 +38,7 @@ void	store_command(t_data *data, t_cmd **cmd, t_token **token, int *is_first)
 		(*cmd) = cmd_init();
 	}
 	*token = (*token)->next;
+	return(0);
 }
 
 void	store_token(t_cmd *command, t_token *token)
