@@ -1,19 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   init.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ytoshihi <ytoshihi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/25 20:07:29 by ytoshihi          #+#    #+#             */
-/*   Updated: 2024/05/01 11:36:12 by ytoshihi         ###   ########.fr       */
+/*   Created: 2024/05/14 16:28:41 by ytoshihi          #+#    #+#             */
+/*   Updated: 2024/05/22 16:28:07 by ytoshihi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#ifndef INIT_H
+# define INIT_H
 
-# include "./42-c-library/library.h"
-# include <stdio.h>
+# include "minishell.h"
+
+typedef struct s_token	t_token;
+typedef struct s_cmd	t_cmd;
+
+t_token				*token_init(void);
+t_cmd				*cmd_init(void);
+void				initialize(t_data *data, char **env);
 
 #endif
