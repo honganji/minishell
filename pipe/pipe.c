@@ -6,11 +6,59 @@
 /*   By: ytoshihi <ytoshihi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/02 15:08:30 by ytoshihi          #+#    #+#             */
-/*   Updated: 2024/05/21 11:50:40 by ytoshihi         ###   ########.fr       */
+/*   Updated: 2024/05/28 19:00:02 by ytoshihi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/pipe.h"
+
+/**
+ * @brief check if there is input and if there is, use it
+ * 
+ * @param data data
+ * @param cmd_lst linked list hold elements that have info about each command
+ * @return void
+ */
+static void	check_input(t_data *data, t_list *cmd_lst)
+{
+	t_redir	input;
+
+	input = ((t_cmd *)cmd_lst->content)->input;
+	if (input.file_name)
+	{
+		if (input.is_single)
+			ft_input_data(data, input.file_name, 1);
+		else
+			input_heredoc(data, input.file_name);
+	}
+}
+
+/**
+ * @brief check if there is output and if there is, use it
+ * 
+ * @param data data
+ * @param cmd_lst linked list hold elements that have info about each command
+ * @return void
+ */
+static void	check_output(t_list *cmd_lst)
+{
+	t_redir	output;
+	char	*str;
+
+	output = ((t_cmd *)cmd_lst->content)->output;
+	if (output.file_name)
+	{
+		str = ft_read_file(STDIN_FILENO);
+		ft_output_red(output.file_name, str, output.is_single);
+		free(str);
+	}
+	else if (!cmd_lst->next)
+	{
+		str = ft_read_file(STDIN_FILENO);
+		printf("%s", str);
+		free(str);
+	}
+}
 
 /**
  * @brief deal with a pipe
@@ -25,37 +73,16 @@
 void	ft_pipe(t_data *data)
 {
 	char	*str;
-	t_list	*lst;
-	t_redir	output;
-	t_redir	input;
+	t_list	*cmd_lst;
 
 	str = NULL;
-	lst = data->cmd_lst;
-	while (lst)
+	cmd_lst = data->cmd_lst;
+	while (cmd_lst)
 	{
-		output = ((t_cmd *)lst->content)->output;
-		input = ((t_cmd *)lst->content)->input;
-		if (input.file_name)
-		{
-			if (input.is_single)
-				ft_input_data(data, input.file_name, 1);
-			else
-				input_heredoc(data, input.file_name);
-				// ft_input_data(data, input.file_name, 0);
-		}
-		ft_exe_command(data, *(t_cmd *)lst->content);
-		if (output.file_name)
-		{
-			str = ft_read_file(STDIN_FILENO);
-			ft_output_red(output.file_name, str, output.is_single);
-		}
-		else if (!lst->next)
-		{
-			str = ft_read_file(STDIN_FILENO);
-			printf("%s", str);
-		}
-		lst = lst->next;
+		check_input(data, cmd_lst);
+		ft_exe_command(data, *(t_cmd *)cmd_lst->content);
+		check_output(cmd_lst);
+		cmd_lst = cmd_lst->next;
 	}
 	free(str);
-	set_sig(0);
 }

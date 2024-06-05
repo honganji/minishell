@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   set_sig.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ytoshihi <ytoshihi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: adprzyby <adprzyby@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/19 15:46:53 by ytoshihi          #+#    #+#             */
-/*   Updated: 2024/05/21 14:19:06 by ytoshihi         ###   ########.fr       */
+/*   Updated: 2024/06/05 11:14:12 by adprzyby         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,36 +18,17 @@
  * @param sig signal
  * @return void
  */
-static void    ft_ctrl_c(int sig)
+static void	ft_ctrl_c(int sig)
 {
-    struct termios term;
+	struct termios	term;
 
-    if ((term.c_lflag & ICANON))
-    {
-        printf("\nminishell: ");
-        rl_redisplay();
-    }
+	tcgetattr(STDIN_FILENO, &term);
+	if (!(term.c_lflag & ICANON))
+		printf("\nminishell: ");
+	else
+		printf("\n");
 	set_sig(sig);
-    term.c_lflag |= ECHO;
-}
-
-/**
- * @brief Function for signal ctrl-backslash
- * 
- * @param sig signal
- * @return void
- */
-static void    ft_ctrl_bs(int sig)
-{
-    struct termios term;
-
-    tcgetattr(STDIN_FILENO, &term);
-    if (term.c_lflag & ICANON)
-    {
-        printf("\nminishell: ");
-        rl_redisplay();
-    }
-	set_sig(sig);
+	rl_redisplay();
 }
 
 /**
@@ -57,8 +38,7 @@ static void    ft_ctrl_bs(int sig)
  */
 void	set_signal_fn(void)
 {
-    // TODO uncomment
-    rl_catch_signals = 0;
+	rl_catch_signals = 0;
 	signal(SIGINT, ft_ctrl_c);
-	signal(SIGQUIT, ft_ctrl_bs);
+	signal(SIGQUIT, SIG_IGN);
 }

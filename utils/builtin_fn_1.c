@@ -6,7 +6,7 @@
 /*   By: ytoshihi <ytoshihi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/04 09:24:36 by ytoshihi          #+#    #+#             */
-/*   Updated: 2024/05/21 15:41:24 by ytoshihi         ###   ########.fr       */
+/*   Updated: 2024/05/24 20:40:01 by ytoshihi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static int	ft_count_arg(t_data *data, char *str)
 	{
 		if (*str++ == '$')
 		{
-			tmp = ft_find_ele(data, str);		
+			tmp = ft_find_ele(data, str);
 			if (tmp)
 			{
 				count--;
@@ -55,23 +55,13 @@ void	ft_del_node(t_data *data, t_list *lst, t_list *pre_lst)
 	if (!lst || !lst->content)
 		critical_err(strerror(errno));
 	if (!pre_lst)
-	{
 		data->env_lst = data->env_lst->next;
-		free(((t_env *)(lst->content))->key);
-		free(((t_env *)(lst->content))->value);
-		free(lst->content);
-		free(lst);
-		return ;
-	}
 	else
-	{
 		pre_lst->next = lst->next;
-		free(((t_env *)(lst->content))->key);
-		free(((t_env *)(lst->content))->value);
-		free(lst->content);
-		free(lst);
-		return ;
-	}
+	free(((t_env *)(lst->content))->key);
+	free(((t_env *)(lst->content))->value);
+	free(lst->content);
+	free(lst);
 }
 
 /**
@@ -121,24 +111,13 @@ char	*ft_rep_env(t_data *data, char *str)
 		arg[i] = *str;
 		if (*str++ == '$')
 		{
-			// if (*str++ == '\'')
-			// {
-			// 	//TODO handle single quotes
-			// 	rv_quotes(str);
-			// }
-			// else if (*str++ == '"')
-			// {
-			// 	//TODO handle double quotes
-			// 	rv_quotes(str);
-			// }
 			tmp = ft_find_ele(data, str);
 			if (tmp)
 			{
 				ft_strlcpy(&arg[i], (*(t_env *)tmp->content).value,
 					ft_strlen((*(t_env *)tmp->content).value) + 1);
-				i += ft_strlen((*(t_env *)tmp->content).value);
+				i += (ft_strlen((*(t_env *)tmp->content).value) - 1);
 				str += ft_strlen((*(t_env *)tmp->content).key);
-				i--;
 			}
 		}
 		i++;

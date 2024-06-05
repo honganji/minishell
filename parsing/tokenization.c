@@ -6,7 +6,7 @@
 /*   By: adprzyby <adprzyby@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/27 17:04:21 by adprzyby          #+#    #+#             */
-/*   Updated: 2024/05/21 13:53:00 by adprzyby         ###   ########.fr       */
+/*   Updated: 2024/06/05 10:51:45 by adprzyby         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	what_token(char *str)
 	return (0);
 }
 
-int is_redir(char *str, int i)
+int	is_redir(char *str, int i)
 {
 	if (str[i] == '>' && str[i + 1] != '\0' && str[i + 1] == '>')
 		return (REDIR);
@@ -45,50 +45,51 @@ int is_redir(char *str, int i)
 	return (0);
 }
 
+t_token	*create_and_link_token(t_token *tmp, t_token **token,
+		t_token **last_token, char *data)
+{
+	t_token	*new_token;
+
+	new_token = split_combined_tokens(tmp);
+	if (new_token != tmp)
+	{
+		if (tmp == *token)
+			*token = new_token;
+		else if (*last_token != NULL)
+			(*last_token)->next = new_token;
+		*last_token = new_token;
+		tmp = new_token->next;
+	}
+	else
+		*last_token = tmp;
+	tmp->type = what_token(data);
+	return (tmp);
+}
+
 t_token	*tokenization(char **tokens)
 {
 	t_token	*token;
 	t_token	*tmp;
+	t_token	*last_token;
 	int		i;
 
-	i = 0;
 	token = token_init();
 	tmp = token;
+	last_token = NULL;
+	i = 0;
 	while (tokens[i])
 	{
-		tmp->data = tokens[i];
-		tmp->type = what_token(tmp->data);
+		tmp->data = ft_strdup(tokens[i]);
+		tmp = create_and_link_token(tmp, &token, &last_token, tmp->data);
+		if (!tokens[i + 1])
+		{
+			tmp->next = NULL;
+			break ;
+		}
 		tmp->next = token_init();
 		tmp->id = i;
 		tmp = tmp->next;
 		i++;
 	}
-	tmp = token;
-	while (tmp && tmp->data)
-	{
-		printf("Token: %s\n", tmp->data);			//!DEBUG
-		printf("Type: %d\n", tmp->type);
-		tmp = tmp->next;
-	}
 	return (token);
-}
-
-void	rv_quotes(char *str)
-{
-	int start;
-	int end;
-	int j;
-
-	j = 0;
-	start = 0;
-	end = strlen(str) - 1;
-	if (!str)
-		return ;
-	if (str[start] == '\'' || str[start] == '\"')
-		start++;
-	if (str[end] == '\'' || str[end] == '\"')
-		end--;
-	while (start <= end)
-		str[j++] = str[start++];
-	str[j] = '\0';
 }

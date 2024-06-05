@@ -6,7 +6,7 @@
 /*   By: ytoshihi <ytoshihi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 11:45:40 by ytoshihi          #+#    #+#             */
-/*   Updated: 2024/05/21 15:17:36 by ytoshihi         ###   ########.fr       */
+/*   Updated: 2024/05/22 16:22:54 by ytoshihi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,11 @@ int	ft_output_red(char *name, char *content, int is_ow)
 		fd = open(name, O_CREAT | O_WRONLY | O_APPEND, 0744);
 	if (fd == -1)
 		return (-1);
-	if (write(fd, content, ft_strlen(content)))		//! I added a check for write
+	if (write(fd, content, ft_strlen(content)))
 	{
 		close(fd);
 		return (-1);
-	}			
+	}
 	close(fd);
-	return(0);
+	return (0);
 }

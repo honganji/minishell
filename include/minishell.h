@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ytoshihi <ytoshihi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: adprzyby <adprzyby@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 20:07:29 by ytoshihi          #+#    #+#             */
-/*   Updated: 2024/05/21 15:16:45 by ytoshihi         ###   ########.fr       */
+/*   Updated: 2024/06/05 11:15:06 by adprzyby         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,6 @@
 # include <sys/wait.h>
 # include <unistd.h>
 # include <termios.h>
-
-int	g_sig;
-
 # include "env.h"
 # include "execution.h"
 # include "pipe.h"
@@ -35,13 +32,12 @@ int	g_sig;
 # include "init.h"
 # include "errors.h"
 # include "set_signal.h"
-// TODO delete
-# include "../42-c-library/library.h"
-# include "test.h"
+
+int	g_sig;
 
 typedef struct s_redir
 {
-	int		is_single;    // 1: single, 0: double
+	int		is_single;
 	char	*file_name;
 }	t_redir;
 

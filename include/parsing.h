@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ytoshihi <ytoshihi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: adprzyby <adprzyby@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 16:33:31 by ytoshihi          #+#    #+#             */
-/*   Updated: 2024/05/21 15:16:53 by ytoshihi         ###   ########.fr       */
+/*   Updated: 2024/06/05 11:11:33 by adprzyby         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,15 +22,23 @@ typedef enum e_com		t_com;
 typedef struct s_redir	t_redir;
 
 void					parse_commands(t_token *tokens, t_data *data);
-void                	add_token_to_command(t_data *data, t_cmd *command, t_token *token);
+void					add_token_to_command(t_data *data, t_cmd *command,
+							t_token *token);
 void					add_command_to_list(t_list **lst, t_cmd *command);
 void					process_commands(char *input, t_data *data);
-t_com 					detect_cmd_type(t_token *token);
-void					print_commands(t_list *lst);	//TODO remove
+t_com					detect_cmd_type(t_token *token);
 t_token					*tokenization(char **tokens);
-void					rv_quotes(char *str);
 int						what_token(char *str);
 int						is_redir(char *str, int i);
-void                    handle_redirections(t_token **tokens, t_data *data,t_cmd *current_command);
-
+void					handle_redirections(t_token **tokens, t_data *data,
+							t_cmd *current_command);
+void					store_command(t_data *data, t_cmd **cmd,
+							t_token **token, int *is_first);
+void					store_token(t_cmd *command, t_token *token);
+t_token					*split_combined_tokens(t_token *token);
+t_token					*create_and_link_token(t_token *tmp, t_token **token,
+							t_token **last_token, char *data);
+t_token					*create_new_token(t_token *token, int i);
+int						check_in_quotes(t_token *token, int i);
+t_token					*check_redirections(t_token *token, int i);
 #endif
