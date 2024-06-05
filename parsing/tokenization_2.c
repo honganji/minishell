@@ -6,7 +6,7 @@
 /*   By: adprzyby <adprzyby@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/05 10:43:55 by adprzyby          #+#    #+#             */
-/*   Updated: 2024/06/05 11:10:35 by adprzyby         ###   ########.fr       */
+/*   Updated: 2024/06/05 14:51:45 by adprzyby         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,8 @@ int	check_in_quotes(t_token *token, int i)
 
 t_token	*check_redirections(t_token *token, int i)
 {
-	if (i == 0 || (i > 0 && (token->data[i - 1] == '<' || token->data[i
-				- 1] == '>')))
+	if (i == 0 || (i > 0 && (token->data[i - 1] == '<'
+				|| token->data[i - 1] == '>')))
 	{
 		if (token->data[i + 1] == '|' || (i == 0 && token->data[i + 1] == '|'
 				&& token->data[i + 2] == '\0'))
