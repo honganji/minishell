@@ -6,7 +6,7 @@
 /*   By: ytoshihi <ytoshihi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 18:35:21 by ytoshihi          #+#    #+#             */
-/*   Updated: 2024/06/06 18:21:23 by ytoshihi         ###   ########.fr       */
+/*   Updated: 2024/06/06 18:27:57 by ytoshihi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,10 +51,15 @@ int	redir_check(t_data *data, t_token *tmp)
 		token_syntax_err(data, "newline", 2);
 		return (1);
 	}
-	else if (tmp->next->type == REDIR)
-	{
-		token_syntax_err(data, tmp->next->data, 2);
-		return (1);
-	}
 	return (0);
+}
+
+char	*ft_getenv2(t_data *data, char *name)
+{
+	t_list	*tmp;
+
+	tmp = ft_find_ele(data, name);
+	if (!tmp)
+		return (NULL);
+	return (((t_env *)tmp->content)->value);
 }
