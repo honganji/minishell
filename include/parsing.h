@@ -6,7 +6,7 @@
 /*   By: adprzyby <adprzyby@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 16:33:31 by ytoshihi          #+#    #+#             */
-/*   Updated: 2024/06/05 18:02:23 by adprzyby         ###   ########.fr       */
+/*   Updated: 2024/06/06 18:08:44 by adprzyby         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,4 +41,7 @@ t_token					*create_and_link_token(t_token *tmp, t_token **token,
 t_token					*create_new_token(t_token *token, int i);
 int						check_in_quotes(t_token *token, int i);
 t_token					*check_redirections(t_token *token, int i);
+char					*ft_getenv2(t_data *data, char *name);
+void					check_for_redir(t_data *data, t_token **token,
+							t_cmd **cmd);
 #endif

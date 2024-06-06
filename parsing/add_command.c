@@ -6,7 +6,7 @@
 /*   By: adprzyby <adprzyby@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/22 16:31:42 by ytoshihi          #+#    #+#             */
-/*   Updated: 2024/06/05 17:59:43 by adprzyby         ###   ########.fr       */
+/*   Updated: 2024/06/06 18:13:49 by adprzyby         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@ int	store_command(t_data *data, t_cmd **cmd, t_token **token, int *is_first)
 {
 	if (*is_first && (*token) != NULL && (*token)->data != NULL)
 	{
-		if ((*token)->data[0] == '$')
+		if ((*token)->data[0] == '$' && (ft_getenv2(data,
+					&((*token)->data[1])) == NULL))
 		{
 			syntax_err(data, "command not found", (*token)->data, 127);
 			return (1);
@@ -25,12 +26,7 @@ int	store_command(t_data *data, t_cmd **cmd, t_token **token, int *is_first)
 		(*cmd)->com = detect_cmd_type((*token));
 	}
 	if ((*token)->type != PIPE)
-	{
-		if ((*token)->type == REDIR)
-			handle_redirections(&(*token), data, (*cmd));
-		else
-			add_token_to_command(data, (*cmd), (*token));
-	}
+		check_for_redir(data, &(*token), &(*cmd));
 	else
 	{
 		*is_first = 1;
@@ -38,7 +34,15 @@ int	store_command(t_data *data, t_cmd **cmd, t_token **token, int *is_first)
 		(*cmd) = cmd_init();
 	}
 	*token = (*token)->next;
-	return(0);
+	return (0);
+}
+
+void	check_for_redir(t_data *data, t_token **token, t_cmd **cmd)
+{
+	if ((*token)->type == REDIR)
+		handle_redirections(&(*token), data, *cmd);
+	else
+		add_token_to_command(data, *cmd, (*token));
 }
 
 void	store_token(t_cmd *command, t_token *token)
