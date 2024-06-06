@@ -6,7 +6,7 @@
 /*   By: ytoshihi <ytoshihi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 18:35:21 by ytoshihi          #+#    #+#             */
-/*   Updated: 2024/06/04 14:20:03 by ytoshihi         ###   ########.fr       */
+/*   Updated: 2024/06/06 18:21:23 by ytoshihi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ void	setup_arg(t_exe	*params, char **args, t_data *data)
 	params->tmp = args[0];
 	args[0] = ft_strjoin("/", args[0]);
 	args[0] = ft_check_exist(data, args[0]);
+	if (!access(params->tmp, X_OK))
+		args[0] = ft_free_strjoin(args[0], params->tmp);
 }
 
 int	redir_check(t_data *data, t_token *tmp)
